@@ -75,7 +75,8 @@ Do not declare interfaces, types, constants or pure functions in `.vue` files �
 
 - No hardcoded text in templates: short strings go to `i18n/messages`, content to `content/<lang>/`.
 - Content texts are typed by ids from `data/` (`satisfies Record<Id, string>`) so no locale can miss an item.
-- Never write: guarantees or turnaround times, "best"/"No. 1", texts copied from autosyndicate / autosyndycate. Painters: «опыт от 12 лет» (12+ years of experience).
+- Never write: guarantees or turnaround times, "best"/"No. 1", texts copied from autosyndicate / autosyndycate. Staff: «маляры и рихтовщики с опытом от 12 лет» (painters and body repairers, 12+ years).
+- Painting is the product. Body repair (рихтовка) and anti-corrosion are presented as preparation for painting, done on site — never as separate services.
 
 **Styles**
 

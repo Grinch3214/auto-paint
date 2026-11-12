@@ -233,7 +233,8 @@ onBeforeUnmount(() => observer?.disconnect())
       <span class="tape">этапы работ</span>
       <h2>Как мы красим</h2>
       <p class="lead">
-        Восемь этапов, через которые проходит каждая машина. Красят мастера с опытом от 12 лет.
+        Восемь этапов, через которые проходит каждая машина. Работают маляры и рихтовщики с опытом
+        от 12 лет.
       </p>
       <ol ref="stepsEl" class="steps" :class="{ 'is-ready': stepsReady, 'is-in': stepsIn }">
         <li
@@ -344,7 +345,7 @@ onBeforeUnmount(() => observer?.disconnect())
         </div>
         <dl class="passport passport--big">
           <dt>Мастера</dt>
-          <dd>опыт от 12 лет</dd>
+          <dd>маляры и рихтовщики, опыт от 12 лет</dd>
           <dt>Материалы</dt>
           <dd>Sikkens · PPG · Standox · Roberlo</dd>
           <dt>Код цвета</dt>
