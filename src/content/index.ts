@@ -5,6 +5,4 @@ export const contentLoaders: Record<Locale, () => Promise<{ default: Content }>>
   ru: () => import('./ru'),
   ka: () => import('./ru'),
   en: () => import('./ru'),
-  uk: () => import('./ru'),
-  be: () => import('./ru'),
 }

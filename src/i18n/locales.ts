@@ -3,10 +3,8 @@ import type { Locale, LocaleInfo } from '@/types/i18n'
 // Порядок = порядок наполнения текстами
 export const LOCALES: readonly LocaleInfo[] = [
   { code: 'ru', prefix: '', hreflang: 'ru', label: 'RU', published: true },
-  { code: 'ka', prefix: '/ka', hreflang: 'ka', label: 'ქარ', published: false },
+  { code: 'ka', prefix: '/ka', hreflang: 'ka', label: 'GE', published: false },
   { code: 'en', prefix: '/en', hreflang: 'en', label: 'EN', published: false },
-  { code: 'uk', prefix: '/uk', hreflang: 'uk', label: 'UA', published: false },
-  { code: 'be', prefix: '/be', hreflang: 'be', label: 'BY', published: false },
 ]
 
 export const DEFAULT_LOCALE: Locale = 'ru'

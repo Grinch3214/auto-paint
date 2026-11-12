@@ -34,19 +34,35 @@ const links = computed(() =>
 <style scoped lang="scss">
 .lang {
   display: flex;
-  gap: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
+  padding: 2px;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .lang__link {
+  min-width: 2.25rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 999px;
+  text-align: center;
+  text-decoration: none;
   opacity: 0.6;
 
-  text-decoration: none;
+  @include motion {
+    transition:
+      opacity 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
 
   &[aria-current='true'] {
     opacity: 1;
-    font-weight: 700;
+    background: rgb(255 255 255 / 0.12);
   }
 }
 </style>

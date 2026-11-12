@@ -11,8 +11,6 @@ const loaders: Record<Locale, () => Promise<{ default: Messages }>> = {
   ru: () => import('./messages/ru'),
   ka: () => import('./messages/ka'),
   en: () => import('./messages/en'),
-  uk: () => import('./messages/uk'),
-  be: () => import('./messages/be'),
 }
 
 const KEY: InjectionKey<I18n> = Symbol('i18n')

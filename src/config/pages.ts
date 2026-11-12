@@ -6,7 +6,7 @@ import type { PageDef, PageId } from '@/types/pages'
 export const PAGES: readonly PageDef[] = [
   {
     id: 'home',
-    slugs: { ru: '', ka: '', en: '', uk: '', be: '' },
+    slugs: { ru: '', ka: '', en: '' },
     component: () => import('@/pages/HomePage.vue'),
   },
   {
@@ -15,8 +15,6 @@ export const PAGES: readonly PageDef[] = [
       ru: 'kontakty',
       ka: 'kontaktebi',
       en: 'contacts',
-      uk: 'kontakty',
-      be: 'kantakty',
     },
     component: () => import('@/pages/ContactsPage.vue'),
   },

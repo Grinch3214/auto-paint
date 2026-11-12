@@ -1,7 +1,7 @@
 import type { Ref, ShallowRef } from 'vue'
 import type { Content } from './content'
 
-export type Locale = 'ru' | 'ka' | 'en' | 'uk' | 'be'
+export type Locale = 'ru' | 'ka' | 'en'
 
 export interface LocaleInfo {
   code: Locale

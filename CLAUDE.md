@@ -22,7 +22,7 @@ src/
   types/           all interfaces and types, by topic (content.ts = shape every locale's content must match)
   constants/       locale-independent constants: image paths and widths, header height, car SVG parts
   utils/           pure functions without Vue: imageSources, formatPrice, padNumber, messenger links
-  i18n/            locales.ts (5 locales, published flag), messages/<lang>.ts — short UI strings
+  i18n/            locales.ts (3 locales: ru, ka, en; published flag), messages/<lang>.ts — short UI strings
   data/            locale-independent data: prices, stages, works, order, photos
   content/<lang>/  content texts by topic; keys typed by ids from data/. Loaded with the locale, read via useContent()
                    (content/index.ts — untranslated locales fall back to ru)
