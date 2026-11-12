@@ -28,9 +28,9 @@ export interface WorkText {
 }
 
 export interface HeroContent {
-  eyebrow: string
   titleLines: readonly string[]
   lead: string
+  carAlt: string
   recolor: string
   colorPicker: string
   ctaEstimate: string

@@ -17,9 +17,8 @@ const nextColor = () => (swatchIndex.value = (swatchIndex.value + 1) % SWATCHES.
 </script>
 
 <template>
-  <section class="hero" :style="{ '--car': swatch.color }">
+  <section class="hero">
     <div class="hero__lamps" aria-hidden="true"><i /><i /><i /></div>
-    <p class="hero__eyebrow">{{ content.hero.eyebrow }}</p>
     <h1 class="hero__title">
       <template v-for="(line, i) in content.hero.titleLines" :key="line">
         <br v-if="i" />{{ line }}
@@ -27,24 +26,24 @@ const nextColor = () => (swatchIndex.value = (swatchIndex.value + 1) % SWATCHES.
     </h1>
 
     <button class="hero__car" type="button" :aria-label="content.hero.recolor" @click="nextColor">
-      <HeroCar />
+      <HeroCar :paint="swatch.paint" />
     </button>
 
     <div class="hero__bottom">
       <div class="dots" role="radiogroup" :aria-label="content.hero.colorPicker">
         <button
           v-for="(s, i) in SWATCHES"
-          :key="s.code"
+          :key="s.name"
           class="dots__dot"
           role="radio"
           :aria-checked="i === swatchIndex"
           :aria-label="s.name"
-          :title="`${s.name} · ${s.code}`"
+          :title="s.name"
           :style="{ '--sw': s.color }"
           @click="swatchIndex = i"
         />
       </div>
-      <p class="hero__swatch mono">{{ swatch.name }} · {{ swatch.code }}</p>
+      <p class="hero__swatch mono">{{ swatch.name }}</p>
       <p class="hero__lead">{{ content.hero.lead }}</p>
       <div class="cta">
         <RouterLink class="btn" :to="{ path: home, hash: '#estimate' }">
@@ -94,14 +93,6 @@ const nextColor = () => (swatchIndex.value = (swatchIndex.value + 1) % SWATCHES.
     }
   }
 
-  &__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.6;
-  }
-
   &__title {
     font-size: clamp(2.6rem, 9.5vw, 7rem);
     line-height: 0.92;
@@ -116,12 +107,7 @@ const nextColor = () => (swatchIndex.value = (swatchIndex.value + 1) % SWATCHES.
     background: none;
     cursor: pointer;
 
-    svg {
-      display: block;
-      width: 100%;
-      height: auto;
-      overflow: visible;
-    }
+    display: block;
   }
 
   &__bottom {

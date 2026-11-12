@@ -1,21 +1,14 @@
-export type CarPart =
-  | 'paint'
-  | 'glass'
-  | 'trim'
-  | 'grille'
-  | 'tire'
-  | 'rim'
-  | 'lens'
-  | 'light'
-  | 'amber'
 
-export interface CarPath {
-  d: string
-  part: CarPart
+export interface PaintFilter {
+  sepia: number
+  hue: number
+  saturate: number
+  brightness: number
+  contrast: number
 }
 
 export interface Swatch {
   name: string
-  code: string
   color: string
+  paint: PaintFilter
 }
