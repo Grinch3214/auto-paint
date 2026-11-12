@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import carRaw from '@/assets/hero-car.svg?raw'
 import { pagePath } from '@/config/pages'
 import { SITE } from '@/config/site'
 import { ESTIMATE_PARTS } from '@/data/estimate'
@@ -11,7 +10,7 @@ import { SWATCHES } from '@/data/swatches'
 import { WORKS } from '@/data/works'
 import { useContent, useI18n } from '@/i18n'
 import { useSeo } from '@/seo/useSeo'
-import { parseCarSvg } from '@/utils/car'
+import HeroSection from '@/components/sections/HeroSection.vue'
 import { formatPrice, padNumber } from '@/utils/format'
 import { imageSources, imageUrl } from '@/utils/image'
 import { telegramShareLink, whatsappLink } from '@/utils/messengers'
@@ -24,9 +23,6 @@ useSeo({
   title: () => t((m) => m.home.seoTitle),
   description: () => t((m) => m.home.seoDescription),
 })
-
-const carParts = parseCarSvg(carRaw)
-const paintPaths = carParts.filter((p) => p.part === 'paint')
 
 const swatchIndex = ref(0)
 const stepsEl = ref<HTMLElement | null>(null)
@@ -70,7 +66,6 @@ const message = computed(() => {
 const waLink = computed(() => whatsappLink(SITE.phone, message.value))
 const tgLink = computed(() => telegramShareLink(message.value))
 
-const nextColor = () => (swatchIndex.value = (swatchIndex.value + 1) % SWATCHES.length)
 const price = (value?: number) =>
   formatPrice(
     value,
@@ -112,187 +107,7 @@ onBeforeUnmount(() => observer?.disconnect())
 
 <template>
   <div class="home" :style="{ '--car': swatch.color }">
-    <!-- ===== HERO: камера ===== -->
-    <section class="hero">
-      <div class="hero__lamps" aria-hidden="true"><i /><i /><i /></div>
-      <p class="hero__eyebrow">Покрасочная камера · Батуми</p>
-      <h1 class="hero__title">Покраска<br />авто</h1>
-
-      <button class="hero__car" type="button" aria-label="Перекрасить машину" @click="nextColor">
-        <svg viewBox="-20 -10 1320 700" role="img" aria-hidden="true">
-          <defs>
-            <!-- всё, что красится: для светотени поверх цвета -->
-            <clipPath id="h-paint">
-              <path
-                v-for="(p, i) in paintPaths"
-                :key="i"
-                :d="p.d"
-                transform="translate(0 660) scale(.1 -.1)"
-              />
-            </clipPath>
-            <linearGradient id="h-shade-v" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#fff" stop-opacity=".28" />
-              <stop offset=".3" stop-color="#fff" stop-opacity=".1" />
-              <stop offset=".48" stop-color="#fff" stop-opacity=".02" />
-              <stop offset=".5" stop-color="#000" stop-opacity=".12" />
-              <stop offset=".75" stop-color="#000" stop-opacity=".22" />
-              <stop offset="1" stop-color="#000" stop-opacity=".55" />
-            </linearGradient>
-            <linearGradient id="h-shade-h" x1="0" x2="1">
-              <stop offset="0" stop-color="#000" stop-opacity=".45" />
-              <stop offset=".35" stop-color="#000" stop-opacity="0" />
-              <stop offset=".8" stop-color="#fff" stop-opacity=".06" />
-              <stop offset="1" stop-color="#000" stop-opacity=".25" />
-            </linearGradient>
-            <linearGradient id="h-glass-fill" x1="0" y1="0" x2=".4" y2="1">
-              <stop offset="0" stop-color="#3a3f48" />
-              <stop offset=".45" stop-color="#15171b" />
-              <stop offset="1" stop-color="#08090b" />
-            </linearGradient>
-            <radialGradient id="h-rim" cx=".45" cy=".4" r=".6">
-              <stop offset="0" stop-color="#e9ecef" />
-              <stop offset=".6" stop-color="#9aa1aa" />
-              <stop offset="1" stop-color="#4a4f57" />
-            </radialGradient>
-            <linearGradient id="h-lens" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#454b55" />
-              <stop offset="1" stop-color="#0d0e11" />
-            </linearGradient>
-            <linearGradient id="h-sweep" x1="0" x2="1">
-              <stop offset="0" stop-color="#fff" stop-opacity="0" />
-              <stop offset=".5" stop-color="#fff" stop-opacity=".45" />
-              <stop offset="1" stop-color="#fff" stop-opacity="0" />
-            </linearGradient>
-            <radialGradient id="h-spec" cx=".5" cy=".5" r=".5">
-              <stop offset="0" stop-color="#fff" stop-opacity=".5" />
-              <stop offset="1" stop-color="#fff" stop-opacity="0" />
-            </radialGradient>
-            <pattern id="h-honey" width="10" height="9" patternUnits="userSpaceOnUse">
-              <rect width="10" height="9" fill="#08090a" />
-              <path
-                d="M2.5 0H7.5L10 4.5L7.5 9H2.5L0 4.5Z"
-                fill="#202328"
-                stroke="#08090a"
-                stroke-width="1.2"
-              />
-            </pattern>
-            <filter id="h-blur" x="-20%" y="-60%" width="140%" height="220%">
-              <feGaussianBlur stdDeviation="14" />
-            </filter>
-            <filter id="h-glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="5" result="b" />
-              <feMerge>
-                <feMergeNode in="b" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          <!-- тень под машиной -->
-          <ellipse
-            cx="700"
-            cy="640"
-            rx="620"
-            ry="34"
-            fill="#000"
-            opacity=".85"
-            filter="url(#h-blur)"
-          />
-          <ellipse
-            cx="60"
-            cy="430"
-            rx="110"
-            ry="18"
-            fill="#000"
-            opacity=".7"
-            filter="url(#h-blur)"
-          />
-
-          <!-- диски под трафаретом: спицы = зазоры, через них виден металл -->
-          <ellipse cx="490" cy="489" rx="112" ry="126" fill="url(#h-rim)" />
-          <ellipse cx="490" cy="489" rx="30" ry="34" fill="#2a2e34" />
-          <ellipse cx="50" cy="334" rx="28" ry="82" fill="url(#h-rim)" />
-
-          <!-- детали машины -->
-          <g transform="translate(0 660) scale(.1 -.1)">
-            <path v-for="(p, i) in carParts" :key="i" :d="p.d" :class="`car-${p.part}`" />
-          </g>
-
-          <!-- светотень и блики только по кузову -->
-          <g clip-path="url(#h-paint)">
-            <rect x="-20" y="-10" width="1320" height="700" fill="url(#h-shade-v)" />
-            <rect x="-20" y="-10" width="1320" height="700" fill="url(#h-shade-h)" />
-            <ellipse
-              cx="820"
-              cy="190"
-              rx="260"
-              ry="34"
-              fill="url(#h-spec)"
-              transform="rotate(12 820 190)"
-            />
-            <ellipse
-              cx="560"
-              cy="210"
-              rx="180"
-              ry="14"
-              fill="url(#h-spec)"
-              transform="rotate(14 560 210)"
-            />
-            <ellipse cx="1090" cy="300" rx="150" ry="12" fill="url(#h-spec)" opacity=".7" />
-            <ellipse
-              cx="760"
-              cy="420"
-              rx="160"
-              ry="18"
-              fill="url(#h-spec)"
-              opacity=".5"
-              transform="rotate(8 760 420)"
-            />
-            <ellipse
-              cx="200"
-              cy="230"
-              rx="90"
-              ry="10"
-              fill="url(#h-spec)"
-              opacity=".6"
-              transform="rotate(10 200 230)"
-            />
-            <rect class="sweep" x="-420" y="-10" width="300" height="700" fill="url(#h-sweep)" />
-          </g>
-
-          <!-- отражения ламп камеры на лобовом -->
-          <g fill="#fff" opacity=".18">
-            <rect x="420" y="50" width="160" height="6" rx="3" transform="rotate(8 500 53)" />
-            <rect x="600" y="80" width="120" height="6" rx="3" transform="rotate(14 660 83)" />
-          </g>
-        </svg>
-      </button>
-
-      <div class="hero__bottom">
-        <div class="dots" role="radiogroup" aria-label="Выбор цвета">
-          <button
-            v-for="(s, i) in SWATCHES"
-            :key="s.code"
-            class="dots__dot"
-            role="radio"
-            :aria-checked="i === swatchIndex"
-            :aria-label="s.name"
-            :title="`${s.name} · ${s.code}`"
-            :style="{ '--sw': s.color }"
-            @click="swatchIndex = i"
-          />
-        </div>
-        <p class="hero__swatch mono">{{ swatch.name }} · {{ swatch.code }}</p>
-        <p class="hero__lead">
-          Профессиональная покраска автомобилей в Батуми по заводской технологии. Мастера с опытом
-          от 12 лет. Цвет подбираем по VIN и по детали вашей машины.
-        </p>
-        <div class="cta">
-          <a class="btn" href="#estimate">Оценка по фото</a>
-          <a class="btn btn--ghost-dark" href="#layers">Как мы красим</a>
-        </div>
-      </div>
-    </section>
+    <HeroSection :swatch-index="swatchIndex" @select-color="swatchIndex = $event" />
 
     <!-- ===== УСЛУГИ ===== -->
     <section id="services" class="section">
@@ -570,173 +385,6 @@ onBeforeUnmount(() => observer?.disconnect())
 <style scoped lang="scss">
 .home {
   --car: #a8121c;
-}
-
-.hero {
-  position: relative;
-  margin-top: calc(-1 * var(--header-h));
-  padding: calc(var(--header-h) + 32px) var(--gutter) var(--space-12);
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--hero-text);
-  background:
-    radial-gradient(ellipse 70% 45% at 50% 0%, rgb(255 255 255 / 0.12), transparent 70%),
-    radial-gradient(ellipse 50% 30% at 50% 78%, rgb(255 255 255 / 0.05), transparent 70%),
-    linear-gradient(var(--hero-0), var(--hero-1) 60%, var(--hero-0));
-  overflow: hidden;
-
-  &__lamps {
-    position: absolute;
-    inset: 0 0 auto;
-    display: flex;
-    justify-content: center;
-    gap: 12vw;
-
-    i {
-      width: 18vw;
-      height: 5px;
-      background: #f5f5f0;
-      box-shadow:
-        0 0 24px 6px rgb(255 255 255 / 0.45),
-        0 0 90px 24px rgb(255 255 255 / 0.12);
-      border-radius: 0 0 4px 4px;
-    }
-  }
-
-  &__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.6;
-  }
-
-  &__title {
-    font-size: clamp(2.6rem, 9.5vw, 7rem);
-    line-height: 0.92;
-    margin-bottom: 0;
-  }
-
-  &__car {
-    width: min(860px, 98vw);
-    margin-top: var(--space-4);
-    padding: 0;
-    border: 0;
-    background: none;
-    cursor: pointer;
-
-    svg {
-      display: block;
-      width: 100%;
-      height: auto;
-      overflow: visible;
-    }
-  }
-
-  &__bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    margin-top: var(--space-4);
-  }
-
-  &__swatch {
-    font-size: 0.8rem;
-    opacity: 0.55;
-    margin: 0;
-  }
-
-  &__lead {
-    max-width: 56ch;
-    opacity: 0.8;
-    margin: var(--space-2) 0 0;
-    font-size: 1.05rem;
-  }
-}
-
-// SVG-машина
-.car-paint {
-  fill: var(--car);
-  transition: fill 0.5s ease;
-}
-
-.car-glass {
-  fill: url(#h-glass-fill);
-}
-
-.car-trim {
-  fill: #15171b;
-}
-
-.car-grille {
-  fill: url(#h-honey);
-}
-
-.car-tire {
-  fill: #0b0c0e;
-}
-
-.car-rim {
-  fill: #17191d;
-}
-
-.car-lens {
-  fill: url(#h-lens);
-}
-
-.car-light {
-  fill: #c9d1dc;
-  opacity: 0.75;
-}
-
-.car-amber {
-  fill: #e7781f;
-}
-
-.sweep {
-  @include motion {
-    animation: sweep 5s ease-in-out infinite;
-  }
-}
-
-@keyframes sweep {
-  0%,
-  35% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(1900px);
-  }
-}
-
-.dots {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-3);
-
-  &__dot {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid rgb(255 255 255 / 0.25);
-    background:
-      radial-gradient(circle at 35% 30%, rgb(255 255 255 / 0.45), transparent 45%), var(--sw);
-    cursor: pointer;
-    padding: 0;
-
-    &[aria-checked='true'] {
-      outline: 2px solid #fff;
-      outline-offset: 3px;
-    }
-  }
 }
 
 .steps {

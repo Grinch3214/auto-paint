@@ -33,7 +33,18 @@ export interface EstimateContent {
   message: string
 }
 
+export interface HeroContent {
+  eyebrow: string
+  titleLines: readonly string[]
+  lead: string
+  recolor: string
+  colorPicker: string
+  ctaEstimate: string
+  ctaProcess: string
+}
+
 export interface Content {
+  hero: HeroContent
   services: Record<ServiceId, ServiceText>
   prices: PricesContent
   stages: Record<StageId, StageText>
