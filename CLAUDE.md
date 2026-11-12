@@ -29,7 +29,7 @@ src/
   pages/           pages (…Page.vue)
   components/      shared components (SiteHeader, HeroCar…)
     sections/      full page sections with their own heading (…Section.vue)
-    blocks/        reusable pieces placed inside sections or pages (PriceTable, PriceHowto, InsuranceNote)
+    blocks/        reusable pieces placed inside sections or pages (PriceTable, PriceHowto, InsuranceNote, PhotoLightbox)
   composables/     useXxx
   seo/             useSeo, hreflang
   styles/          _tokens.scss, _mixins.scss, _ui.scss, base.scss

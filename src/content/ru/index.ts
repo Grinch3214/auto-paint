@@ -3,6 +3,7 @@ import estimate from './estimate'
 import hero from './hero'
 import howto from './howto'
 import insurance from './insurance'
+import passport from './passport'
 import prices from './prices'
 import services from './services'
 import stages from './stages'
@@ -16,5 +17,6 @@ export default {
   insurance,
   stages,
   works,
+  passport,
   estimate,
 } satisfies Content

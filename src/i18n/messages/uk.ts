@@ -31,6 +31,12 @@ const uk: Messages = {
   common: {
     priceFrom: 'від {value}',
   },
+  lightbox: {
+    label: 'Перегляд фото',
+    prev: 'Попереднє фото',
+    next: 'Наступне фото',
+    close: 'Закрити',
+  },
   footer: {
     tagline: 'фарбування авто в Батумі',
   },

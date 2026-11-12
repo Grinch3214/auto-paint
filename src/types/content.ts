@@ -80,6 +80,19 @@ export interface StagesContent extends SectionHeading {
   items: Record<StageId, StageText>
 }
 
+export interface WorksContent extends SectionHeading {
+  /** {alt} — подпись фото */
+  openPhoto: string
+  items: Record<WorkId, WorkText>
+}
+
+export interface PassportContent {
+  tape: string
+  title: string
+  label: string
+  rows: readonly { term: string; value: string }[]
+}
+
 export interface InsuranceContent {
   title: string
   lead: string
@@ -102,6 +115,7 @@ export interface Content {
   howto: HowtoContent
   insurance: InsuranceContent
   stages: StagesContent
-  works: Record<WorkId, WorkText>
+  works: WorksContent
+  passport: PassportContent
   estimate: EstimateContent
 }

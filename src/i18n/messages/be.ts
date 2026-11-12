@@ -31,6 +31,12 @@ const be: Messages = {
   common: {
     priceFrom: 'ад {value}',
   },
+  lightbox: {
+    label: 'Прагляд фота',
+    prev: 'Папярэдняе фота',
+    next: 'Наступнае фота',
+    close: 'Закрыць',
+  },
   footer: {
     tagline: 'фарбаванне аўто ў Батумі',
   },

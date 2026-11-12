@@ -30,6 +30,12 @@ const en: Messages = {
   common: {
     priceFrom: 'from {value}',
   },
+  lightbox: {
+    label: 'Photo viewer',
+    prev: 'Previous photo',
+    next: 'Next photo',
+    close: 'Close',
+  },
   footer: {
     tagline: 'car painting in Batumi',
   },

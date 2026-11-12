@@ -29,6 +29,12 @@ const ru = {
   common: {
     priceFrom: 'от {value}',
   },
+  lightbox: {
+    label: 'Просмотр фото',
+    prev: 'Предыдущее фото',
+    next: 'Следующее фото',
+    close: 'Закрыть',
+  },
   footer: {
     tagline: 'покраска авто в Батуми',
   },

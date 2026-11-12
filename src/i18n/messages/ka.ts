@@ -31,6 +31,12 @@ const ka: Messages = {
   common: {
     priceFrom: '{value}-დან',
   },
+  lightbox: {
+    label: 'ფოტოს ნახვა',
+    prev: 'წინა ფოტო',
+    next: 'შემდეგი ფოტო',
+    close: 'დახურვა',
+  },
   footer: {
     tagline: 'მანქანის შეღებვა ბათუმში',
   },
