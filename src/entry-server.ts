@@ -5,8 +5,8 @@ import { createApp } from './app'
 import { PAGES, pagePath } from './config/pages'
 import { SITE } from './config/site'
 import { LOCALES } from './i18n/locales'
-import type { Alternate } from './seo/alternates'
 import { pageAlternates } from './seo/alternates'
+import type { PrerenderEntry } from './types/seo'
 
 /** Рендер одного URL в HTML + теги <head>. Вызывается из scripts/prerender.mjs */
 export async function render(url: string) {
@@ -18,11 +18,6 @@ export async function render(url: string) {
   const html = await renderToString(app)
   const headPayload = await renderSSRHead(head)
   return { html, head: headPayload }
-}
-
-export interface PrerenderEntry {
-  path: string
-  alternates: Alternate[]
 }
 
 /** Все опубликованные URL с языковыми альтернативами — для пререндера и sitemap */

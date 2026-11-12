@@ -1,9 +1,13 @@
-import type { Messages } from './ru'
+import type { Messages } from '@/types/i18n'
 
 // ЧЕРНОВИК: перевод должен вычитать носитель языка
 const ka: Messages = {
   nav: {
     home: 'მთავარი',
+    process: 'როგორ ვღებავთ',
+    works: 'ნამუშევრები',
+    estimate: 'შეფასება ფოტოთი',
+    cta: 'მოგვწერეთ',
     contacts: 'კონტაქტი',
   },
   home: {
@@ -23,6 +27,12 @@ const ka: Messages = {
     seoTitle: 'გვერდი ვერ მოიძებნა — {BRAND}',
     h1: 'გვერდი ვერ მოიძებნა',
     back: 'მთავარზე',
+  },
+  common: {
+    priceFrom: '{value}-დან',
+  },
+  footer: {
+    tagline: 'მანქანის შეღებვა ბათუმში',
   },
   langSwitcher: 'ენა',
 }

@@ -1,8 +1,6 @@
 :root {
-  --font-display:
-    'Unbounded Variable', 'Noto Sans Georgian Variable', sans-serif;
-  --font-text:
-    'Manrope Variable', 'Noto Sans Georgian Variable', sans-serif; // текст
+  --font-display: 'Unbounded Variable', 'Noto Sans Georgian Variable', sans-serif;
+  --font-text: 'Manrope Variable', 'Noto Sans Georgian Variable', sans-serif; // текст
   --font-mono: var(--font-text);
   --font-marker: 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive;
 
@@ -16,6 +14,7 @@
   --gutter: 16px;
 
   --radius: 6px;
+  --header-h: 72px; // менять вместе с HEADER_HEIGHT в constants/layout.ts
 
   --color-bg: #e6dac2;
   --color-surface: #f3ebdb;

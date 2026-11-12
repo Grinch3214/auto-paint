@@ -12,6 +12,8 @@ useSeo({
 </script>
 
 <template>
-  <h1>{{ t((m) => m.notFound.h1) }}</h1>
-  <RouterLink :to="pagePath('home', locale)">{{ t((m) => m.notFound.back) }}</RouterLink>
+  <section class="section">
+    <h1>{{ t((m) => m.notFound.h1) }}</h1>
+    <RouterLink :to="pagePath('home', locale)">{{ t((m) => m.notFound.back) }}</RouterLink>
+  </section>
 </template>

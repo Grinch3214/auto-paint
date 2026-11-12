@@ -1,9 +1,13 @@
-import type { Messages } from './ru'
+import type { Messages } from '@/types/i18n'
 
 // ЧЕРНОВИК: перевод должен вычитать носитель языка
 const uk: Messages = {
   nav: {
     home: 'Головна',
+    process: 'Як фарбуємо',
+    works: 'Роботи',
+    estimate: 'Оцінка за фото',
+    cta: 'Написати',
     contacts: 'Контакти',
   },
   home: {
@@ -23,6 +27,12 @@ const uk: Messages = {
     seoTitle: 'Сторінку не знайдено — {BRAND}',
     h1: 'Сторінку не знайдено',
     back: 'На головну',
+  },
+  common: {
+    priceFrom: 'від {value}',
+  },
+  footer: {
+    tagline: 'фарбування авто в Батумі',
   },
   langSwitcher: 'Мова',
 }

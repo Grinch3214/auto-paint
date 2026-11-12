@@ -1,15 +1,6 @@
-import type { Component } from 'vue'
-import type { Locale } from '@/i18n/locales'
 import { getLocale } from '@/i18n/locales'
-
-export type PageId = 'home' | 'contacts'
-
-export interface PageDef {
-  id: PageId
-  /** Слаг на каждом языке. '' = главная языка */
-  slugs: Record<Locale, string>
-  component: () => Promise<Component>
-}
+import type { Locale } from '@/types/i18n'
+import type { PageDef, PageId } from '@/types/pages'
 
 // Новые страницы из брифа (п. 5) добавляются сюда
 export const PAGES: readonly PageDef[] = [

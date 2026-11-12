@@ -1,12 +1,8 @@
-import type { PageId } from '@/config/pages'
 import { pagePath } from '@/config/pages'
 import { SITE } from '@/config/site'
 import { DEFAULT_LOCALE, LOCALES, X_DEFAULT_LOCALE, isPublished } from '@/i18n/locales'
-
-export interface Alternate {
-  hreflang: string
-  href: string
-}
+import type { PageId } from '@/types/pages'
+import type { Alternate } from '@/types/seo'
 
 /** hreflang-ссылки страницы: все опубликованные языки + x-default */
 export function pageAlternates(id: PageId): Alternate[] {

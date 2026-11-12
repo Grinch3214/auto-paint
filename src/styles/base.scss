@@ -47,6 +47,22 @@ a {
   color: inherit;
 }
 
+// якорь не прячется под липкой шапкой (переходы роутера — см. scrollBehavior в router.ts)
+[id] {
+  scroll-margin-top: var(--header-h);
+}
+
+// подвал прижат к низу на коротких страницах
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+main {
+  flex: 1;
+}
+
 img,
 svg,
 video {

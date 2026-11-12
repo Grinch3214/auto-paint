@@ -1,19 +1,4 @@
-export type Locale = 'ru' | 'ka' | 'en' | 'uk' | 'be'
-
-export interface LocaleInfo {
-  code: Locale
-  /** Префикс URL: '' для языка в корне, '/ka' и т.д. для остальных */
-  prefix: string
-  /** Значение для <html lang> и hreflang */
-  hreflang: string
-  /** Подпись в переключателе языков */
-  label: string
-  /**
-   * Готов ли язык к публикации. Неопубликованный язык доступен в dev,
-   * но не пререндерится и не попадает в sitemap/hreflang.
-   */
-  published: boolean
-}
+import type { Locale, LocaleInfo } from '@/types/i18n'
 
 // Порядок = порядок наполнения текстами
 export const LOCALES: readonly LocaleInfo[] = [

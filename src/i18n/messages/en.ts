@@ -1,8 +1,12 @@
-import type { Messages } from './ru'
+import type { Messages } from '@/types/i18n'
 
 const en: Messages = {
   nav: {
     home: 'Home',
+    process: 'Our process',
+    works: 'Our work',
+    estimate: 'Photo estimate',
+    cta: 'Message us',
     contacts: 'Contacts',
   },
   home: {
@@ -22,6 +26,12 @@ const en: Messages = {
     seoTitle: 'Page not found — {BRAND}',
     h1: 'Page not found',
     back: 'Back to home',
+  },
+  common: {
+    priceFrom: 'from {value}',
+  },
+  footer: {
+    tagline: 'car painting in Batumi',
   },
   langSwitcher: 'Language',
 }

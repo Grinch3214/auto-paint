@@ -1,19 +1,13 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
-import type { PageId } from '@/config/pages'
 import { pagePath } from '@/config/pages'
 import { SITE } from '@/config/site'
 import { getLocale } from '@/i18n/locales'
 import { useI18n } from '@/i18n'
+import type { PageId } from '@/types/pages'
+import type { SeoInput } from '@/types/seo'
 import { pageAlternates } from './alternates'
-
-interface SeoInput {
-  title: () => string
-  description?: () => string
-  /** 404 и служебные страницы: noindex, без canonical/hreflang */
-  noindex?: boolean
-}
 
 /**
  * <head> страницы: title, description, canonical, hreflang, OG, lang.

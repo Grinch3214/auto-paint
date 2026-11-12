@@ -11,6 +11,8 @@ useSeo({
 </script>
 
 <template>
-  <h1>{{ t((m) => m.contacts.h1) }}</h1>
-  <p>{{ t((m) => m.contacts.lead) }}</p>
+  <section class="section">
+    <h1>{{ t((m) => m.contacts.h1) }}</h1>
+    <p>{{ t((m) => m.contacts.lead) }}</p>
+  </section>
 </template>

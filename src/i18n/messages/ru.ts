@@ -2,6 +2,10 @@
 const ru = {
   nav: {
     home: 'Главная',
+    process: 'Как красим',
+    works: 'Работы',
+    estimate: 'Оценка по фото',
+    cta: 'Написать',
     contacts: 'Контакты',
   },
   home: {
@@ -22,8 +26,13 @@ const ru = {
     h1: 'Страница не найдена',
     back: 'На главную',
   },
+  common: {
+    priceFrom: 'от {value}',
+  },
+  footer: {
+    tagline: 'покраска авто в Батуми',
+  },
   langSwitcher: 'Язык',
 }
 
-export type Messages = typeof ru
 export default ru

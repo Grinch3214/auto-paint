@@ -8,7 +8,6 @@ import { visibleLocales } from '@/i18n/locales'
 const route = useRoute()
 const { t, locale } = useI18n()
 
-// Ссылка ведёт на ту же страницу на другом языке; с 404 — на главную языка
 const links = computed(() =>
   visibleLocales().map((l) => ({
     ...l,
@@ -43,9 +42,11 @@ const links = computed(() =>
 .lang__link {
   opacity: 0.6;
 
+  text-decoration: none;
+
   &[aria-current='true'] {
     opacity: 1;
-    color: var(--accent-ink);
+    font-weight: 700;
   }
 }
 </style>

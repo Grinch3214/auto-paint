@@ -1,9 +1,8 @@
-import type { App, InjectionKey, Ref, ShallowRef } from 'vue'
+import type { App, InjectionKey } from 'vue'
 import { inject, ref, shallowRef } from 'vue'
-import type { Locale } from './locales'
 import { DEFAULT_LOCALE } from './locales'
-import type { Messages } from './messages/ru'
 import { SITE } from '@/config/site'
+import type { I18n, Locale, Messages } from '@/types/i18n'
 
 // Каждый словарь — отдельный чанк: страница грузит только свой язык
 const loaders: Record<Locale, () => Promise<{ default: Messages }>> = {
@@ -12,13 +11,6 @@ const loaders: Record<Locale, () => Promise<{ default: Messages }>> = {
   en: () => import('./messages/en'),
   uk: () => import('./messages/uk'),
   be: () => import('./messages/be'),
-}
-
-export interface I18n {
-  locale: Ref<Locale>
-  /** null только до первого setLocale; роутер вызывает его до рендера */
-  messages: ShallowRef<Messages | null>
-  setLocale: (locale: Locale) => Promise<void>
 }
 
 const KEY: InjectionKey<I18n> = Symbol('i18n')
