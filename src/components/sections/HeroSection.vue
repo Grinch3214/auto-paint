@@ -1,24 +1,23 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import HeroCar from '@/components/HeroCar.vue'
 import { pagePath } from '@/config/pages'
 import { SWATCHES } from '@/data/swatches'
 import { useContent, useI18n } from '@/i18n'
 
-const props = defineProps<{ swatchIndex: number }>()
-const emit = defineEmits(['select-color'])
-
 const { locale } = useI18n()
 const content = useContent()
 
-const swatch = computed(() => SWATCHES[props.swatchIndex] ?? SWATCHES[0]!)
+const swatchIndex = ref(0)
+
+const swatch = computed(() => SWATCHES[swatchIndex.value] ?? SWATCHES[0]!)
 const home = computed(() => pagePath('home', locale.value))
 
-const nextColor = () => emit('select-color', (props.swatchIndex + 1) % SWATCHES.length)
+const nextColor = () => (swatchIndex.value = (swatchIndex.value + 1) % SWATCHES.length)
 </script>
 
 <template>
-  <section class="hero">
+  <section class="hero" :style="{ '--car': swatch.color }">
     <div class="hero__lamps" aria-hidden="true"><i /><i /><i /></div>
     <p class="hero__eyebrow">{{ content.hero.eyebrow }}</p>
     <h1 class="hero__title">
@@ -42,7 +41,7 @@ const nextColor = () => emit('select-color', (props.swatchIndex + 1) % SWATCHES.
           :aria-label="s.name"
           :title="`${s.name} · ${s.code}`"
           :style="{ '--sw': s.color }"
-          @click="emit('select-color', i)"
+          @click="swatchIndex = i"
         />
       </div>
       <p class="hero__swatch mono">{{ swatch.name }} · {{ swatch.code }}</p>

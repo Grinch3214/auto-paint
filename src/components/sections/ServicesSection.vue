@@ -57,11 +57,9 @@ const services = computed(() =>
   padding: var(--space-6);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: 4px solid var(--car);
+  border-top: 4px solid var(--color-accent);
   border-radius: var(--radius);
-  transition:
-    border-color 0.5s,
-    transform 0.25s;
+  transition: transform 0.25s;
 
   &:hover {
     @include motion {

@@ -13,7 +13,7 @@ import SiteLogo from './SiteLogo.vue'
 
 const route = useRoute()
 const { t } = useI18n()
-const { toHome, links } = useNavLinks()
+const { links } = useNavLinks()
 const { y } = useWindowScroll()
 
 const mounted = ref(false)
@@ -49,9 +49,10 @@ onMounted(() => (mounted.value = true))
         <RouterLink v-for="l in links" :key="l.key" :to="l.to">{{ l.label }}</RouterLink>
       </nav>
       <LangSwitcher v-if="showLangs" />
-      <RouterLink class="btn btn--small" :to="toHome('#estimate')">
-        {{ t((m) => m.nav.cta) }}
-      </RouterLink>
+      <a class="btn btn--small header__call" :href="phoneLink(SITE.phone)">
+        <BaseIcon name="phone" />
+        {{ t((m) => m.contactInfo.call) }}
+      </a>
     </div>
   </header>
 </template>
@@ -124,6 +125,10 @@ onMounted(() => (mounted.value = true))
 
   &__logo {
     margin-inline-end: auto;
+  }
+
+  &__call {
+    gap: var(--space-2);
   }
 
   &__nav {

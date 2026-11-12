@@ -127,8 +127,7 @@ const { isOpen, toggle } = useAccordion(0)
     font-weight: 700;
     font-size: 2.6rem;
     line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--accent-ink);
+    color: var(--color-accent);
   }
 
   &__title {

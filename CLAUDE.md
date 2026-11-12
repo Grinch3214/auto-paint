@@ -28,9 +28,9 @@ src/
                    (content/index.ts — untranslated locales fall back to ru)
   pages/           pages (…Page.vue)
   components/      shared components (BaseIcon — inline SVG icons from constants/icons.ts; HeroCar — temporary SVG car, to be replaced by the Audi photo)
-    layout/        SiteHeader, SiteFooter, SiteLogo, LangSwitcher, ContactDock (mobile), FloatingCall (desktop)
+    layout/        SiteHeader, SiteFooter, SiteLogo, LangSwitcher, ContactDock (mobile), FloatingContact (desktop)
     sections/      full page sections with their own heading (…Section.vue)
-    blocks/        reusable pieces placed inside sections or pages (PriceTable, PriceHowto, InsuranceNote, PhotoLightbox)
+    blocks/        reusable pieces placed inside sections or pages (PriceTable, PriceHowto, InsuranceNote, PhotoLightbox, ContactSheet)
   composables/     useXxx
   seo/             useSeo, hreflang
   styles/          _tokens.scss, _mixins.scss, _ui.scss, base.scss

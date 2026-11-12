@@ -32,35 +32,45 @@ const content = useContent()
   border-radius: var(--radius);
   overflow: hidden;
 
-  // шапка этикетки в цвет машины из hero
   &__head {
     display: flex;
     justify-content: space-between;
+    gap: var(--space-4);
     padding: var(--space-4) var(--space-6);
-    background: var(--car);
-    color: var(--on-accent);
+    background: var(--hero-0);
+    color: var(--hero-text);
+    border-bottom: 3px solid var(--color-accent);
     font-family: var(--font-display);
     font-weight: 700;
-    transition: background 0.5s;
+
+    .mono {
+      color: var(--hero-muted);
+    }
   }
 }
 
 .passport {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: var(--space-2) var(--space-6);
-  margin: var(--space-4) 0 0;
-  padding: var(--space-6);
+  margin: 0;
+  padding: var(--space-2) var(--space-6) var(--space-4);
   font-family: var(--font-mono);
   font-size: 0.95rem;
 
   dt,
   dd {
-    padding-bottom: var(--space-3);
+    padding-block: var(--space-3);
     border-bottom: 1px solid var(--color-border);
   }
 
+  dt:last-of-type,
+  dd:last-of-type {
+    border-bottom: 0;
+  }
+
+  // без gap: линия строки идёт сплошной через обе колонки
   dt {
+    padding-right: var(--space-6);
     color: var(--color-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -72,15 +82,13 @@ const content = useContent()
 
   @include below(sm) {
     grid-template-columns: 1fr;
-    gap: 0;
-
     dt {
       border: none;
       padding-bottom: 0;
     }
 
     dd {
-      margin-bottom: var(--space-3);
+      padding-top: var(--space-1);
     }
   }
 }

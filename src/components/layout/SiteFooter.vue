@@ -29,11 +29,9 @@ const { links } = useNavLinks()
         <h2 class="footer__title">{{ t((m) => m.footer.hoursTitle) }}</h2>
         <p>{{ t((m) => m.contactInfo.hoursWork) }}</p>
         <p class="footer__muted">{{ t((m) => m.contactInfo.hoursOff) }}</p>
-        <p class="footer__line footer__address">
+        <p class="footer__address">{{ t((m) => m.contactInfo.address) }}</p>
+        <a class="footer__line footer__link" :href="SITE.mapsUrl" target="_blank" rel="noopener">
           <BaseIcon name="pin" />
-          {{ t((m) => m.contactInfo.address) }}
-        </p>
-        <a class="footer__link" :href="SITE.mapsUrl" target="_blank" rel="noopener">
           {{ t((m) => m.contactInfo.maps) }}
         </a>
       </div>

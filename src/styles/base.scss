@@ -10,6 +10,30 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: var(--hero-1) var(--color-bg);
+}
+
+// Safari до 26 не знает scrollbar-color — рисуем через webkit-псевдоэлементы
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border: 2px solid var(--color-bg);
+    border-radius: 999px;
+    background: var(--hero-1);
+
+    &:hover {
+      background: var(--hero-0);
+    }
+  }
 }
 
 body {
