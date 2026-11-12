@@ -4,9 +4,6 @@
 // Фото в public/images/test/ — работы AutoSyndicate, только для теста.
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import carRaw from '@/assets/hero-car.svg?raw'
-import '@fontsource-variable/unbounded'
-import '@fontsource-variable/manrope'
-import '@fontsource-variable/noto-sans-georgian'
 
 // ---------- hero: SVG-машина и выкраски ----------
 // Заводские цвета Ford Mustang 2010–2014 (код — на табличке в проёме водительской двери).
@@ -737,108 +734,6 @@ onBeforeUnmount(() => observer?.disconnect())
 <style scoped lang="scss">
 .page {
   --car: #a8121c;
-  --marker: 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive;
-  --font-display: 'Unbounded Variable', 'Noto Sans Georgian Variable', sans-serif;
-  --font-text: 'Manrope Variable', 'Noto Sans Georgian Variable', sans-serif;
-  // «технические» строки (паспорт, цены, номера) — тем же Manrope, цифры одной ширины
-  --font-mono: 'Manrope Variable', 'Noto Sans Georgian Variable', sans-serif;
-
-  font-variant-numeric: tabular-nums;
-
-  font-family: var(--font-text);
-}
-
-h1,
-h2 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: -0.01em;
-}
-
-.mono {
-  font-family: var(--font-mono);
-}
-
-.lead {
-  color: var(--color-text-muted);
-  max-width: 60ch;
-  font-size: 1.125rem;
-}
-
-// ---------- скотч ----------
-.tape {
-  display: inline-block;
-  padding: 4px 16px 5px;
-  margin-bottom: var(--space-3);
-  background: var(--color-tape);
-  color: var(--on-tape);
-  font-family: var(--marker);
-  font-size: 0.95rem;
-  transform: rotate(-1.5deg);
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.15);
-  clip-path: polygon(
-    0 8%,
-    3% 0,
-    6% 10%,
-    10% 2%,
-    100% 0,
-    97% 12%,
-    100% 25%,
-    98% 40%,
-    100% 55%,
-    97% 70%,
-    100% 85%,
-    97% 100%,
-    93% 92%,
-    90% 100%,
-    0 100%,
-    3% 88%,
-    0 72%,
-    2% 55%,
-    0 40%,
-    3% 25%
-  );
-}
-
-// ---------- кнопки ----------
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  padding: 0 var(--space-6);
-  border-radius: var(--radius);
-  background: var(--color-accent);
-  color: var(--on-accent);
-  font-weight: 700;
-  text-decoration: none;
-  border: 2px solid var(--color-accent);
-
-  &--ghost {
-    background: transparent;
-    color: var(--color-text);
-    border-color: var(--color-border);
-  }
-
-  &--ghost-dark {
-    background: transparent;
-    color: var(--hero-text);
-    border-color: rgb(255 255 255 / 0.25);
-  }
-
-  &--small {
-    min-height: 40px;
-    padding: 0 var(--space-4);
-  }
-}
-
-.cta {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: inherit;
-  gap: var(--space-3);
-  margin-top: var(--space-6);
 }
 
 // ---------- шапка (поверх тёмного hero) ----------
@@ -1452,10 +1347,6 @@ h2 {
   }
 }
 
-.visually-hidden {
-  @include visually-hidden;
-}
-
 // ---------- документы для страховой ----------
 .docs {
   display: flex;
@@ -1704,16 +1595,6 @@ h2 {
     font-family: var(--font-display);
     font-weight: 700;
     transition: background 0.5s;
-  }
-}
-
-// ---------- секции ----------
-.section {
-  @include container;
-  padding-block: var(--space-12);
-
-  h2 {
-    font-size: clamp(1.75rem, 4vw, 2.75rem);
   }
 }
 

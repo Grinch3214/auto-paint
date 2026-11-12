@@ -4,17 +4,17 @@ import { createApp as createClientApp, createSSRApp } from 'vue'
 import App from './App.vue'
 import { createI18n } from './i18n'
 import { createRouter, localeFromPath } from './router'
-import '@fontsource-variable/jetbrains-mono'
+import '@fontsource-variable/unbounded'
+import '@fontsource-variable/manrope'
+import '@fontsource-variable/noto-sans-georgian'
 import '@/styles/base.scss'
 
 interface Options {
   history: RouterHistory
   head: VueHeadClient
-  /** true — гидрировать готовый HTML (пререндер, прод); false — обычный mount (vite dev) */
   hydrate: boolean
 }
 
-/** Общая фабрика для клиента и SSR: на каждый рендер свой экземпляр приложения */
 export function createApp({ history, head, hydrate }: Options) {
   const app = hydrate ? createSSRApp(App) : createClientApp(App)
   const router = createRouter(history)

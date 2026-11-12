@@ -1,10 +1,10 @@
-// Цвета и отступы — CSS-переменные.
-// Палитра «Крафт» — одна, светлая, без тёмной темы: фон цвета малярной бумаги,
-// синий бренд-цвет, скотч того же синего.
-
 :root {
-  --font-sans: 'FiraGO', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --font-display:
+    'Unbounded Variable', 'Noto Sans Georgian Variable', sans-serif;
+  --font-text:
+    'Manrope Variable', 'Noto Sans Georgian Variable', sans-serif; // текст
+  --font-mono: var(--font-text);
+  --font-marker: 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -17,22 +17,19 @@
 
   --radius: 6px;
 
-  --color-bg: #e6dac2; // малярная бумага
+  --color-bg: #e6dac2;
   --color-surface: #f3ebdb;
   --color-text: #1f1b15;
   --color-text-muted: #675d4c;
   --color-border: #cbbd9f;
 
-  // Бренд: синий — кнопки, рамки, полосы
   --color-accent: #2a6fd6;
-  --on-accent: #fff; // текст на акценте
-  --accent-ink: #1d58b8; // ссылки, цифры, фокус — чуть темнее, чтобы читалось на бумаге
+  --on-accent: #fff;
+  --accent-ink: #1d58b8;
 
-  // Малярный скотч — плашки-подписи, в цвет бренда
   --color-tape: var(--color-accent);
-  --on-tape: var(--on-accent); // текст на скотче
+  --on-tape: var(--on-accent);
 
-  // «Камера» в hero — тёплый тёмный
   --hero-0: #1d1912;
   --hero-1: #352d21;
   --hero-text: #f3ebdb;
