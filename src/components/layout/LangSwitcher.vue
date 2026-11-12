@@ -35,7 +35,7 @@ const links = computed(() =>
 .lang {
   display: flex;
   padding: 2px;
-  border: 1px solid rgb(255 255 255 / 0.18);
+  border: 1px solid var(--hero-line);
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 600;
@@ -62,7 +62,7 @@ const links = computed(() =>
 
   &[aria-current='true'] {
     opacity: 1;
-    background: rgb(255 255 255 / 0.12);
+    background: var(--hero-fill);
   }
 }
 </style>

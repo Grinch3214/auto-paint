@@ -36,8 +36,29 @@ const en: Messages = {
     next: 'Next photo',
     close: 'Close',
   },
+  contactInfo: {
+    address: '26b Kakhaberi St, Batumi',
+    hoursWork: 'Mon–Sat 10:00–19:00',
+    hoursOff: 'Sun — closed',
+    whatsapp: 'Message on WhatsApp',
+    maps: 'Open in Google Maps',
+    call: 'Call',
+  },
+  contactDock: {
+    title: 'Get in touch',
+    whatsappHint: 'Message or call',
+    telegramHint: 'Message on Telegram',
+    route: 'Directions in Google Maps',
+  },
   footer: {
     tagline: 'car painting in Batumi',
+    about:
+      'Car painting in Batumi: full and partial respray, colour matching, body repair and rust treatment before painting.',
+    navTitle: 'Sections',
+    hoursTitle: 'Opening hours',
+    contactsTitle: 'Contacts',
+    note: 'Prices on the site are preliminary. We name the final amount after inspecting the car and agree it before work starts.',
+    rights: 'All rights reserved.',
   },
   langSwitcher: 'Language',
 }

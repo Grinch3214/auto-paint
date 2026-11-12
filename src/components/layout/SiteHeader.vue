@@ -2,36 +2,51 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useWindowScroll } from '@vueuse/core'
-import { pagePath } from '@/config/pages'
+import BaseIcon from '@/components/BaseIcon.vue'
+import { useNavLinks } from '@/composables/useNavLinks'
 import { SITE } from '@/config/site'
 import { useI18n } from '@/i18n'
 import { visibleLocales } from '@/i18n/locales'
+import { phoneLink } from '@/utils/messengers'
 import LangSwitcher from './LangSwitcher.vue'
+import SiteLogo from './SiteLogo.vue'
 
-const { t, locale } = useI18n()
 const route = useRoute()
-
-const home = computed(() => pagePath('home', locale.value))
-const toHome = (hash: string) => ({ path: home.value, hash })
+const { t } = useI18n()
+const { toHome, links } = useNavLinks()
+const { y } = useWindowScroll()
 
 const mounted = ref(false)
 
-onMounted(() => (mounted.value = true))
-const { y } = useWindowScroll()
 const transparent = computed(() => route.meta.pageId === 'home' && (!mounted.value || y.value < 8))
-
 const showLangs = computed(() => visibleLocales().length > 1)
+
+onMounted(() => (mounted.value = true))
 </script>
 
 <template>
+  <div class="topbar">
+    <div class="topbar__inner">
+      <a class="topbar__item topbar__link" :href="SITE.mapsUrl" target="_blank" rel="noopener">
+        <BaseIcon name="pin" />
+        {{ t((m) => m.contactInfo.address) }}
+      </a>
+      <span class="topbar__item">
+        <BaseIcon name="clock" />
+        {{ t((m) => m.contactInfo.hoursWork) }}, {{ t((m) => m.contactInfo.hoursOff) }}
+      </span>
+      <a class="topbar__item topbar__phone" :href="phoneLink(SITE.phone)">
+        <BaseIcon name="phone" />
+        {{ SITE.phoneDisplay }}
+      </a>
+    </div>
+  </div>
+
   <header class="header" :class="{ 'is-transparent': transparent }">
     <div class="header__inner">
-      <RouterLink :to="home" class="header__logo">{{ SITE.brand }}</RouterLink>
+      <SiteLogo class="header__logo" compact />
       <nav class="header__nav">
-        <RouterLink :to="toHome('#layers')">{{ t((m) => m.nav.process) }}</RouterLink>
-        <RouterLink :to="toHome('#works')">{{ t((m) => m.nav.works) }}</RouterLink>
-        <RouterLink :to="toHome('#estimate')">{{ t((m) => m.nav.estimate) }}</RouterLink>
-        <RouterLink :to="pagePath('contacts', locale)">{{ t((m) => m.nav.contacts) }}</RouterLink>
+        <RouterLink v-for="l in links" :key="l.key" :to="l.to">{{ l.label }}</RouterLink>
       </nav>
       <LangSwitcher v-if="showLangs" />
       <RouterLink class="btn btn--small" :to="toHome('#estimate')">
@@ -42,12 +57,48 @@ const showLangs = computed(() => visibleLocales().length > 1)
 </template>
 
 <style scoped lang="scss">
+.topbar {
+  background: var(--hero-0);
+  color: var(--hero-muted);
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--hero-line);
+
+  @include below(lg) {
+    display: none;
+  }
+
+  &__inner {
+    @include container;
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    min-height: var(--topbar-h);
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+  }
+
+  &__link:hover {
+    color: var(--hero-text);
+  }
+
+  &__phone {
+    margin-inline-start: auto;
+    color: var(--hero-text);
+    font-weight: 600;
+  }
+}
+
 .header {
   position: sticky;
   top: 0;
   z-index: 20;
   color: var(--hero-text);
-  background: rgb(29 25 18 / 0.8);
+  background: var(--header-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
@@ -67,21 +118,18 @@ const showLangs = computed(() => visibleLocales().length > 1)
     @include container;
     display: flex;
     align-items: center;
-    gap: var(--space-6);
-    padding-block: var(--space-4);
+    gap: var(--space-4);
+    min-height: var(--header-h);
   }
 
   &__logo {
-    font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-decoration: none;
     margin-inline-end: auto;
   }
 
   &__nav {
     display: flex;
     gap: var(--space-6);
+    margin-inline-end: var(--space-4);
 
     a {
       text-decoration: none;
@@ -92,7 +140,7 @@ const showLangs = computed(() => visibleLocales().length > 1)
       }
     }
 
-    @include below(md) {
+    @include below(lg) {
       display: none;
     }
   }

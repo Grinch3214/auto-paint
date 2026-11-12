@@ -14,7 +14,9 @@
   --gutter: 16px;
 
   --radius: 6px;
-  --header-h: 72px; // менять вместе с HEADER_HEIGHT в constants/layout.ts
+  --topbar-h: 32px; // менять вместе с TOPBAR_HEIGHT в constants/layout.ts
+  --dock-h: 72px;
+  --header-h: 64px; // менять вместе с HEADER_HEIGHT в constants/layout.ts
 
   --color-bg: #e6dac2;
   --color-surface: #f3ebdb;
@@ -32,6 +34,12 @@
   --hero-0: #1d1912;
   --hero-1: #352d21;
   --hero-text: #f3ebdb;
+  --hero-muted: rgb(243 235 219 / 0.6);
+  --hero-line: rgb(243 235 219 / 0.14);
+  --hero-fill: rgb(243 235 219 / 0.1);
+  --header-bg: rgb(29 25 18 / 0.85);
+  --shadow-pop: 0 12px 32px rgb(0 0 0 / 0.35);
+  --scrim: rgb(29 25 18 / 0.55);
 
   color-scheme: light;
 }

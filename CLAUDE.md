@@ -27,8 +27,8 @@ src/
   content/<lang>/  content texts by topic; keys typed by ids from data/. Loaded with the locale, read via useContent()
                    (content/index.ts — untranslated locales fall back to ru)
   pages/           pages (…Page.vue)
-  components/      shared components (HeroCar — temporary SVG car, to be replaced by the Audi photo)
-    layout/        SiteHeader, SiteFooter, LangSwitcher
+  components/      shared components (BaseIcon — inline SVG icons from constants/icons.ts; HeroCar — temporary SVG car, to be replaced by the Audi photo)
+    layout/        SiteHeader, SiteFooter, SiteLogo, LangSwitcher, ContactDock (mobile), FloatingCall (desktop)
     sections/      full page sections with their own heading (…Section.vue)
     blocks/        reusable pieces placed inside sections or pages (PriceTable, PriceHowto, InsuranceNote, PhotoLightbox)
   composables/     useXxx
