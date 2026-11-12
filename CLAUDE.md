@@ -19,12 +19,13 @@ src/
   App.vue                                    shell: header, RouterView, footer
   router.ts                                  routes = pages × visible locales
   config/          site.ts (brand, domain, phone), pages.ts (pages and per-locale slugs)
-  types/           all interfaces and types, by topic: i18n, pages, seo, car, prices, images, app
+  types/           all interfaces and types, by topic (content.ts = shape every locale's content must match)
   constants/       locale-independent constants: image paths and widths, header height, car SVG parts
   utils/           pure functions without Vue: imageSources, formatPrice, padNumber, messenger links
   i18n/            locales.ts (5 locales, published flag), messages/<lang>.ts — short UI strings
   data/            locale-independent data: prices, stages, works, order, photos
-  content/<lang>/  content texts by topic; keys typed by ids from data/
+  content/<lang>/  content texts by topic; keys typed by ids from data/. Loaded with the locale, read via useContent()
+                   (content/index.ts — untranslated locales fall back to ru)
   pages/           pages (…Page.vue)
   components/      shared components and sections (…Section.vue)
   composables/     useXxx

@@ -1,0 +1,10 @@
+export type EstimatePartId =
+  | 'hood'
+  | 'frontBumper'
+  | 'rearBumper'
+  | 'frontLeftFender'
+  | 'frontRightFender'
+  | 'frontLeftDoor'
+  | 'frontRightDoor'
+  | 'roof'
+  | 'wholeCar'

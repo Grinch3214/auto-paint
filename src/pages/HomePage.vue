@@ -1,223 +1,97 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import carRaw from '@/assets/hero-car.svg?raw'
+import { pagePath } from '@/config/pages'
 import { SITE } from '@/config/site'
-import { useI18n } from '@/i18n'
+import { ESTIMATE_PARTS } from '@/data/estimate'
+import { PRICE_GROUPS } from '@/data/prices'
+import { SERVICES } from '@/data/services'
+import { STAGES } from '@/data/stages'
+import { SWATCHES } from '@/data/swatches'
+import { WORKS } from '@/data/works'
+import { useContent, useI18n } from '@/i18n'
 import { useSeo } from '@/seo/useSeo'
 import { parseCarSvg } from '@/utils/car'
 import { formatPrice, padNumber } from '@/utils/format'
 import { imageSources, imageUrl } from '@/utils/image'
 import { telegramShareLink, whatsappLink } from '@/utils/messengers'
-import type { Swatch } from '@/types/car'
-import type { PriceGroup } from '@/types/prices'
+import type { EstimatePartId } from '@/types/estimate'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const content = useContent()
 
 useSeo({
   title: () => t((m) => m.home.seoTitle),
   description: () => t((m) => m.home.seoDescription),
 })
 
-const swatches: Swatch[] = [
-  { name: 'Race Red', code: 'PQ', color: '#c8202a' },
-  { name: 'Grabber Blue', code: 'CI', color: '#2a8bd6' },
-  { name: 'Competition Orange', code: 'CY', color: '#f26a1b' },
-  { name: 'Yellow Blaze', code: 'NQ', color: '#f2c414' },
-  { name: 'Gotta Have It Green', code: 'HD', color: '#74a83a' },
-  { name: 'Performance White', code: 'HP', color: '#f1f0eb' },
-  { name: 'Ingot Silver', code: 'UX', color: '#b9bdc2' },
-]
-const swatchIndex = ref(0)
-const swatch = computed(() => swatches[swatchIndex.value] ?? swatches[0]!)
-const nextColor = () => (swatchIndex.value = (swatchIndex.value + 1) % swatches.length)
-
 const carParts = parseCarSvg(carRaw)
 const paintPaths = carParts.filter((p) => p.part === 'paint')
 
-const services = [
-  {
-    title: 'Полная покраска',
-    text: 'Перекраска всего кузова в заводской или новый цвет. Разбираем навесное, готовим каждую панель и красим в камере.',
-    fits: 'смена цвета, выгоревший кузов',
-    href: '/polnaya-pokraska',
-  },
-  {
-    title: 'Покраска детали',
-    text: 'Дверь, крыло, капот или бампер. Подбираем цвет так, чтобы деталь не отличалась от соседних.',
-    fits: 'после ДТП, замены или царапин',
-    href: '/pokraska-detali',
-  },
-  {
-    title: 'Локальная покраска',
-    text: 'Скол или царапина на небольшом участке: красим только повреждение с плавным переходом, а не всю деталь.',
-    fits: 'сколы, царапины, потёртости бампера',
-    href: '/lokalnaya-pokraska',
-  },
-  {
-    title: 'Подбор краски',
-    text: 'Код по VIN, тестовый выкрас и сверка с вашей машиной. Подскажем, где найти код краски на вашей марке.',
-    fits: 'когда нужен точный цвет',
-    href: '/podbor-kraski',
-  },
-]
+const swatchIndex = ref(0)
+const stepsEl = ref<HTMLElement | null>(null)
+const openStep = ref<number | null>(0)
+// JS готов: только тогда прячем карточки до появления, без JS они видны сразу
+const stepsReady = ref(false)
+const stepsIn = ref(false)
+const lightbox = ref<HTMLDialogElement | null>(null)
+const current = ref(0)
+const picked = ref<EstimatePartId[]>([])
+let observer: IntersectionObserver | null = null
 
-const priceGroups: PriceGroup[] = [
-  {
-    title: 'Передняя часть',
-    rows: [
-      { name: 'Капот', fresh: 490, own: 540 },
-      { name: 'Бампер', fresh: 390, own: 440 },
-      { name: 'Крыло переднее', fresh: 340, own: 340 },
-    ],
-  },
-  {
-    title: 'Боковина',
-    rows: [
-      { name: 'Дверь', fresh: 390, own: 390 },
-      { name: 'Дверь снаружи и изнутри', single: 540 },
-      { name: 'Крыло заднее', own: 440 },
-      { name: 'Порог металлический', own: 390 },
-      { name: 'Порог пластиковый', fresh: 240, own: 240 },
-      { name: 'Стойка верхняя', own: 190 },
-      { name: 'Дверной проём (половина)', own: 190 },
-    ],
-  },
-  {
-    title: 'Крыша и багажник',
-    rows: [
-      { name: 'Крыша', fresh: 790, own: 790 },
-      { name: 'Крышка багажника', fresh: 390, own: 440 },
-      { name: 'Крышка багажника с изнанкой', single: 490 },
-    ],
-  },
-  {
-    title: 'Мелкие детали',
-    rows: [
-      { name: 'Ручка двери', fresh: 30, own: 30 },
-      { name: 'Датчики парковки, 4 шт.', fresh: 40 },
-      { name: 'Накладки, молдинги', fresh: 40 },
-      { name: 'Корпус зеркала', ask: true },
-      { name: 'Спойлер', ask: true },
-      { name: 'Колёсный диск', ask: true },
-      { name: 'Суппорт', ask: true },
-    ],
-  },
-]
+const swatch = computed(() => SWATCHES[swatchIndex.value] ?? SWATCHES[0]!)
+const services = computed(() => SERVICES.map((s) => ({ ...s, ...content.value.services[s.id] })))
+const priceGroups = computed(() =>
+  PRICE_GROUPS.map((g) => ({
+    id: g.id,
+    title: content.value.prices.groups[g.id],
+    items: g.items.map((item) => ({ ...item, name: content.value.prices.items[item.id] })),
+  })),
+)
+const stages = computed(() => STAGES.map((id) => ({ id, ...content.value.stages[id] })))
+const works = computed(() =>
+  WORKS.map((w) => ({
+    id: w.id,
+    ...imageSources(w.folder, w.image),
+    ...content.value.works[w.id],
+    large: imageUrl(w.folder, w.image, 1200),
+    big: w.size === 'big',
+    wide: w.size === 'wide',
+  })),
+)
+const currentWork = computed(() => works.value[current.value] ?? works.value[0]!)
+const parts = computed(() =>
+  ESTIMATE_PARTS.map((id) => ({ id, label: content.value.estimate.parts[id] })),
+)
+const message = computed(() => {
+  const names = picked.value.map((id) => content.value.estimate.parts[id].toLowerCase())
+  return content.value.estimate.message.replace('{parts}', names.length ? names.join(', ') : '…')
+})
+const waLink = computed(() => whatsappLink(SITE.phone, message.value))
+const tgLink = computed(() => telegramShareLink(message.value))
+
+const nextColor = () => (swatchIndex.value = (swatchIndex.value + 1) % SWATCHES.length)
 const price = (value?: number) =>
   formatPrice(
     value,
     t((m) => m.common.priceFrom),
   )
-
-const priceSteps = [
-  'Сфотографируйте повреждение: 2–3 кадра, общий план и крупно',
-  'Отправьте фото в WhatsApp или Telegram',
-  'Получите предварительный расчёт',
-]
-
-const estimateFlow = ['Оцениваем', 'Составляем смету', 'Согласовываем с вами', 'Начинаем работу']
-
-const stages = [
-  {
-    title: 'Осмотр и оценка',
-    text: 'Смотрим машину или фото, которые вы прислали, обсуждаем цвет и объём работ. Составляем смету и согласовываем её с вами — к работе приступаем только после вашего одобрения.',
-    note: 'цена согласована до начала работ, без сюрпризов',
-  },
-  {
-    title: 'Разборка и мойка',
-    text: 'Снимаем молдинги, ручки, фонари и зеркала там, где это возможно, моем и обезжириваем кузов.',
-    note: 'краска не обрывается на кромках, нет «ступенек» от скотча',
-  },
-  {
-    title: 'Ремонт повреждений',
-    text: 'Убираем ржавчину и зачищаем сколы до прочного слоя, выводим вмятины.',
-    note: 'коррозия не вылезет из-под новой краски',
-  },
-  {
-    title: 'Шпаклёвка и шлифовка',
-    text: 'Выравниваем поверхность шпаклёвкой и шлифуем, проверяя деталь под лампой на просвет.',
-    note: 'ровная геометрия: под лаком не видно волн',
-  },
-  {
-    title: 'Грунт и маскировка',
-    text: 'Грунт защищает металл и выравнивает риски. Шлифуем его по проявочному слою, всё, что не красим, закрываем бумагой и плёнкой.',
-    note: 'дефекты ловим до цвета, а не после лака',
-  },
-  {
-    title: 'Подбор цвета',
-    text: 'Код краски по VIN, затем тестовый выкрас и сверка с вашей деталью. Материалы: Sikkens, PPG, Standox, Roberlo.',
-    note: 'заводской цвет выгорает, поэтому сверяем с реальной машиной',
-  },
-  {
-    title: 'База и лак в камере',
-    text: 'Красим и сушим в покрасочной камере: одна машина за раз, вентиляция убирает пыль. Лак даёт глубину цвета и защиту.',
-    note: 'без пыли и подтёков',
-  },
-  {
-    title: 'Сборка и проверка',
-    text: 'Собираем машину и проверяем покрытие под светом ламп со всех сторон, прежде чем отдать вам.',
-    note: 'вы забираете машину, которую мы сами проверили',
-  },
-]
-const stepsEl = ref<HTMLElement | null>(null)
-const openStep = ref<number | null>(0) // аккордеон этапов на мобильном
 const toggleStep = (i: number) => (openStep.value = openStep.value === i ? null : i)
-const stepsReady = ref(false) // JS готов: можно прятать карточки до появления
-const stepsIn = ref(false)
-let observer: IntersectionObserver | null = null
 
-const work = (name: string, alt: string, tag: string, size?: 'big' | 'wide') => ({
-  ...imageSources('test', name),
-  large: imageUrl('test', name, 1200),
-  alt,
-  tag,
-  big: size === 'big',
-  wide: size === 'wide',
-})
-const works = [
-  work('hood-gloss', 'Капот после лака в камере', 'капот · лак', 'big'),
-  work('side-gloss', 'Заднее крыло и дверь после лака', 'крыло · лак'),
-  work('sedan-after-1', 'Белый седан после ремонта и покраски', 'седан · готово'),
-  work('parts-gloss', 'Двери, крыло и бампер после лака', 'детали · лак', 'wide'),
-  work('wing-spot', 'Локальная покраска крыла', 'локальный ремонт'),
-  work('crossover-before', 'Кроссовер до ремонта: снят бампер', 'до ремонта'),
-  work('side-base', 'Крыло в грунте и базе', 'грунт · база'),
-  work('parts-base', 'Детали в базе перед лаком', 'детали · база'),
-]
-const lightbox = ref<HTMLDialogElement | null>(null)
-const current = ref(0)
-const currentWork = computed(() => works[current.value] ?? works[0]!)
 function openWork(i: number) {
   current.value = i
   lightbox.value?.showModal()
 }
+
 function step(delta: number) {
-  current.value = (current.value + delta + works.length) % works.length
+  current.value = (current.value + delta + works.value.length) % works.value.length
 }
 
-const parts = [
-  'Капот',
-  'Передний бампер',
-  'Задний бампер',
-  'Крыло переднее левое',
-  'Крыло переднее правое',
-  'Дверь передняя левая',
-  'Дверь передняя правая',
-  'Крыша',
-  'Вся машина',
-]
-const picked = ref<string[]>([])
-function togglePart(p: string) {
-  picked.value = picked.value.includes(p)
-    ? picked.value.filter((x) => x !== p)
-    : [...picked.value, p]
+function togglePart(id: EstimatePartId) {
+  picked.value = picked.value.includes(id)
+    ? picked.value.filter((x) => x !== id)
+    : [...picked.value, id]
 }
-const message = computed(
-  () =>
-    `Здравствуйте! Нужна оценка покраски: ${picked.value.length ? picked.value.join(', ').toLowerCase() : '…'}. Фото пришлю в этом чате.`,
-)
-const waLink = computed(() => whatsappLink(SITE.phone, message.value))
-const tgLink = computed(() => telegramShareLink(message.value))
 
 onMounted(() => {
   stepsReady.value = true
@@ -232,6 +106,7 @@ onMounted(() => {
   )
   if (stepsEl.value) observer.observe(stepsEl.value)
 })
+
 onBeforeUnmount(() => observer?.disconnect())
 </script>
 
@@ -396,7 +271,7 @@ onBeforeUnmount(() => observer?.disconnect())
       <div class="hero__bottom">
         <div class="dots" role="radiogroup" aria-label="Выбор цвета">
           <button
-            v-for="(s, i) in swatches"
+            v-for="(s, i) in SWATCHES"
             :key="s.code"
             class="dots__dot"
             role="radio"
@@ -425,11 +300,13 @@ onBeforeUnmount(() => observer?.disconnect())
       <h2>Что красим</h2>
       <p class="lead">Выберите, что нужно, или просто пришлите фото — подскажем сами.</p>
       <ul class="services">
-        <li v-for="s in services" :key="s.href" class="service">
+        <li v-for="s in services" :key="s.id" class="service">
           <h3 class="service__title">{{ s.title }}</h3>
           <p>{{ s.text }}</p>
           <p class="service__fits mono">{{ s.fits }}</p>
-          <a class="service__link" :href="s.href">Подробнее →</a>
+          <RouterLink v-if="s.page" class="service__link" :to="pagePath(s.page, locale)">
+            Подробнее →
+          </RouterLink>
         </li>
       </ul>
 
@@ -442,7 +319,7 @@ onBeforeUnmount(() => observer?.disconnect())
           </p>
         </div>
         <div class="prices__groups">
-          <section v-for="g in priceGroups" :key="g.title" class="price-group">
+          <section v-for="g in priceGroups" :key="g.id" class="price-group">
             <h4 class="price-group__title"><span class="tape">{{ g.title }}</span></h4>
             <table class="price-group__table">
               <thead>
@@ -453,13 +330,13 @@ onBeforeUnmount(() => observer?.disconnect())
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="r in g.rows" :key="r.name">
+                <tr v-for="r in g.items" :key="r.id">
                   <th scope="row">{{ r.name }}</th>
                   <td v-if="r.ask" colspan="2" class="is-ask">по фото</td>
                   <td v-else-if="r.single !== undefined" colspan="2">{{ price(r.single) }}</td>
                   <template v-else>
                     <td :class="{ 'is-empty': r.fresh === undefined }">{{ price(r.fresh) }}</td>
-                    <td :class="{ 'is-empty': r.own === undefined }">{{ price(r.own) }}</td>
+                    <td :class="{ 'is-empty': r.used === undefined }">{{ price(r.used) }}</td>
                   </template>
                 </tr>
               </tbody>
@@ -480,7 +357,7 @@ onBeforeUnmount(() => observer?.disconnect())
             <span class="tape">быстро</span>
             <h4>По фото</h4>
             <ol class="howto__steps">
-              <li v-for="(s, i) in priceSteps" :key="s">
+              <li v-for="(s, i) in content.prices.photoSteps" :key="s">
                 <span class="howto__num mono">{{ padNumber(i + 1) }}</span>
                 {{ s }}
               </li>
@@ -502,7 +379,7 @@ onBeforeUnmount(() => observer?.disconnect())
         <div class="howto__flow">
           <p class="howto__flow-title">Сначала смета — потом работа</p>
           <ol>
-            <li v-for="(s, i) in estimateFlow" :key="s">
+            <li v-for="(s, i) in content.prices.flow" :key="s">
               <span class="howto__num mono">{{ padNumber(i + 1) }}</span>
               {{ s }}
             </li>
@@ -546,7 +423,7 @@ onBeforeUnmount(() => observer?.disconnect())
       <ol ref="stepsEl" class="steps" :class="{ 'is-ready': stepsReady, 'is-in': stepsIn }">
         <li
           v-for="(s, i) in stages"
-          :key="s.title"
+          :key="s.id"
           class="steps__item"
           :class="{ 'is-open': openStep === i }"
           :style="{ '--d': i }"
@@ -582,7 +459,7 @@ onBeforeUnmount(() => observer?.disconnect())
       <ul class="works">
         <li
           v-for="(w, i) in works"
-          :key="w.src"
+          :key="w.id"
           class="works__item"
           :class="{ 'works__item--big': w.big, 'works__item--wide': w.wide }"
         >
@@ -673,12 +550,12 @@ onBeforeUnmount(() => observer?.disconnect())
       <div class="chips">
         <button
           v-for="p in parts"
-          :key="p"
+          :key="p.id"
           class="chip"
-          :aria-pressed="picked.includes(p)"
-          @click="togglePart(p)"
+          :aria-pressed="picked.includes(p.id)"
+          @click="togglePart(p.id)"
         >
-          {{ p }}
+          {{ p.label }}
         </button>
       </div>
       <p class="preview mono">{{ message }}</p>
