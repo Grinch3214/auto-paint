@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { SITE } from '@/config/site'
 import { ESTIMATE_PARTS } from '@/data/estimate'
-import { STAGES } from '@/data/stages'
 import { SWATCHES } from '@/data/swatches'
 import { WORKS } from '@/data/works'
 import { useContent, useI18n } from '@/i18n'
@@ -12,7 +11,7 @@ import PriceHowto from '@/components/blocks/PriceHowto.vue'
 import PriceTable from '@/components/blocks/PriceTable.vue'
 import HeroSection from '@/components/sections/HeroSection.vue'
 import ServicesSection from '@/components/sections/ServicesSection.vue'
-import { padNumber } from '@/utils/format'
+import StagesSection from '@/components/sections/StagesSection.vue'
 import { imageSources, imageUrl } from '@/utils/image'
 import { telegramShareLink, whatsappLink } from '@/utils/messengers'
 import type { EstimatePartId } from '@/types/estimate'
@@ -26,18 +25,11 @@ useSeo({
 })
 
 const swatchIndex = ref(0)
-const stepsEl = ref<HTMLElement | null>(null)
-const openStep = ref<number | null>(0)
-// JS готов: только тогда прячем карточки до появления, без JS они видны сразу
-const stepsReady = ref(false)
-const stepsIn = ref(false)
 const lightbox = ref<HTMLDialogElement | null>(null)
 const current = ref(0)
 const picked = ref<EstimatePartId[]>([])
-let observer: IntersectionObserver | null = null
 
 const swatch = computed(() => SWATCHES[swatchIndex.value] ?? SWATCHES[0]!)
-const stages = computed(() => STAGES.map((id) => ({ id, ...content.value.stages[id] })))
 const works = computed(() =>
   WORKS.map((w) => ({
     id: w.id,
@@ -59,8 +51,6 @@ const message = computed(() => {
 const waLink = computed(() => whatsappLink(SITE.phone, message.value))
 const tgLink = computed(() => telegramShareLink(message.value))
 
-const toggleStep = (i: number) => (openStep.value = openStep.value === i ? null : i)
-
 function openWork(i: number) {
   current.value = i
   lightbox.value?.showModal()
@@ -75,22 +65,6 @@ function togglePart(id: EstimatePartId) {
     ? picked.value.filter((x) => x !== id)
     : [...picked.value, id]
 }
-
-onMounted(() => {
-  stepsReady.value = true
-  observer = new IntersectionObserver(
-    (entries) => {
-      if (entries.some((e) => e.isIntersecting)) {
-        stepsIn.value = true
-        observer?.disconnect()
-      }
-    },
-    { rootMargin: '0px 0px -15% 0px' },
-  )
-  if (stepsEl.value) observer.observe(stepsEl.value)
-})
-
-onBeforeUnmount(() => observer?.disconnect())
 </script>
 
 <template>
@@ -103,44 +77,7 @@ onBeforeUnmount(() => observer?.disconnect())
       <InsuranceNote />
     </ServicesSection>
 
-    <!-- ===== ЭТАПЫ РАБОТ ===== -->
-    <section id="layers" class="section">
-      <span class="tape">этапы работ</span>
-      <h2>Как мы красим</h2>
-      <p class="lead">
-        Восемь этапов, через которые проходит каждая машина. Работают маляры и рихтовщики с опытом
-        от 12 лет.
-      </p>
-      <ol ref="stepsEl" class="steps" :class="{ 'is-ready': stepsReady, 'is-in': stepsIn }">
-        <li
-          v-for="(s, i) in stages"
-          :key="s.id"
-          class="steps__item"
-          :class="{ 'is-open': openStep === i }"
-          :style="{ '--d': i }"
-        >
-          <h3 class="steps__h">
-            <button
-              type="button"
-              class="steps__head"
-              :aria-expanded="openStep === i"
-              :aria-controls="`step-${i}`"
-              @click="toggleStep(i)"
-            >
-              <span class="steps__num" aria-hidden="true">{{ padNumber(i + 1) }}</span>
-              <span class="steps__title">{{ s.title }}</span>
-              <span class="steps__chev" aria-hidden="true" />
-            </button>
-          </h3>
-          <div :id="`step-${i}`" class="steps__body">
-            <div class="steps__inner">
-              <p>{{ s.text }}</p>
-              <p class="steps__note"><span class="tape">зачем</span> {{ s.note }}</p>
-            </div>
-          </div>
-        </li>
-      </ol>
-    </section>
+    <StagesSection />
 
     <!-- ===== ПРИМЕРЫ РАБОТ ===== -->
     <section id="works" class="section">
@@ -261,213 +198,6 @@ onBeforeUnmount(() => observer?.disconnect())
 <style scoped lang="scss">
 .home {
   --car: #a8121c;
-}
-
-.steps {
-  list-style: none;
-  padding: 0;
-  margin: var(--space-6) 0 0;
-  display: grid;
-  gap: var(--space-4);
-
-  @include above(md) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include above(xl) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  &__item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    padding: var(--space-6);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-
-    p {
-      margin: 0;
-      color: var(--color-text-muted);
-      font-size: 0.95rem;
-    }
-  }
-
-  // появление по очереди: прячем, только когда JS готов, и только без reduced-motion
-  @include motion {
-    &.is-ready &__item {
-      opacity: 0;
-      transform: translateY(16px);
-      transition:
-        opacity 0.5s ease calc(var(--d) * 70ms),
-        transform 0.5s ease calc(var(--d) * 70ms);
-    }
-
-    &.is-in &__item {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  &__h {
-    margin: 0;
-  }
-
-  &__head {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-2);
-    width: 100%;
-    padding: 0;
-    border: 0;
-    background: none;
-    color: inherit;
-    font: inherit;
-    text-align: left;
-    cursor: default;
-
-    // на планшете и десктопе карточки всегда раскрыты — кнопка не нужна
-    @include above(md) {
-      pointer-events: none;
-    }
-  }
-
-  &__num {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 2.6rem;
-    line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--accent-ink);
-  }
-
-  &__title {
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    line-height: 1.2;
-    margin-top: var(--space-2);
-  }
-
-  &__chev {
-    display: none;
-  }
-
-  &__body {
-    display: grid;
-    grid-template-rows: 1fr;
-    flex: 1;
-  }
-
-  &__inner {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    min-height: 0;
-    overflow: hidden;
-    padding-top: var(--space-2);
-  }
-
-  // ---------- мобильный: аккордеон ----------
-  @include below(md) {
-    gap: var(--space-2);
-
-    &__item {
-      padding: 0;
-    }
-
-    &__head {
-      flex-direction: row;
-      align-items: center;
-      gap: var(--space-3);
-      padding: var(--space-4);
-      cursor: pointer;
-    }
-
-    &__num {
-      font-size: 1.6rem;
-    }
-
-    &__title {
-      margin: 0;
-      flex: 1;
-    }
-
-    // плюс, превращается в крестик
-    &__chev {
-      position: relative;
-      display: block;
-      flex: none;
-      width: 16px;
-      height: 16px;
-
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        inset: 7px 0 auto;
-        height: 2px;
-        background: currentColor;
-        transition: transform 0.25s ease;
-      }
-
-      &::after {
-        transform: rotate(90deg);
-      }
-    }
-
-    &__item.is-open &__chev {
-      &::before {
-        transform: rotate(45deg);
-      }
-
-      &::after {
-        transform: rotate(135deg);
-      }
-    }
-
-    &__body {
-      grid-template-rows: 0fr;
-
-      @include motion {
-        transition: grid-template-rows 0.3s ease;
-      }
-    }
-
-    &__item.is-open &__body {
-      grid-template-rows: 1fr;
-    }
-
-    &__inner {
-      padding: 0 var(--space-4);
-    }
-
-    &__item.is-open &__inner {
-      padding-bottom: var(--space-4);
-    }
-  }
-
-  &__note {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-2);
-    margin-top: auto !important;
-    padding-top: var(--space-3);
-    color: var(--color-text) !important;
-    font-weight: 600;
-    font-size: 0.9rem !important;
-
-    .tape {
-      flex: none;
-      margin: 0;
-      font-size: 0.75rem;
-      font-weight: 400;
-    }
-  }
 }
 
 .passport {

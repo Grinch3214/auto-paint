@@ -75,6 +75,11 @@ export interface HowtoContent {
   flowNote: string
 }
 
+export interface StagesContent extends SectionHeading {
+  noteLabel: string
+  items: Record<StageId, StageText>
+}
+
 export interface InsuranceContent {
   title: string
   lead: string
@@ -96,7 +101,7 @@ export interface Content {
   prices: PricesContent
   howto: HowtoContent
   insurance: InsuranceContent
-  stages: Record<StageId, StageText>
+  stages: StagesContent
   works: Record<WorkId, WorkText>
   estimate: EstimateContent
 }
