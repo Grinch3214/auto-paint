@@ -1,0 +1,11 @@
+# Cloudflare Pages: заголовки кэша
+# Файлы с хэшем в имени — навсегда
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Картинки: 30 дней. Изменённая картинка = новое имя или ?v=N
+/images/*
+  Cache-Control: public, max-age=2592000

@@ -1,0 +1,36 @@
+# deps
+node_modules/
+
+# build
+dist/
+dist-ssr/
+*.tsbuildinfo
+.vite/
+
+# Cloudflare (wrangler, later)
+.wrangler/
+.dev.vars
+
+# env
+.env
+.env.*
+!.env.example
+
+# photo pipeline: raw originals stay local (HEIC/JPG from the boxes)
+photos-raw/
+
+# logs
+npm-debug.log*
+*.log
+
+# editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# internal docs
+PAINT_SITE_BRIEF.md
+docs/
