@@ -27,7 +27,9 @@ src/
   content/<lang>/  content texts by topic; keys typed by ids from data/. Loaded with the locale, read via useContent()
                    (content/index.ts — untranslated locales fall back to ru)
   pages/           pages (…Page.vue)
-  components/      shared components and sections (…Section.vue)
+  components/      shared components (SiteHeader, HeroCar…)
+    sections/      full page sections with their own heading (…Section.vue)
+    blocks/        reusable pieces placed inside sections or pages (PriceTable, PriceHowto, InsuranceNote)
   composables/     useXxx
   seo/             useSeo, hreflang
   styles/          _tokens.scss, _mixins.scss, _ui.scss, base.scss

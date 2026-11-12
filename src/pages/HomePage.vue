@@ -1,22 +1,23 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { pagePath } from '@/config/pages'
 import { SITE } from '@/config/site'
 import { ESTIMATE_PARTS } from '@/data/estimate'
-import { PRICE_GROUPS } from '@/data/prices'
-import { SERVICES } from '@/data/services'
 import { STAGES } from '@/data/stages'
 import { SWATCHES } from '@/data/swatches'
 import { WORKS } from '@/data/works'
 import { useContent, useI18n } from '@/i18n'
 import { useSeo } from '@/seo/useSeo'
+import InsuranceNote from '@/components/blocks/InsuranceNote.vue'
+import PriceHowto from '@/components/blocks/PriceHowto.vue'
+import PriceTable from '@/components/blocks/PriceTable.vue'
 import HeroSection from '@/components/sections/HeroSection.vue'
-import { formatPrice, padNumber } from '@/utils/format'
+import ServicesSection from '@/components/sections/ServicesSection.vue'
+import { padNumber } from '@/utils/format'
 import { imageSources, imageUrl } from '@/utils/image'
 import { telegramShareLink, whatsappLink } from '@/utils/messengers'
 import type { EstimatePartId } from '@/types/estimate'
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const content = useContent()
 
 useSeo({
@@ -36,14 +37,6 @@ const picked = ref<EstimatePartId[]>([])
 let observer: IntersectionObserver | null = null
 
 const swatch = computed(() => SWATCHES[swatchIndex.value] ?? SWATCHES[0]!)
-const services = computed(() => SERVICES.map((s) => ({ ...s, ...content.value.services[s.id] })))
-const priceGroups = computed(() =>
-  PRICE_GROUPS.map((g) => ({
-    id: g.id,
-    title: content.value.prices.groups[g.id],
-    items: g.items.map((item) => ({ ...item, name: content.value.prices.items[item.id] })),
-  })),
-)
 const stages = computed(() => STAGES.map((id) => ({ id, ...content.value.stages[id] })))
 const works = computed(() =>
   WORKS.map((w) => ({
@@ -66,11 +59,6 @@ const message = computed(() => {
 const waLink = computed(() => whatsappLink(SITE.phone, message.value))
 const tgLink = computed(() => telegramShareLink(message.value))
 
-const price = (value?: number) =>
-  formatPrice(
-    value,
-    t((m) => m.common.priceFrom),
-  )
 const toggleStep = (i: number) => (openStep.value = openStep.value === i ? null : i)
 
 function openWork(i: number) {
@@ -109,124 +97,11 @@ onBeforeUnmount(() => observer?.disconnect())
   <div class="home" :style="{ '--car': swatch.color }">
     <HeroSection :swatch-index="swatchIndex" @select-color="swatchIndex = $event" />
 
-    <!-- ===== УСЛУГИ ===== -->
-    <section id="services" class="section">
-      <span class="tape">услуги</span>
-      <h2>Что красим</h2>
-      <p class="lead">Выберите, что нужно, или просто пришлите фото — подскажем сами.</p>
-      <ul class="services">
-        <li v-for="s in services" :key="s.id" class="service">
-          <h3 class="service__title">{{ s.title }}</h3>
-          <p>{{ s.text }}</p>
-          <p class="service__fits mono">{{ s.fits }}</p>
-          <RouterLink v-if="s.page" class="service__link" :to="pagePath(s.page, locale)">
-            Подробнее →
-          </RouterLink>
-        </li>
-      </ul>
-
-      <div id="prices" class="prices">
-        <div class="prices__head">
-          <h3>Цены на покраску</h3>
-          <p>
-            Цены в лари, за одну деталь. Итог зависит от состояния детали и класса машины — точную
-            сумму назовём по фото или после осмотра.
-          </p>
-        </div>
-        <div class="prices__groups">
-          <section v-for="g in priceGroups" :key="g.id" class="price-group">
-            <h4 class="price-group__title"><span class="tape">{{ g.title }}</span></h4>
-            <table class="price-group__table">
-              <thead>
-                <tr>
-                  <th scope="col"><span class="visually-hidden">Деталь</span></th>
-                  <th scope="col">Новая<small>после замены</small></th>
-                  <th scope="col">Б/У<small>с подготовкой</small></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="r in g.items" :key="r.id">
-                  <th scope="row">{{ r.name }}</th>
-                  <td v-if="r.ask" colspan="2" class="is-ask">по фото</td>
-                  <td v-else-if="r.single !== undefined" colspan="2">{{ price(r.single) }}</td>
-                  <template v-else>
-                    <td :class="{ 'is-empty': r.fresh === undefined }">{{ price(r.fresh) }}</td>
-                    <td :class="{ 'is-empty': r.used === undefined }">{{ price(r.used) }}</td>
-                  </template>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-        </div>
-        <p class="prices__extra">
-          <span class="prices__info" aria-hidden="true">i</span>
-          Цены указаны для обычной эмали. Металлик, перламутр, трёхслойные цвета и матовый лак
-          рассчитываем индивидуально.
-        </p>
-      </div>
-
-      <div class="howto">
-        <h3 class="howto__title">Как узнать точную цену</h3>
-        <div class="howto__options">
-          <article class="howto__opt">
-            <span class="tape">быстро</span>
-            <h4>По фото</h4>
-            <ol class="howto__steps">
-              <li v-for="(s, i) in content.prices.photoSteps" :key="s">
-                <span class="howto__num mono">{{ padNumber(i + 1) }}</span>
-                {{ s }}
-              </li>
-            </ol>
-            <a class="btn btn--ghost howto__cta" href="#estimate">Отправить фото</a>
-          </article>
-          <article class="howto__opt howto__opt--best">
-            <span class="tape">точнее всего</span>
-            <h4>На месте</h4>
-            <p>
-              Приезжайте к нам: мастер осмотрит машину вживую, при хорошем свете и под лампами. Так
-              видно то, что не попадает в кадр, — скрытые повреждения, старый ремонт, толщину
-              краски. Сумма будет точной сразу.
-            </p>
-            <a class="btn howto__cta" href="/kontakty">Адрес и часы работы</a>
-          </article>
-        </div>
-
-        <div class="howto__flow">
-          <p class="howto__flow-title">Сначала смета — потом работа</p>
-          <ol>
-            <li v-for="(s, i) in content.prices.flow" :key="s">
-              <span class="howto__num mono">{{ padNumber(i + 1) }}</span>
-              {{ s }}
-            </li>
-          </ol>
-          <p class="howto__flow-note">
-            Работу начинаем только после того, как вы одобрили смету. Мы на связи на всех этапах:
-            если при разборке найдём скрытые повреждения, сначала согласуем с вами, и только потом
-            продолжим. Цена не меняется по ходу без вашего согласия.
-          </p>
-        </div>
-      </div>
-
-      <aside class="docs" aria-labelledby="docs-title">
-        <svg class="docs__icon" viewBox="0 0 48 48" aria-hidden="true">
-          <rect x="9" y="7" width="26" height="34" rx="3" />
-          <path d="M17 7V4h10v3" />
-          <path d="M15 17l2 2 4-4M15 26l2 2 4-4M15 35l2 2 4-4M25 17h5M25 26h5M25 35h5" />
-          <path d="M40 16l3 3-11 11-4 1 1-4z" />
-        </svg>
-        <div>
-          <h3 id="docs-title" class="docs__title">Документы для страховой</h3>
-          <p>
-            После ДТП подготовим документы для страховой компании и поможем урегулировать страховой
-            случай.
-          </p>
-          <p>
-            По покраске и сопутствующим работам выдаём <strong>акт выполненных работ</strong> и
-            <strong>чек</strong> — для компенсации затрат на ремонт.
-          </p>
-        </div>
-      </aside>
-    </section>
+    <ServicesSection>
+      <PriceTable />
+      <PriceHowto />
+      <InsuranceNote />
+    </ServicesSection>
 
     <!-- ===== ЭТАПЫ РАБОТ ===== -->
     <section id="layers" class="section">
@@ -592,383 +467,6 @@ onBeforeUnmount(() => observer?.disconnect())
       font-size: 0.75rem;
       font-weight: 400;
     }
-  }
-}
-
-.services {
-  list-style: none;
-  padding: 0;
-  margin: var(--space-6) 0 0;
-  display: grid;
-  gap: var(--space-4);
-
-  @include above(md) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include above(xl) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.service {
-  display: flex;
-  flex-direction: column;
-  padding: var(--space-6);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: 4px solid var(--car);
-  border-radius: var(--radius);
-  transition:
-    border-color 0.5s,
-    transform 0.25s;
-
-  &:hover {
-    @include motion {
-      transform: translateY(-3px);
-    }
-  }
-
-  &__title {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    margin-bottom: var(--space-3);
-  }
-
-  p {
-    color: var(--color-text-muted);
-  }
-
-  &__fits {
-    font-size: 0.8rem;
-    color: var(--color-text) !important;
-
-    &::before {
-      content: 'подходит: ';
-      color: var(--color-text-muted);
-    }
-  }
-
-  &__link {
-    margin-top: auto;
-    padding-top: var(--space-2);
-    font-weight: 700;
-    color: var(--accent-ink);
-    text-decoration: none;
-  }
-}
-
-.prices {
-  margin-top: var(--space-8);
-
-  &__head {
-    margin-bottom: var(--space-4);
-
-    h3 {
-      font-family: var(--font-display);
-      text-transform: uppercase;
-      font-size: 1.3rem;
-      margin-bottom: var(--space-2);
-    }
-
-    p {
-      color: var(--color-text-muted);
-      max-width: 70ch;
-      margin: 0;
-    }
-  }
-
-  // колонки вместо сетки: группы разной высоты стыкуются без дыр
-  &__groups {
-    column-gap: var(--space-4);
-
-    @include above(lg) {
-      columns: 2;
-    }
-  }
-
-  &__extra {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-3);
-    margin: 0;
-    padding: var(--space-3) var(--space-4);
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    background: var(--color-surface);
-    border-radius: var(--radius);
-  }
-
-  &__info {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: 20px;
-    height: 20px;
-    margin-top: 1px;
-    border: 1.5px solid currentColor;
-    border-radius: 50%;
-    font: 700 0.72rem/1 var(--font-mono);
-  }
-}
-
-.price-group {
-  break-inside: avoid;
-  margin-bottom: var(--space-4);
-  padding: var(--space-4) var(--space-4) var(--space-2);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-
-  &__title {
-    margin: 0 0 var(--space-2);
-    font-weight: 400;
-
-    .tape {
-      margin: 0;
-    }
-  }
-
-  &__table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.95rem;
-
-    th,
-    td {
-      padding: var(--space-2) 0;
-      text-align: left;
-      border-bottom: 1px dashed var(--color-border);
-    }
-
-    thead th {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-      vertical-align: bottom;
-      width: 26%;
-
-      &:first-child {
-        width: auto;
-      }
-
-      small {
-        display: block;
-        font-size: 0.68rem;
-        font-weight: 400;
-        text-transform: none;
-      }
-    }
-
-    tbody th {
-      font-weight: 500;
-      padding-right: var(--space-3);
-    }
-
-    tbody tr:last-child > * {
-      border-bottom: 0;
-    }
-
-    td {
-      font-family: var(--font-mono);
-      font-weight: 600;
-      white-space: nowrap;
-
-      &.is-empty {
-        color: var(--color-text-muted);
-        font-weight: 400;
-        opacity: 0.5;
-      }
-
-      &.is-ask {
-        color: var(--accent-ink);
-        font-weight: 400;
-      }
-    }
-  }
-}
-
-.docs {
-  display: flex;
-  gap: var(--space-6);
-  align-items: flex-start;
-  margin-top: var(--space-6);
-  padding: var(--space-6);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-left: 4px solid var(--color-accent);
-  border-radius: var(--radius);
-
-  @include below(sm) {
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  // иконка на «кусочке скотча»: тёмный контур читается на любом фоне
-  &__icon {
-    flex: none;
-    width: 56px;
-    height: 56px;
-    padding: 8px;
-    background: var(--color-tape);
-    border-radius: var(--radius);
-    transform: rotate(-3deg);
-    fill: none;
-    stroke: var(--on-tape);
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  &__title {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    margin-bottom: var(--space-2);
-  }
-
-  p {
-    margin: 0 0 var(--space-2);
-    color: var(--color-text-muted);
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  strong {
-    color: var(--color-text);
-  }
-}
-
-.howto {
-  margin-top: var(--space-8);
-  padding: var(--space-6);
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius);
-
-  &__title {
-    font-family: var(--font-display);
-    text-transform: uppercase;
-    font-size: 1.3rem;
-    margin-bottom: var(--space-4);
-  }
-
-  &__options {
-    display: grid;
-    gap: var(--space-4);
-
-    @include above(md) {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  &__opt {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-3);
-    padding: var(--space-6);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-
-    .tape {
-      margin: 0;
-      font-size: 0.85rem;
-    }
-
-    h4 {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      text-transform: uppercase;
-    }
-
-    p {
-      margin: 0;
-      color: var(--color-text-muted);
-    }
-
-    &--best {
-      border-color: var(--color-accent);
-      box-shadow: 0 0 0 1px var(--color-accent);
-    }
-  }
-
-  &__steps {
-    display: grid;
-    gap: var(--space-2);
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      display: flex;
-      gap: var(--space-3);
-      align-items: baseline;
-    }
-  }
-
-  &__num {
-    flex: none;
-    color: var(--accent-ink);
-    font-size: 0.85rem;
-  }
-
-  &__cta {
-    margin-top: auto;
-  }
-
-  &__flow {
-    margin-top: var(--space-6);
-
-    ol {
-      display: grid;
-      gap: var(--space-2);
-      list-style: none;
-      padding: 0;
-      margin: var(--space-3) 0;
-
-      @include above(md) {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      li {
-        position: relative;
-        display: flex;
-        gap: var(--space-2);
-        align-items: baseline;
-        padding: var(--space-3) var(--space-4);
-        font-weight: 600;
-        background: var(--color-surface);
-        border-radius: var(--radius);
-      }
-
-      li:last-child {
-        background: var(--color-tape);
-        color: var(--on-tape);
-
-        .howto__num {
-          color: inherit;
-        }
-      }
-    }
-  }
-
-  &__flow-title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
-
-  &__flow-note {
-    margin: 0;
-    color: var(--color-text-muted);
   }
 }
 
