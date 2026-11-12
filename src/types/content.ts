@@ -1,4 +1,5 @@
 import type { EstimatePartId } from './estimate'
+import type { FaqEntry, FaqId } from './faq'
 import type { PriceGroupId, PriceItemId } from './prices'
 import type { ServiceId } from './services'
 import type { StageId } from './stages'
@@ -108,6 +109,10 @@ export interface EstimateContent extends SectionHeading {
   message: string
 }
 
+export interface FaqContent extends SectionHeading {
+  items: Record<FaqId, FaqEntry>
+}
+
 export interface Content {
   hero: HeroContent
   services: ServicesContent
@@ -118,4 +123,5 @@ export interface Content {
   works: WorksContent
   passport: PassportContent
   estimate: EstimateContent
+  faq: FaqContent
 }

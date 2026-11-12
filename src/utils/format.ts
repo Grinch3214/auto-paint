@@ -1,3 +1,5 @@
+import type { PriceGroup, PriceItem } from '@/types/prices'
+
 /** 1 → '01' */
 export function padNumber(value: number, length = 2): string {
   return String(value).padStart(length, '0')
@@ -6,4 +8,19 @@ export function padNumber(value: number, length = 2): string {
 /** template — строка из словаря с {value}, например 'от {value}' */
 export function formatPrice(value: number | undefined, template: string): string {
   return value === undefined ? '—' : template.replace('{value}', String(value))
+}
+
+/** Самая низкая цена детали: для текстов «от N лари» */
+export function minPrice(item: PriceItem): number | undefined {
+  const values = [item.fresh, item.used, item.single].filter((v) => v !== undefined)
+  return values.length ? Math.min(...values) : undefined
+}
+
+/** Подставляет в текст цены из таблицы: '{hood}' → '490' */
+export function fillPrices(text: string, groups: readonly PriceGroup[]): string {
+  return text.replace(/\{(\w+)\}/g, (match, id: string) => {
+    const item = groups.flatMap((g) => g.items).find((i) => i.id === id)
+    const price = item && minPrice(item)
+    return price === undefined ? match : String(price)
+  })
 }

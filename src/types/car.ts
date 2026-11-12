@@ -1,4 +1,3 @@
-
 export interface PaintFilter {
   sepia: number
   hue: number

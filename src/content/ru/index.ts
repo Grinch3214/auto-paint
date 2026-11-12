@@ -1,5 +1,6 @@
 import type { Content } from '@/types/content'
 import estimate from './estimate'
+import faq from './faq'
 import hero from './hero'
 import howto from './howto'
 import insurance from './insurance'
@@ -19,4 +20,5 @@ export default {
   works,
   passport,
   estimate,
+  faq,
 } satisfies Content
