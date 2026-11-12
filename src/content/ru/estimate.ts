@@ -1,6 +1,9 @@
 import type { Content } from '@/types/content'
 
 export default {
+  tape: 'оценка по фото',
+  title: 'Что нужно покрасить?',
+  lead: 'Отметьте детали — мы подставим их в сообщение. Фото прикрепите уже в чате.',
   parts: {
     hood: 'Капот',
     frontBumper: 'Передний бампер',

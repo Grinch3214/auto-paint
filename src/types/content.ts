@@ -103,7 +103,7 @@ export interface InsuranceContent {
   docsAfter: string
 }
 
-export interface EstimateContent {
+export interface EstimateContent extends SectionHeading {
   parts: Record<EstimatePartId, string>
   message: string
 }
