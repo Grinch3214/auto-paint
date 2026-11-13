@@ -49,7 +49,7 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
           <img
             :src="w.src"
             :srcset="w.srcset"
-            :sizes="w.big ? '(min-width: 768px) 50vw, 100vw' : '(min-width: 768px) 25vw, 50vw'"
+            :sizes="w.big ? '(min-width: 768px) 50vw, 80vw' : '(min-width: 768px) 25vw, 80vw'"
             :alt="w.alt"
             width="800"
             height="600"
@@ -69,24 +69,51 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
   list-style: none;
   padding: 0;
   margin: var(--space-6) 0 0;
-  display: grid;
-  gap: var(--space-3);
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 150px;
-  grid-auto-flow: dense;
+
+  // телефон: лента со свайпом, край следующего фото подсказывает, что можно листать
+  @include below(md) {
+    display: flex;
+    gap: var(--space-3);
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 
   @include above(md) {
+    display: grid;
+    gap: var(--space-3);
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 210px;
+    grid-auto-flow: dense;
+  }
+
+  &__item {
+    @include below(md) {
+      flex: 0 0 80%;
+      aspect-ratio: 4 / 3;
+      scroll-snap-align: start;
+    }
   }
 
   &__item--big {
-    grid-column: span 2;
-    grid-row: span 2;
+    @include above(md) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
   }
 
   &__item--wide {
-    grid-column: span 2;
+    @include above(md) {
+      grid-column: span 2;
+    }
   }
 
   &__btn {
