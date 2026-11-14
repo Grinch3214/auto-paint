@@ -113,6 +113,14 @@ export interface FaqContent extends SectionHeading {
   items: Record<FaqId, FaqEntry>
 }
 
+export interface VisitContent extends SectionHeading {
+  addressLabel: string
+  hoursLabel: string
+  phoneLabel: string
+  route: string
+  allContacts: string
+}
+
 export interface Content {
   hero: HeroContent
   services: ServicesContent
@@ -124,4 +132,5 @@ export interface Content {
   passport: PassportContent
   estimate: EstimateContent
   faq: FaqContent
+  visit: VisitContent
 }

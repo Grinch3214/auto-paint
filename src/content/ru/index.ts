@@ -8,6 +8,7 @@ import passport from './passport'
 import prices from './prices'
 import services from './services'
 import stages from './stages'
+import visit from './visit'
 import works from './works'
 
 export default {
@@ -21,4 +22,5 @@ export default {
   passport,
   estimate,
   faq,
+  visit,
 } satisfies Content
