@@ -16,7 +16,6 @@ const props = defineProps<{ ids: readonly FaqId[] }>()
 const { t } = useI18n()
 const content = useContent()
 
-// цены в ответах берём из таблицы, чтобы FAQ не расходился с прайсом
 const items = computed(() =>
   props.ids.map((id) => {
     const entry = content.value.faq.items[id]
@@ -39,7 +38,7 @@ useHead({
       <span class="tape">{{ content.faq.tape }}</span>
       <h2>{{ content.faq.title }}</h2>
       <p class="lead">{{ content.faq.lead }}</p>
-      <!-- на телефоне и планшете эти кнопки уже есть в нижней панели -->
+
       <div class="faq-aside__cta">
         <a class="btn" :href="phoneLink(SITE.phone)">
           <BaseIcon name="phone" />
@@ -70,7 +69,6 @@ useHead({
             <span class="faq__chev" aria-hidden="true" />
           </button>
         </h3>
-        <!-- ответ всегда в HTML, только свёрнут: поисковик видит весь текст -->
         <div :id="`faq-${item.id}`" class="faq__body">
           <div class="faq__inner">
             <p class="faq__a">{{ item.answer }}</p>
