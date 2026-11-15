@@ -1,12 +1,11 @@
 import { computed, inject, ref, shallowRef } from 'vue'
 import { contentLoaders } from '@/content'
 import { SITE } from '@/config/site'
+import { fillBrand } from '@/utils/format'
 import { DEFAULT_LOCALE } from './locales'
 import type { App, InjectionKey } from 'vue'
 import type { Content } from '@/types/content'
 import type { I18n, Locale, Messages } from '@/types/i18n'
-
-// Каждый словарь — отдельный чанк: страница грузит только свой язык
 const loaders: Record<Locale, () => Promise<{ default: Messages }>> = {
   ru: () => import('./messages/ru'),
   ka: () => import('./messages/ka'),
@@ -15,7 +14,7 @@ const loaders: Record<Locale, () => Promise<{ default: Messages }>> = {
 
 const KEY: InjectionKey<I18n> = Symbol('i18n')
 
-const fill = (text: string) => text.replaceAll('{BRAND}', SITE.brand)
+const fill = (text: string) => fillBrand(text, SITE.brand)
 
 export function createI18n() {
   const cache = new Map<Locale, { messages: Messages; content: Content }>()
@@ -51,7 +50,6 @@ function injectI18n() {
 
 export function useI18n() {
   const i18n = injectI18n()
-  /** t(m => m.home.h1): ключи проверяются TypeScript'ом */
   const t = (pick: (m: Messages) => string) => {
     const messages = i18n.messages.value
     if (!messages) throw new Error('Messages are not loaded yet')
@@ -60,7 +58,6 @@ export function useI18n() {
   return { t, locale: i18n.locale }
 }
 
-/** Тексты контента текущего языка (content/<lang>/) */
 export function useContent() {
   const i18n = injectI18n()
   return computed(() => {

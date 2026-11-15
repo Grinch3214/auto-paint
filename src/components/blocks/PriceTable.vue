@@ -3,19 +3,23 @@ import { computed } from 'vue'
 import { PRICE_GROUPS } from '@/data/prices'
 import { useContent, useI18n } from '@/i18n'
 import { formatPrice } from '@/utils/format'
-import type { PriceGroupId } from '@/types/prices'
+import type { PriceGroupId, PriceItemId } from '@/types/prices'
 
-const props = defineProps<{ groups?: PriceGroupId[] }>()
+const props = defineProps<{ groups?: readonly PriceGroupId[]; items?: readonly PriceItemId[] }>()
 
 const { t } = useI18n()
 const content = useContent()
 
 const priceGroups = computed(() =>
-  PRICE_GROUPS.filter((g) => !props.groups || props.groups.includes(g.id)).map((g) => ({
-    id: g.id,
-    title: content.value.prices.groups[g.id],
-    items: g.items.map((item) => ({ ...item, name: content.value.prices.items[item.id] })),
-  })),
+  PRICE_GROUPS.filter((g) => !props.groups || props.groups.includes(g.id))
+    .map((g) => ({
+      id: g.id,
+      title: content.value.prices.groups[g.id],
+      items: g.items
+        .filter((item) => !props.items || props.items.includes(item.id))
+        .map((item) => ({ ...item, name: content.value.prices.items[item.id] })),
+    }))
+    .filter((g) => g.items.length),
 )
 
 const price = (value?: number) =>
@@ -92,7 +96,6 @@ const price = (value?: number) =>
     }
   }
 
-  // колонки вместо сетки: группы разной высоты стыкуются без дыр
   &__groups {
     column-gap: var(--space-4);
 

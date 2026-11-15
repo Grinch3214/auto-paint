@@ -1,4 +1,4 @@
-export type PriceGroupId = 'front' | 'side' | 'roof' | 'small'
+export type PriceGroupId = 'front' | 'side' | 'roof' | 'small' | 'spot'
 
 export type PriceItemId =
   | 'hood'
@@ -21,16 +21,16 @@ export type PriceItemId =
   | 'spoiler'
   | 'wheel'
   | 'caliper'
+  | 'spotChip'
+  | 'spotScratch'
+  | 'bumperCorner'
+  | 'spotPartial'
 
 export interface PriceItem {
   id: PriceItemId
-  /** новая деталь после замены */
   fresh?: number
-  /** б/у деталь с подготовкой */
   used?: number
-  /** одна цена на обе колонки */
   single?: number
-  /** цену называем по фото */
   ask?: boolean
 }
 

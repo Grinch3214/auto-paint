@@ -6,6 +6,7 @@ import howto from './howto'
 import insurance from './insurance'
 import passport from './passport'
 import prices from './prices'
+import servicePages from './servicePages'
 import services from './services'
 import stages from './stages'
 import visit from './visit'
@@ -23,4 +24,5 @@ export default {
   estimate,
   faq,
   visit,
+  servicePages,
 } satisfies Content

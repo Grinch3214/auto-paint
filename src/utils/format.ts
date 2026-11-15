@@ -24,3 +24,8 @@ export function fillPrices(text: string, groups: readonly PriceGroup[]): string 
     return price === undefined ? match : String(price)
   })
 }
+
+/** '{BRAND}' в тексте → название бренда */
+export function fillBrand(text: string, brand: string): string {
+  return text.replaceAll('{BRAND}', brand)
+}

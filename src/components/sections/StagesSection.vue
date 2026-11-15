@@ -5,12 +5,17 @@ import { useRevealOnce } from '@/composables/useRevealOnce'
 import { STAGES } from '@/data/stages'
 import { useContent } from '@/i18n'
 import { padNumber } from '@/utils/format'
+import type { StageId } from '@/types/stages'
+
+const props = defineProps<{ ids?: readonly StageId[] }>()
 
 const content = useContent()
 
 const list = ref<HTMLElement | null>(null)
 
-const stages = computed(() => STAGES.map((id) => ({ id, ...content.value.stages.items[id] })))
+const stages = computed(() =>
+  (props.ids ?? STAGES).map((id) => ({ id, ...content.value.stages.items[id] })),
+)
 
 const { ready, visible } = useRevealOnce(list)
 const { isOpen, toggle } = useAccordion(0)
@@ -20,7 +25,7 @@ const { isOpen, toggle } = useAccordion(0)
   <section id="layers" class="section">
     <span class="tape">{{ content.stages.tape }}</span>
     <h2>{{ content.stages.title }}</h2>
-    <p class="lead">{{ content.stages.lead }}</p>
+    <p class="lead">{{ ids ? content.stages.leadPartial : content.stages.lead }}</p>
     <ol ref="list" class="steps" :class="{ 'is-ready': ready, 'is-in': visible }">
       <li
         v-for="(s, i) in stages"
@@ -64,7 +69,7 @@ const { isOpen, toggle } = useAccordion(0)
   display: grid;
   gap: var(--space-4);
 
-  @include above(md) {
+  @include above(lg) {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -82,7 +87,6 @@ const { isOpen, toggle } = useAccordion(0)
     border-radius: var(--radius);
   }
 
-  // появление по очереди, только без reduced-motion
   @include motion {
     &.is-ready &__item {
       opacity: 0;
@@ -116,8 +120,7 @@ const { isOpen, toggle } = useAccordion(0)
     text-align: left;
     cursor: default;
 
-    // на планшете и десктопе карточки всегда раскрыты
-    @include above(md) {
+    @include above(lg) {
       pointer-events: none;
     }
   }
@@ -158,8 +161,8 @@ const { isOpen, toggle } = useAccordion(0)
     padding-top: var(--space-2);
   }
 
-  // мобильный: аккордеон
-  @include below(md) {
+  // до lg — аккордеон: карточки по 4–5 строк в две колонки занимают слишком много высоты
+  @include below(lg) {
     gap: var(--space-2);
 
     &__item {
@@ -197,7 +200,10 @@ const { isOpen, toggle } = useAccordion(0)
         inset: 7px 0 auto;
         height: 2px;
         background: currentColor;
-        transition: transform 0.25s ease;
+
+        @include motion {
+          transition: transform 0.25s ease;
+        }
       }
 
       &::after {

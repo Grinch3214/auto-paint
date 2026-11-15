@@ -28,6 +28,8 @@ const ru = {
   },
   common: {
     priceFrom: 'от {value}',
+    /** в лари — для списков цен на страницах услуг */
+    priceFromGel: 'от {value} ₾',
   },
   lightbox: {
     label: 'Просмотр фото',

@@ -1,5 +1,6 @@
 import type { EstimatePartId } from './estimate'
 import type { FaqEntry, FaqId } from './faq'
+import type { ServicePageId } from './pages'
 import type { PriceGroupId, PriceItemId } from './prices'
 import type { ServiceId } from './services'
 import type { StageId } from './stages'
@@ -77,12 +78,12 @@ export interface HowtoContent {
 }
 
 export interface StagesContent extends SectionHeading {
+  leadPartial: string
   noteLabel: string
   items: Record<StageId, StageText>
 }
 
 export interface WorksContent extends SectionHeading {
-  /** {alt} — подпись фото */
   openPhoto: string
   items: Record<WorkId, WorkText>
 }
@@ -97,7 +98,6 @@ export interface PassportContent {
 export interface InsuranceContent {
   title: string
   lead: string
-  /** «{before} <strong>док1</strong> {joiner} <strong>док2</strong> {after}» */
   docsBefore: string
   docs: readonly string[]
   docsJoiner: string
@@ -121,6 +121,38 @@ export interface VisitContent extends SectionHeading {
   allContacts: string
 }
 
+export interface ServicePageText {
+  seoTitle: string
+  seoDescription: string
+  h1: string
+  lead: string
+  photoCaption?: string
+  includes: readonly string[]
+  cases: readonly string[]
+}
+
+export interface ServicePagesContent {
+  ctaEstimate: string
+  scope: { tape: string; includesTitle: string; casesTitle: string }
+  price: {
+    tape: string
+    title: string
+    listTitle: string
+    note: string
+    askTitle: string
+    askText: string
+    askCta: string
+  }
+  related: { tape: string; title: string }
+  aside: {
+    tape: string
+    title: string
+    route: string
+    facts: readonly { title: string; text: string }[]
+  }
+  items: Record<ServicePageId, ServicePageText>
+}
+
 export interface Content {
   hero: HeroContent
   services: ServicesContent
@@ -133,4 +165,5 @@ export interface Content {
   estimate: EstimateContent
   faq: FaqContent
   visit: VisitContent
+  servicePages: ServicePagesContent
 }

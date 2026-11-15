@@ -4,13 +4,20 @@ import PhotoLightbox from '@/components/blocks/PhotoLightbox.vue'
 import { WORKS } from '@/data/works'
 import { useContent } from '@/i18n'
 import { imageSources, imageUrl } from '@/utils/image'
+import type { ServicePageId } from '@/types/pages'
+
+const props = defineProps<{ page?: ServicePageId }>()
 
 const content = useContent()
 
 const lightbox = ref<InstanceType<typeof PhotoLightbox> | null>(null)
 
+const list = computed(() => {
+  const page = props.page
+  return page ? WORKS.filter((w) => w.pages?.includes(page)) : WORKS
+})
 const works = computed(() =>
-  WORKS.map((w) => ({
+  list.value.map((w) => ({
     id: w.id,
     ...imageSources(w.folder, w.image),
     ...content.value.works.items[w.id],
@@ -19,7 +26,7 @@ const works = computed(() =>
   })),
 )
 const photos = computed(() =>
-  WORKS.map((w) => ({
+  list.value.map((w) => ({
     src: imageUrl(w.folder, w.image, 1200),
     alt: content.value.works.items[w.id].alt,
   })),
@@ -29,7 +36,7 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
 </script>
 
 <template>
-  <section id="works" class="section">
+  <section v-if="works.length" id="works" class="section">
     <span class="tape">{{ content.works.tape }}</span>
     <h2>{{ content.works.title }}</h2>
     <p class="lead">{{ content.works.lead }}</p>
@@ -70,7 +77,6 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
   padding: 0;
   margin: var(--space-6) 0 0;
 
-  // телефон: лента со свайпом, край следующего фото подсказывает, что можно листать
   @include below(md) {
     display: flex;
     gap: var(--space-3);

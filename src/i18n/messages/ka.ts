@@ -30,6 +30,8 @@ const ka: Messages = {
   },
   common: {
     priceFrom: '{value}-დან',
+    /** в лари — для списков цен на страницах услуг */
+    priceFromGel: '{value} ₾-დან',
   },
   lightbox: {
     label: 'ფოტოს ნახვა',

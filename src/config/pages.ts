@@ -2,7 +2,8 @@ import { getLocale } from '@/i18n/locales'
 import type { Locale } from '@/types/i18n'
 import type { PageDef, PageId } from '@/types/pages'
 
-// Новые страницы из брифа (п. 5) добавляются сюда
+const servicePage = () => import('@/pages/ServicePage.vue')
+
 export const PAGES: readonly PageDef[] = [
   {
     id: 'home',
@@ -18,13 +19,14 @@ export const PAGES: readonly PageDef[] = [
     },
     component: () => import('@/pages/ContactsPage.vue'),
   },
+  {
+    id: 'spotRepair',
+    slugs: { ru: 'lokalnaya-pokraska', ka: 'lokaluri-sheghebva', en: 'spot-repair' },
+    component: servicePage,
+    props: { id: 'spotRepair' },
+  },
 ]
 
-/**
- * Путь страницы на языке. Главная языка со слэшем ('/', '/ka/'),
- * остальные без ('/kontakty', '/ka/kontaktebi'): так их отдаёт Cloudflare Pages
- * из файлов dist/ka/index.html и dist/ka/kontaktebi.html.
- */
 export function pagePath(id: PageId, locale: Locale): string {
   const page = PAGES.find((p) => p.id === id)
   if (!page) throw new Error(`Unknown page: ${id}`)

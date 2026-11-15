@@ -29,6 +29,8 @@ const en: Messages = {
   },
   common: {
     priceFrom: 'from {value}',
+    /** в лари — для списков цен на страницах услуг */
+    priceFromGel: 'from ₾{value}',
   },
   lightbox: {
     label: 'Photo viewer',

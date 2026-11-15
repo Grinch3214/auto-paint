@@ -26,6 +26,7 @@ function buildRoutes(): RouteRecordRaw[] {
       path: pagePath(page.id, code),
       name: `${page.id}:${code}`,
       component: page.component,
+      props: page.props,
       meta: { locale: code, pageId: page.id },
     })),
   )

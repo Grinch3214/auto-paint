@@ -1,3 +1,5 @@
+import type { ServicePageId } from './pages'
+
 export type WorkId =
   | 'hoodGloss'
   | 'sideGloss'
@@ -13,4 +15,6 @@ export interface Work {
   folder: string
   image: string
   size?: 'big' | 'wide'
+  /** на каких страницах услуг показывать это фото */
+  pages?: readonly ServicePageId[]
 }
