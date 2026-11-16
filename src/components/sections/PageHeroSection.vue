@@ -10,7 +10,6 @@ import { phoneLink } from '@/utils/messengers'
 import type { PageId } from '@/types/pages'
 import type { WorkId } from '@/types/works'
 
-// Тёмный hero внутренних страниц: H1, вступление, кнопки; справа фото, если задано
 const props = defineProps<{
   page: PageId
   title: string

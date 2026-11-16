@@ -2,7 +2,6 @@
 import { padNumber } from '@/utils/format'
 import type { SectionHeading, TitledText } from '@/types/content'
 
-// Заголовок секции + карточки «заголовок и текст». numbered — шаги процесса с номерами
 defineProps<{
   heading: SectionHeading
   items: readonly TitledText[]
