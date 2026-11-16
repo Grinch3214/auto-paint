@@ -1,7 +1,13 @@
+import { STAGES } from '@/data/stages'
 import type { ServicePageData } from '@/types/servicePages'
 import type { ServicePageId } from '@/types/pages'
 
 export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
+  fullPaint: {
+    stages: STAGES,
+    related: ['panelPaint', 'spotRepair', 'colorMatch'],
+    faq: ['price', 'duration', 'colorMatch', 'paintBooth', 'bodyRepair', 'polishing'],
+  },
   spotRepair: {
     heroWork: 'wingSpot',
     prices: ['spotChip', 'spotScratch', 'bumperCorner', 'spotPartial'],

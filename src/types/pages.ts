@@ -1,7 +1,7 @@
 import type { Component } from 'vue'
 import type { Locale } from './i18n'
 
-export type ServicePageId = 'spotRepair'
+export type ServicePageId = 'fullPaint' | 'spotRepair'
 
 export type PageId = 'home' | 'contacts' | ServicePageId
 

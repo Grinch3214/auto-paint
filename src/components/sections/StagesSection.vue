@@ -13,6 +13,8 @@ const content = useContent()
 
 const list = ref<HTMLElement | null>(null)
 
+// выборка из всех 8 этапов — то же, что без выборки: общее вступление
+const partial = computed(() => !!props.ids && props.ids.length < STAGES.length)
 const stages = computed(() =>
   (props.ids ?? STAGES).map((id) => ({ id, ...content.value.stages.items[id] })),
 )
@@ -25,7 +27,7 @@ const { isOpen, toggle } = useAccordion(0)
   <section id="layers" class="section">
     <span class="tape">{{ content.stages.tape }}</span>
     <h2>{{ content.stages.title }}</h2>
-    <p class="lead">{{ ids ? content.stages.leadPartial : content.stages.lead }}</p>
+    <p class="lead">{{ partial ? content.stages.leadPartial : content.stages.lead }}</p>
     <ol ref="list" class="steps" :class="{ 'is-ready': ready, 'is-in': visible }">
       <li
         v-for="(s, i) in stages"

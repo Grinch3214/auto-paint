@@ -20,6 +20,12 @@ export const PAGES: readonly PageDef[] = [
     component: () => import('@/pages/ContactsPage.vue'),
   },
   {
+    id: 'fullPaint',
+    slugs: { ru: 'polnaya-pokraska', ka: 'sruli-sheghebva', en: 'full-respray' },
+    component: servicePage,
+    props: { id: 'fullPaint' },
+  },
+  {
     id: 'spotRepair',
     slugs: { ru: 'lokalnaya-pokraska', ka: 'lokaluri-sheghebva', en: 'spot-repair' },
     component: servicePage,
