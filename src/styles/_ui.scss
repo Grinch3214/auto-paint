@@ -95,4 +95,9 @@
   justify-content: inherit;
   gap: var(--space-3);
   margin-top: var(--space-6);
+
+  @include below(sm) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
