@@ -19,12 +19,11 @@ export function useNavLinks() {
       label: t((m) => m.nav.colorMatch),
     },
     { key: 'prices', to: pagePath('prices', locale.value), label: t((m) => m.nav.prices) },
-    { key: 'estimate', to: toHome('#estimate'), label: t((m) => m.nav.estimate) },
     { key: 'contacts', to: pagePath('contacts', locale.value), label: t((m) => m.nav.contacts) },
   ])
 
-  const pageLinks = computed(() => [
-    ...SERVICES.flatMap((s) =>
+  const serviceLinks = computed(() =>
+    SERVICES.flatMap((s) =>
       s.page
         ? [
             {
@@ -35,9 +34,13 @@ export function useNavLinks() {
           ]
         : [],
     ),
+  )
+
+  const pageLinks = computed(() => [
+    ...serviceLinks.value,
     { key: 'prices', to: pagePath('prices', locale.value), label: t((m) => m.nav.prices) },
     { key: 'contacts', to: pagePath('contacts', locale.value), label: t((m) => m.nav.contacts) },
   ])
 
-  return { home, toHome, links, pageLinks }
+  return { home, toHome, links, serviceLinks, pageLinks }
 }

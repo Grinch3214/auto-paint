@@ -6,7 +6,6 @@ const en: Messages = {
     colorMatch: 'Colour matching',
     prices: 'Prices',
     home: 'Home',
-    estimate: 'Photo estimate',
     cta: 'Message us',
     contacts: 'Contacts',
   },
@@ -56,6 +55,11 @@ const en: Messages = {
     contactsTitle: 'Contacts',
     note: 'Prices on the site are preliminary. We name the final amount after inspecting the car and agree it before work starts.',
     rights: 'All rights reserved.',
+  },
+  menu: {
+    open: 'Open menu',
+    close: 'Close menu',
+    services: 'Services',
   },
   langSwitcher: 'Language',
 }

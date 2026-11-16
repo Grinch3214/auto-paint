@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useWindowScroll } from '@vueuse/core'
+import { onKeyStroke, useWindowScroll } from '@vueuse/core'
 import BaseIcon from '@/components/BaseIcon.vue'
 import { useNavLinks } from '@/composables/useNavLinks'
 import { SITE } from '@/config/site'
@@ -9,6 +9,7 @@ import { useI18n } from '@/i18n'
 import { visibleLocales } from '@/i18n/locales'
 import { phoneLink } from '@/utils/messengers'
 import LangSwitcher from './LangSwitcher.vue'
+import MobileMenu from './MobileMenu.vue'
 import SiteLogo from './SiteLogo.vue'
 
 const route = useRoute()
@@ -17,9 +18,22 @@ const { links } = useNavLinks()
 const { y } = useWindowScroll()
 
 const mounted = ref(false)
+const menuOpen = ref(false)
 
-const transparent = computed(() => route.meta.pageId === 'home' && (!mounted.value || y.value < 8))
+const transparent = computed(
+  () => route.meta.pageId === 'home' && !menuOpen.value && (!mounted.value || y.value < 8),
+)
 const showLangs = computed(() => visibleLocales().length > 1)
+
+const closeMenu = () => (menuOpen.value = false)
+
+onKeyStroke('Escape', closeMenu)
+
+watch(() => route.fullPath, closeMenu)
+// пока меню открыто, страница под ним не прокручивается
+watch(menuOpen, (open) => {
+  document.documentElement.style.overflow = open ? 'hidden' : ''
+})
 
 onMounted(() => (mounted.value = true))
 </script>
@@ -48,13 +62,29 @@ onMounted(() => (mounted.value = true))
       <nav class="header__nav">
         <RouterLink v-for="l in links" :key="l.key" :to="l.to">{{ l.label }}</RouterLink>
       </nav>
-      <LangSwitcher v-if="showLangs" />
+      <LangSwitcher v-if="showLangs" class="header__langs" />
+      <!-- на телефоне и планшете звонок — в нижней панели, здесь бургер -->
       <a class="btn btn--small header__call" :href="phoneLink(SITE.phone)">
         <BaseIcon name="phone" />
         {{ t((m) => m.contactInfo.call) }}
       </a>
+      <button
+        type="button"
+        class="burger"
+        :class="{ 'is-open': menuOpen }"
+        :aria-expanded="menuOpen"
+        aria-controls="mobile-menu"
+        :aria-label="menuOpen ? t((m) => m.menu.close) : t((m) => m.menu.open)"
+        @click="menuOpen = !menuOpen"
+      >
+        <span class="burger__line" />
+        <span class="burger__line" />
+        <span class="burger__line" />
+      </button>
     </div>
   </header>
+
+  <MobileMenu :open="menuOpen" @close="closeMenu" />
 </template>
 
 <style scoped lang="scss">
@@ -131,6 +161,13 @@ onMounted(() => (mounted.value = true))
     gap: var(--space-2);
   }
 
+  &__call,
+  &__langs {
+    @include below(lg) {
+      display: none;
+    }
+  }
+
   &__nav {
     display: flex;
     gap: var(--space-6);
@@ -147,6 +184,64 @@ onMounted(() => (mounted.value = true))
 
     @include below(lg) {
       display: none;
+    }
+  }
+}
+.burger {
+  position: relative;
+  display: none;
+  width: 44px;
+  height: 44px;
+  margin-inline-end: calc(-1 * var(--space-2));
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+
+  @include below(lg) {
+    display: block;
+  }
+
+  &__line {
+    position: absolute;
+    left: 11px;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+
+    @include motion {
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    &:nth-child(1) {
+      top: 15px;
+    }
+
+    &:nth-child(2) {
+      top: 21px;
+    }
+
+    &:nth-child(3) {
+      top: 27px;
+    }
+  }
+
+  // три полоски → крестик
+  &.is-open &__line {
+    &:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    &:nth-child(2) {
+      opacity: 0;
+    }
+
+    &:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
     }
   }
 }
