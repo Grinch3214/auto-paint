@@ -11,3 +11,11 @@ export const HERO_CAR = {
   width: 1600,
   height: 940,
 } as const
+
+export const LOGO = {
+  folder: 'brand',
+  name: 'autoatelier',
+  widths: [320, 640, 960],
+  width: 2040,
+  height: 547,
+} as const

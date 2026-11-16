@@ -1,64 +1,54 @@
 <script setup lang="ts">
-import BaseIcon from '@/components/BaseIcon.vue'
 import { useNavLinks } from '@/composables/useNavLinks'
 import { SITE } from '@/config/site'
+import { LOGO } from '@/constants/images'
 import { useI18n } from '@/i18n'
+import { imageSources } from '@/utils/image'
 
 defineProps<{ tagline?: boolean; compact?: boolean }>()
 
 const { t } = useI18n()
 const { home } = useNavLinks()
+
+const logo = imageSources(LOGO.folder, LOGO.name, LOGO.widths)
 </script>
 
 <template>
-  <RouterLink
-    :to="home"
-    class="logo"
-    :class="{ 'logo--compact': compact }"
-    :aria-label="SITE.brand"
-  >
-    <span class="logo__mark"><BaseIcon name="drop" /></span>
-    <span class="logo__text">
-      <span class="logo__name">{{ SITE.brand }}</span>
-      <span v-if="tagline" class="logo__tagline">{{ t((m) => m.footer.tagline) }}</span>
-    </span>
+  <RouterLink :to="home" class="logo" :class="{ 'logo--compact': compact }">
+    <img
+      class="logo__img"
+      :src="logo.src"
+      :srcset="logo.srcset"
+      :sizes="compact ? '160px' : '220px'"
+      :alt="SITE.brand"
+      :width="LOGO.width"
+      :height="LOGO.height"
+      :loading="compact ? undefined : 'lazy'"
+    />
+    <span v-if="tagline" class="logo__tagline">{{ t((m) => m.footer.tagline) }}</span>
   </RouterLink>
 </template>
 
 <style scoped lang="scss">
 .logo {
   display: inline-flex;
-  align-items: center;
-  gap: var(--space-3);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
   text-decoration: none;
 
-  // на узком экране в шапке остаётся только значок, иначе не влезает кнопка
-  &--compact &__text {
+  &__img {
+    display: block;
+    width: auto;
+    height: 56px;
+  }
+
+  &--compact &__img {
+    height: 40px;
+
     @include below(sm) {
-      display: none;
+      height: 32px;
     }
-  }
-
-  &__mark {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--color-accent);
-    color: var(--on-accent);
-  }
-
-  &__text {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__name {
-    font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: 0.04em;
   }
 
   &__tagline {

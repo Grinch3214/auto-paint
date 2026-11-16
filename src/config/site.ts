@@ -1,7 +1,7 @@
-// Плейсхолдеры до выбора бренда, домена и контактов Ильи
+// Бренд AutoAtelier, домен autoatelier.ge. Телефон, почта и Telegram — заглушки до контактов Ильи
 export const SITE = {
-  url: 'https://example.ge', // без слэша на конце
-  brand: '{BRAND}',
+  url: 'https://autoatelier.ge', // без слэша на конце
+  brand: 'AutoAtelier',
   /** только цифры с кодом страны — так его ждёт wa.me */
   phone: '995555123456',
   phoneDisplay: '+995 555 12 34 56',
