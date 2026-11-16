@@ -7,15 +7,21 @@ import { WORKS } from '@/data/works'
 import { useContent, useI18n } from '@/i18n'
 import { imageSources } from '@/utils/image'
 import { phoneLink } from '@/utils/messengers'
-import type { ServicePageId } from '@/types/pages'
+import type { PageId } from '@/types/pages'
 import type { WorkId } from '@/types/works'
 
-const props = defineProps<{ id: ServicePageId; work?: WorkId }>()
+// Тёмный hero внутренних страниц: H1, вступление, кнопки; справа фото, если задано
+const props = defineProps<{
+  page: PageId
+  title: string
+  lead: string
+  work?: WorkId
+  caption?: string
+}>()
 
 const { t, locale } = useI18n()
 const content = useContent()
 
-const text = computed(() => content.value.servicePages.items[props.id])
 const photo = computed(() => {
   const work = WORKS.find((w) => w.id === props.work)
   if (!work) return null
@@ -27,16 +33,16 @@ const photo = computed(() => {
 </script>
 
 <template>
-  <section class="service-hero">
-    <div class="service-hero__inner" :class="{ 'has-photo': photo }">
-      <div class="service-hero__text">
-        <h1 class="service-hero__title">{{ text.h1 }}</h1>
-        <p class="service-hero__lead">{{ text.lead }}</p>
+  <section class="page-hero">
+    <div class="page-hero__inner" :class="{ 'has-photo': photo }">
+      <div class="page-hero__text">
+        <h1 class="page-hero__title">{{ title }}</h1>
+        <p class="page-hero__lead">{{ lead }}</p>
         <div class="cta">
-          <RouterLink class="btn" :to="{ path: pagePath(id, locale), hash: '#estimate' }">
+          <RouterLink class="btn" :to="{ path: pagePath(page, locale), hash: '#estimate' }">
             {{ content.servicePages.ctaEstimate }}
           </RouterLink>
-          <a class="btn btn--ghost-dark service-hero__call" :href="phoneLink(SITE.phone)">
+          <a class="btn btn--ghost-dark page-hero__call" :href="phoneLink(SITE.phone)">
             <BaseIcon name="phone" />
             {{ t((m) => m.contactInfo.call) }}
           </a>
@@ -55,8 +61,8 @@ const photo = computed(() => {
           height="600"
           fetchpriority="high"
         />
-        <figcaption v-if="text.photoCaption" class="tape snapshot__caption">
-          {{ text.photoCaption }}
+        <figcaption v-if="caption" class="tape snapshot__caption">
+          {{ caption }}
         </figcaption>
       </figure>
     </div>
@@ -64,7 +70,7 @@ const photo = computed(() => {
 </template>
 
 <style scoped lang="scss">
-.service-hero {
+.page-hero {
   color: var(--hero-text);
   background:
     radial-gradient(ellipse 60% 70% at 50% 0%, rgb(255 255 255 / 0.1), transparent 70%),

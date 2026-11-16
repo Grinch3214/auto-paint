@@ -13,7 +13,6 @@ const content = useContent()
 
 const list = ref<HTMLElement | null>(null)
 
-// выборка из всех 8 этапов — то же, что без выборки: общее вступление
 const partial = computed(() => !!props.ids && props.ids.length < STAGES.length)
 const stages = computed(() =>
   (props.ids ?? STAGES).map((id) => ({ id, ...content.value.stages.items[id] })),

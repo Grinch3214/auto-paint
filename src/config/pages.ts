@@ -26,10 +26,38 @@ export const PAGES: readonly PageDef[] = [
     props: { id: 'fullPaint' },
   },
   {
+    id: 'panelPaint',
+    slugs: { ru: 'pokraska-detali', ka: 'detalebis-sheghebva', en: 'panel-painting' },
+    component: servicePage,
+    props: { id: 'panelPaint' },
+  },
+  {
     id: 'spotRepair',
     slugs: { ru: 'lokalnaya-pokraska', ka: 'lokaluri-sheghebva', en: 'spot-repair' },
     component: servicePage,
     props: { id: 'spotRepair' },
+  },
+  {
+    id: 'wheelPaint',
+    slugs: { ru: 'pokraska-diskov', ka: 'diskebis-sheghebva', en: 'wheel-painting' },
+    component: servicePage,
+    props: { id: 'wheelPaint' },
+  },
+  {
+    id: 'polishing',
+    slugs: { ru: 'polirovka', ka: 'gaprialeba', en: 'polishing' },
+    component: servicePage,
+    props: { id: 'polishing' },
+  },
+  {
+    id: 'colorMatch',
+    slugs: { ru: 'podbor-kraski', ka: 'peris-shercheva', en: 'paint-color-matching' },
+    component: () => import('@/pages/ColorMatchPage.vue'),
+  },
+  {
+    id: 'prices',
+    slugs: { ru: 'ceny', ka: 'fasebi', en: 'prices' },
+    component: () => import('@/pages/PricesPage.vue'),
   },
 ]
 

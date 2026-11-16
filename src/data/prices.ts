@@ -1,4 +1,4 @@
-import type { PriceGroup, PriceGroupId } from '@/types/prices'
+import type { PriceGroup } from '@/types/prices'
 
 // Цены в лари за деталь. Ориентир: конкурент минус 10 лари, сверить с Димой
 export const PRICE_GROUPS: readonly PriceGroup[] = [
@@ -42,17 +42,4 @@ export const PRICE_GROUPS: readonly PriceGroup[] = [
       { id: 'caliper', ask: true },
     ],
   },
-  {
-    // ЗАГЛУШКИ: цены на локальный ремонт придуманы для макета — сверить с Димой до запуска
-    id: 'spot',
-    items: [
-      { id: 'spotChip', single: 60 },
-      { id: 'spotScratch', single: 90 },
-      { id: 'bumperCorner', single: 150 },
-      { id: 'spotPartial', single: 190 },
-    ],
-  },
 ]
-
-/** Сокращённая таблица на главной: локальный ремонт — на своей странице */
-export const HOME_PRICE_GROUPS: readonly PriceGroupId[] = ['front', 'side', 'roof', 'small']

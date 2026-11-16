@@ -1,18 +1,28 @@
 <script setup lang="ts">
-import { useI18n } from '@/i18n'
+import { computed } from 'vue'
+import ContactsSection from '@/components/sections/ContactsSection.vue'
+import EstimateSection from '@/components/sections/EstimateSection.vue'
+import FaqSection from '@/components/sections/FaqSection.vue'
+import PageHeroSection from '@/components/sections/PageHeroSection.vue'
+import { SITE } from '@/config/site'
+import { FAQ_CONTACTS } from '@/data/faq'
+import { useContent } from '@/i18n'
 import { useSeo } from '@/seo/useSeo'
+import { fillBrand } from '@/utils/format'
 
-const { t } = useI18n()
+const content = useContent()
+
+const text = computed(() => content.value.contactsPage)
 
 useSeo({
-  title: () => t((m) => m.contacts.seoTitle),
-  description: () => t((m) => m.contacts.seoDescription),
+  title: () => fillBrand(text.value.seoTitle, SITE.brand),
+  description: () => fillBrand(text.value.seoDescription, SITE.brand),
 })
 </script>
 
 <template>
-  <section class="section">
-    <h1>{{ t((m) => m.contacts.h1) }}</h1>
-    <p>{{ t((m) => m.contacts.lead) }}</p>
-  </section>
+  <PageHeroSection page="contacts" :title="text.h1" :lead="text.lead" />
+  <ContactsSection />
+  <EstimateSection />
+  <FaqSection :ids="FAQ_CONTACTS" />
 </template>

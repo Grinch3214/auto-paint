@@ -1,35 +1,12 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { PRICE_GROUPS } from '@/data/prices'
-import { useContent, useI18n } from '@/i18n'
-import { minPrice } from '@/utils/format'
+import { usePriceRows } from '@/composables/usePriceRows'
+import { useContent } from '@/i18n'
 import type { PriceItemId } from '@/types/prices'
 
 const props = defineProps<{ items: readonly PriceItemId[] }>()
 
-const { t } = useI18n()
 const content = useContent()
-
-// строки берём из общей таблицы цен — цифры не расходятся с главной и FAQ
-const rows = computed(() => {
-  const all = PRICE_GROUPS.flatMap((g) => g.items)
-  return props.items.flatMap((id) => {
-    const item = all.find((i) => i.id === id)
-    if (!item) return []
-    const value = item.ask ? undefined : minPrice(item)
-    return [
-      {
-        id,
-        name: content.value.prices.items[id],
-        price:
-          value === undefined
-            ? content.value.prices.ask
-            : t((m) => m.common.priceFromGel).replace('{value}', String(value)),
-        ask: value === undefined,
-      },
-    ]
-  })
-})
+const rows = usePriceRows(() => props.items)
 </script>
 
 <template>

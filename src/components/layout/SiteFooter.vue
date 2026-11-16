@@ -7,7 +7,7 @@ import { mailLink, phoneLink, telegramLink, whatsappLink } from '@/utils/messeng
 import SiteLogo from './SiteLogo.vue'
 
 const { t } = useI18n()
-const { links } = useNavLinks()
+const { pageLinks } = useNavLinks()
 </script>
 
 <template>
@@ -20,7 +20,7 @@ const { links } = useNavLinks()
 
       <nav class="footer__col" :aria-label="t((m) => m.footer.navTitle)">
         <h2 class="footer__title">{{ t((m) => m.footer.navTitle) }}</h2>
-        <RouterLink v-for="l in links" :key="l.key" :to="l.to" class="footer__link">
+        <RouterLink v-for="l in pageLinks" :key="l.key" :to="l.to" class="footer__link">
           {{ l.label }}
         </RouterLink>
       </nav>

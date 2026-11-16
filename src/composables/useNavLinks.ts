@@ -1,20 +1,43 @@
 import { computed } from 'vue'
 import { pagePath } from '@/config/pages'
-import { useI18n } from '@/i18n'
+import { SERVICES } from '@/data/services'
+import { useContent, useI18n } from '@/i18n'
 
-/** Пункты меню: общие для шапки и подвала */
+/** Пункты меню: короткое — в шапке, полный список страниц — в подвале */
 export function useNavLinks() {
   const { t, locale } = useI18n()
+  const content = useContent()
 
   const home = computed(() => pagePath('home', locale.value))
   const toHome = (hash: string) => ({ path: home.value, hash })
 
   const links = computed(() => [
-    { key: 'process', to: toHome('#layers'), label: t((m) => m.nav.process) },
-    { key: 'works', to: toHome('#works'), label: t((m) => m.nav.works) },
+    { key: 'services', to: toHome('#services'), label: t((m) => m.nav.services) },
+    {
+      key: 'colorMatch',
+      to: pagePath('colorMatch', locale.value),
+      label: t((m) => m.nav.colorMatch),
+    },
+    { key: 'prices', to: pagePath('prices', locale.value), label: t((m) => m.nav.prices) },
     { key: 'estimate', to: toHome('#estimate'), label: t((m) => m.nav.estimate) },
     { key: 'contacts', to: pagePath('contacts', locale.value), label: t((m) => m.nav.contacts) },
   ])
 
-  return { home, toHome, links }
+  const pageLinks = computed(() => [
+    ...SERVICES.flatMap((s) =>
+      s.page
+        ? [
+            {
+              key: s.id,
+              to: pagePath(s.page, locale.value),
+              label: content.value.services.items[s.id].title,
+            },
+          ]
+        : [],
+    ),
+    { key: 'prices', to: pagePath('prices', locale.value), label: t((m) => m.nav.prices) },
+    { key: 'contacts', to: pagePath('contacts', locale.value), label: t((m) => m.nav.contacts) },
+  ])
+
+  return { home, toHome, links, pageLinks }
 }

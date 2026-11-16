@@ -10,6 +10,11 @@ export type FaqId =
   | 'polishing'
   | 'foreignPlates'
   | 'duration'
+  | 'wheelColor'
+  | 'wheelTires'
+  | 'polishScratches'
+  | 'paintCode'
+  | 'metallic'
 
 export interface FaqEntry {
   question: string

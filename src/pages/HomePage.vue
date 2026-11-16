@@ -11,7 +11,6 @@ import StagesSection from '@/components/sections/StagesSection.vue'
 import VisitSection from '@/components/sections/VisitSection.vue'
 import WorksSection from '@/components/sections/WorksSection.vue'
 import { FAQ_HOME } from '@/data/faq'
-import { HOME_PRICE_GROUPS } from '@/data/prices'
 import { useI18n } from '@/i18n'
 import { useSeo } from '@/seo/useSeo'
 
@@ -27,7 +26,7 @@ useSeo({
   <HeroSection />
 
   <ServicesSection>
-    <PriceTable :groups="HOME_PRICE_GROUPS" />
+    <PriceTable />
     <PriceHowto />
     <InsuranceNote />
   </ServicesSection>

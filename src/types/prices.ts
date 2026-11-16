@@ -1,4 +1,4 @@
-export type PriceGroupId = 'front' | 'side' | 'roof' | 'small' | 'spot'
+export type PriceGroupId = 'front' | 'side' | 'roof' | 'small'
 
 export type PriceItemId =
   | 'hood'
@@ -21,10 +21,6 @@ export type PriceItemId =
   | 'spoiler'
   | 'wheel'
   | 'caliper'
-  | 'spotChip'
-  | 'spotScratch'
-  | 'bumperCorner'
-  | 'spotPartial'
 
 export interface PriceItem {
   id: PriceItemId
@@ -37,4 +33,12 @@ export interface PriceItem {
 export interface PriceGroup {
   id: PriceGroupId
   items: readonly PriceItem[]
+}
+
+/** Строка цены, готовая к выводу: «Бампер — от 390 ₾» */
+export interface PriceRow {
+  id: PriceItemId
+  name: string
+  price: string
+  ask: boolean
 }

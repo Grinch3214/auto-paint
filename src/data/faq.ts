@@ -14,3 +14,20 @@ export const FAQ_HOME: readonly FaqId[] = [
   'polishing',
   'foreignPlates',
 ]
+
+export const FAQ_COLOR_MATCH: readonly FaqId[] = [
+  'paintCode',
+  'colorMatch',
+  'metallic',
+  'singlePart',
+]
+
+export const FAQ_PRICES: readonly FaqId[] = [
+  'price',
+  'photoEstimate',
+  'metallic',
+  'duration',
+  'polishing',
+]
+
+export const FAQ_CONTACTS: readonly FaqId[] = ['foreignPlates', 'photoEstimate', 'insurance']

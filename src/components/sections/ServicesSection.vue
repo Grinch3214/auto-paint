@@ -46,8 +46,8 @@ const services = computed(() =>
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include above(xl) {
-    grid-template-columns: repeat(4, 1fr);
+  @include above(lg) {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

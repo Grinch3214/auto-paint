@@ -1,9 +1,9 @@
 import type { Component } from 'vue'
 import type { Locale } from './i18n'
 
-export type ServicePageId = 'fullPaint' | 'spotRepair'
+export type ServicePageId = 'fullPaint' | 'panelPaint' | 'spotRepair' | 'wheelPaint' | 'polishing'
 
-export type PageId = 'home' | 'contacts' | ServicePageId
+export type PageId = 'home' | 'contacts' | 'colorMatch' | 'prices' | ServicePageId
 
 export interface PageDef {
   id: PageId

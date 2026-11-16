@@ -14,7 +14,6 @@ export default {
     side: 'Боковина',
     roof: 'Крыша и багажник',
     small: 'Мелкие детали',
-    spot: 'Локальный ремонт',
   },
   items: {
     hood: 'Капот',
@@ -37,9 +36,5 @@ export default {
     spoiler: 'Спойлер',
     wheel: 'Колёсный диск',
     caliper: 'Суппорт',
-    spotChip: 'Скол — до 2 см',
-    spotScratch: 'Царапина — до 10 см',
-    bumperCorner: 'Угол бампера',
-    spotPartial: 'Часть детали с переходом',
   },
 } satisfies Content['prices']
