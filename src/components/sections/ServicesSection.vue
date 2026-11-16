@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 import { pagePath } from '@/config/pages'
 import { SERVICES } from '@/data/services'
 import { useContent, useI18n } from '@/i18n'
@@ -18,16 +19,23 @@ const services = computed(() =>
     <h2>{{ content.services.title }}</h2>
     <p class="lead">{{ content.services.lead }}</p>
     <ul class="services">
-      <li v-for="s in services" :key="s.id" class="service">
-        <h3 class="service__title">{{ s.title }}</h3>
+      <li v-for="s in services" :key="s.id" class="service" :class="{ 'has-link': s.page }">
+        <h3 class="service__title">
+          <!-- ссылка растянута на всю карточку через ::after: нажимается вся карточка -->
+          <RouterLink v-if="s.page" class="service__link" :to="pagePath(s.page, locale)">
+            {{ s.title }}
+          </RouterLink>
+          <template v-else>{{ s.title }}</template>
+        </h3>
         <p class="service__text">{{ s.text }}</p>
         <p class="service__fits mono">
           <span class="service__fits-label">{{ content.services.fitsLabel }}</span>
           {{ s.fits }}
         </p>
-        <RouterLink v-if="s.page" class="service__link" :to="pagePath(s.page, locale)">
+        <span v-if="s.page" class="service__more" aria-hidden="true">
           {{ content.services.more }}
-        </RouterLink>
+        </span>
+        <BaseIcon v-if="s.page" name="arrow" class="service__arrow" />
       </li>
     </ul>
     <slot />
@@ -49,9 +57,15 @@ const services = computed(() =>
   @include above(lg) {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  // телефон: компактный список-навигация, описание — на странице услуги
+  @include below(md) {
+    gap: var(--space-2);
+  }
 }
 
 .service {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: var(--space-6);
@@ -59,9 +73,16 @@ const services = computed(() =>
   border: 1px solid var(--color-border);
   border-top: 4px solid var(--color-accent);
   border-radius: var(--radius);
-  transition: transform 0.25s;
 
-  &:hover {
+  @include motion {
+    transition:
+      transform 0.25s,
+      border-color 0.25s;
+  }
+
+  &.has-link:hover {
+    border-color: var(--color-accent);
+
     @include motion {
       transform: translateY(-3px);
     }
@@ -72,6 +93,16 @@ const services = computed(() =>
     font-size: 1.1rem;
     text-transform: uppercase;
     margin-bottom: var(--space-3);
+  }
+
+  &__link {
+    text-decoration: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
   }
 
   &__text {
@@ -86,12 +117,49 @@ const services = computed(() =>
     color: var(--color-text-muted);
   }
 
-  &__link {
+  &__more {
     margin-top: auto;
     padding-top: var(--space-2);
     font-weight: 700;
     color: var(--accent-ink);
-    text-decoration: none;
+  }
+
+  &__arrow {
+    display: none;
+  }
+
+  @include below(md) {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    column-gap: var(--space-3);
+    padding: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent);
+
+    &__title {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    &__text,
+    &__fits-label,
+    &__more {
+      display: none;
+    }
+
+    &__fits {
+      grid-column: 1;
+      margin: var(--space-1) 0 0;
+      color: var(--color-text-muted);
+    }
+
+    &__arrow {
+      display: block;
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      color: var(--accent-ink);
+    }
   }
 }
 </style>
