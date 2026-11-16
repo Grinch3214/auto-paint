@@ -9,6 +9,6 @@ export default {
     { term: 'Материалы', value: 'Sikkens · PPG · Standox · Roberlo' },
     { term: 'Код цвета', value: 'по VIN → сверка по детали' },
     { term: 'Камера', value: 'покраска + сушка, 1 машина' },
-    { term: 'Оценка', value: 'по фото в WhatsApp / Telegram или лично на СТО' },
+    { term: 'Оценка', value: 'бесплатно: по фото в WhatsApp / Telegram или на осмотре' },
   ],
 } satisfies Content['passport']

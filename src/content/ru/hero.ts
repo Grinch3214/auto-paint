@@ -6,6 +6,6 @@ export default {
   carAlt: 'Седан Audi — цвет кузова меняется по выбранной выкраске',
   recolor: 'Перекрасить машину',
   colorPicker: 'Выбор цвета',
-  ctaEstimate: 'Оценка по фото',
+  ctaEstimate: 'Бесплатная оценка по фото',
   ctaProcess: 'Как мы красим',
 } satisfies Content['hero']
