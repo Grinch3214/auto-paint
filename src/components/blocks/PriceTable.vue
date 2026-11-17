@@ -19,6 +19,11 @@ const priceGroups = computed(() =>
         .filter((item) => !props.items || props.items.includes(item.id))
         .map((item) => ({ ...item, name: content.value.prices.items[item.id] })),
     }))
+    // группы без деления «новая / б/у» (диски, полировка…) — одна колонка «Цена»
+    .map((g) => ({
+      ...g,
+      simple: g.items.every((i) => i.fresh === undefined && i.used === undefined),
+    }))
     .filter((g) => g.items.length),
 )
 
@@ -46,12 +51,15 @@ const price = (value?: number) =>
               <th scope="col">
                 <span class="visually-hidden">{{ content.prices.partHeader }}</span>
               </th>
-              <th scope="col">
-                {{ content.prices.fresh.title }}<small>{{ content.prices.fresh.hint }}</small>
-              </th>
-              <th scope="col">
-                {{ content.prices.used.title }}<small>{{ content.prices.used.hint }}</small>
-              </th>
+              <th v-if="g.simple" scope="col" colspan="2">{{ content.prices.priceHeader }}</th>
+              <template v-else>
+                <th scope="col">
+                  {{ content.prices.fresh.title }}<small>{{ content.prices.fresh.hint }}</small>
+                </th>
+                <th scope="col">
+                  {{ content.prices.used.title }}<small>{{ content.prices.used.hint }}</small>
+                </th>
+              </template>
             </tr>
           </thead>
           <tbody>

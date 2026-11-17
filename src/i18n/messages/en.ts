@@ -33,7 +33,7 @@ const en: Messages = {
     close: 'Close',
   },
   contactInfo: {
-    address: '26b Kakhaberi St, Batumi',
+    address: '35a Kakhaberi St, Batumi',
     hoursWork: 'Mon–Sat 10:00–19:00',
     hoursOff: 'Sun — closed',
     whatsapp: 'Message on WhatsApp',

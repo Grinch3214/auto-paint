@@ -4,6 +4,7 @@ import type { ServicePageId } from '@/types/pages'
 
 export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
   fullPaint: {
+    prices: ['fullExterior', 'fullWithOpenings'],
     stages: STAGES,
     related: ['panelPaint', 'spotRepair', 'colorMatch'],
     faq: ['price', 'duration', 'colorMatch', 'paintBooth', 'bodyRepair', 'polishing'],
@@ -17,17 +18,19 @@ export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
   },
   spotRepair: {
     heroWork: 'wingSpot',
+    prices: ['spotChip', 'spotArea', 'spotScratch'],
     stages: ['inspection', 'filler', 'primer', 'colorMatch', 'paintBooth'],
     related: ['panelPaint', 'colorMatch'],
     faq: ['singlePart', 'colorMatch', 'photoEstimate', 'polishing'],
   },
   wheelPaint: {
-    prices: ['wheel', 'caliper'],
+    prices: ['wheel', 'wheelR17', 'wheelR19', 'caliper'],
     stages: ['inspection', 'filler', 'primer', 'colorMatch', 'paintBooth', 'assembly'],
     related: ['panelPaint', 'polishing', 'fullPaint'],
     faq: ['wheels', 'wheelColor', 'wheelTires', 'photoEstimate'],
   },
   polishing: {
+    prices: ['polishPanel', 'polishLight', 'polishDeep'],
     related: ['spotRepair', 'panelPaint', 'fullPaint'],
     faq: ['polishing', 'polishScratches', 'photoEstimate'],
   },

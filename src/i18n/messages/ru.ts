@@ -32,7 +32,7 @@ const ru = {
     close: 'Закрыть',
   },
   contactInfo: {
-    address: 'ул. Кахабери, 26б, Батуми',
+    address: 'ул. Кахабери, 35а, Батуми',
     hoursWork: 'Пн–Сб 10:00–19:00',
     hoursOff: 'Вс — выходной',
     whatsapp: 'Написать в WhatsApp',

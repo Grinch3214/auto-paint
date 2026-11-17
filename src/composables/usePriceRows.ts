@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 import { PRICE_GROUPS } from '@/data/prices'
 import { useContent, useI18n } from '@/i18n'
-import { minPrice } from '@/utils/format'
+import { formatPrice, minPrice } from '@/utils/format'
 import type { PriceItemId, PriceRow } from '@/types/prices'
 
 /** Строки цен «от … ₾» по id из общей таблицы — цифры не расходятся с главной и FAQ */
@@ -22,7 +22,10 @@ export function usePriceRows(ids: () => readonly PriceItemId[]) {
           price:
             value === undefined
               ? content.value.prices.ask
-              : t((m) => m.common.priceFromGel).replace('{value}', String(value)),
+              : formatPrice(
+                  value,
+                  t((m) => m.common.priceFromGel),
+                ),
           ask: value === undefined,
         },
       ]

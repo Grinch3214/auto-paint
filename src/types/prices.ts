@@ -1,4 +1,12 @@
-export type PriceGroupId = 'front' | 'side' | 'roof' | 'small'
+export type PriceGroupId =
+  | 'front'
+  | 'side'
+  | 'roof'
+  | 'small'
+  | 'wheels'
+  | 'spot'
+  | 'full'
+  | 'polish'
 
 export type PriceItemId =
   | 'hood'
@@ -21,6 +29,16 @@ export type PriceItemId =
   | 'spoiler'
   | 'wheel'
   | 'caliper'
+  | 'wheelR17'
+  | 'wheelR19'
+  | 'spotChip'
+  | 'spotArea'
+  | 'spotScratch'
+  | 'fullExterior'
+  | 'fullWithOpenings'
+  | 'polishPanel'
+  | 'polishLight'
+  | 'polishDeep'
 
 export interface PriceItem {
   id: PriceItemId

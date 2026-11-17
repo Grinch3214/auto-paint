@@ -1,6 +1,5 @@
-import type { PriceGroup } from '@/types/prices'
+import type { PriceGroup, PriceGroupId } from '@/types/prices'
 
-// Цены в лари за деталь. Ориентир: конкурент минус 10 лари, сверить с Димой
 export const PRICE_GROUPS: readonly PriceGroup[] = [
   {
     id: 'front',
@@ -36,10 +35,43 @@ export const PRICE_GROUPS: readonly PriceGroup[] = [
       { id: 'doorHandle', fresh: 30, used: 30 },
       { id: 'parkingSensors', fresh: 40 },
       { id: 'moldings', fresh: 40 },
-      { id: 'mirrorCover', ask: true },
-      { id: 'spoiler', ask: true },
-      { id: 'wheel', ask: true },
-      { id: 'caliper', ask: true },
+      { id: 'mirrorCover', single: 100 },
+      { id: 'spoiler', single: 150 },
+    ],
+  },
+  {
+    id: 'wheels',
+    items: [
+      { id: 'wheel', single: 180 },
+      { id: 'wheelR17', single: 210 },
+      { id: 'wheelR19', single: 250 },
+      { id: 'caliper', single: 100 },
+    ],
+  },
+  {
+    id: 'spot',
+    items: [
+      { id: 'spotChip', single: 50 },
+      { id: 'spotArea', single: 180 },
+      { id: 'spotScratch', single: 250 },
+    ],
+  },
+  {
+    id: 'full',
+    items: [
+      { id: 'fullExterior', single: 4500 },
+      { id: 'fullWithOpenings', single: 6000 },
+    ],
+  },
+  {
+    id: 'polish',
+    items: [
+      { id: 'polishPanel', single: 100 },
+      { id: 'polishLight', single: 500 },
+      { id: 'polishDeep', single: 800 },
     ],
   },
 ]
+
+/** Сокращённая таблица на главной — цены за деталь; всё остальное на /ceny и страницах услуг */
+export const HOME_PRICE_GROUPS: readonly PriceGroupId[] = ['front', 'side', 'roof', 'small']

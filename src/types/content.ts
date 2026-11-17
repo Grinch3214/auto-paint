@@ -55,6 +55,7 @@ export interface PricesContent {
   title: string
   intro: string
   partHeader: string
+  priceHeader: string
   fresh: PriceColumn
   used: PriceColumn
   ask: string

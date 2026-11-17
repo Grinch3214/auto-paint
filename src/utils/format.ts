@@ -5,9 +5,14 @@ export function padNumber(value: number, length = 2): string {
   return String(value).padStart(length, '0')
 }
 
+/** 4500 → '4 500' (неразрывный пробел: число не переносится) */
+export function formatNumber(value: number): string {
+  return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0')
+}
+
 /** template — строка из словаря с {value}, например 'от {value}' */
 export function formatPrice(value: number | undefined, template: string): string {
-  return value === undefined ? '—' : template.replace('{value}', String(value))
+  return value === undefined ? '—' : template.replace('{value}', formatNumber(value))
 }
 
 /** Самая низкая цена детали: для текстов «от N лари» */
@@ -21,7 +26,7 @@ export function fillPrices(text: string, groups: readonly PriceGroup[]): string 
   return text.replace(/\{(\w+)\}/g, (match, id: string) => {
     const item = groups.flatMap((g) => g.items).find((i) => i.id === id)
     const price = item && minPrice(item)
-    return price === undefined ? match : String(price)
+    return price === undefined ? match : formatNumber(price)
   })
 }
 

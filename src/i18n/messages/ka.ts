@@ -34,7 +34,7 @@ const ka: Messages = {
     close: 'დახურვა',
   },
   contactInfo: {
-    address: 'კახაბერის ქ. 26ბ, ბათუმი',
+    address: 'კახაბერის ქ. 35ა, ბათუმი',
     hoursWork: 'ორშ–შაბ 10:00–19:00',
     hoursOff: 'კვირა — დასვენება',
     whatsapp: 'მოგვწერეთ WhatsApp-ში',
