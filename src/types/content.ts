@@ -221,8 +221,6 @@ export interface ContactsPageContent extends PageIntro {
     phoneHint: string
     whatsapp: string
     whatsappHint: string
-    telegram: string
-    telegramHint: string
     email: string
     emailHint: string
   }

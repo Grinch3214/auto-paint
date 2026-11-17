@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 import { SITE } from '@/config/site'
 import { useContent, useI18n } from '@/i18n'
-import { mailLink, phoneLink, telegramLink, whatsappLink } from '@/utils/messengers'
+import { mailLink, phoneLink, whatsappLink } from '@/utils/messengers'
 
 const { t } = useI18n()
 const content = useContent()
@@ -29,15 +29,6 @@ const channels = computed(() => [
     value: SITE.phoneDisplay,
     hint: text.value.channels.whatsappHint,
     href: whatsappLink(SITE.phone),
-    external: true,
-  },
-  {
-    key: 'telegram',
-    icon: 'telegram' as const,
-    title: text.value.channels.telegram,
-    value: `@${SITE.telegram}`,
-    hint: text.value.channels.telegramHint,
-    href: telegramLink(SITE.telegram),
     external: true,
   },
   {
@@ -142,7 +133,7 @@ const channels = computed(() => [
   }
 
   @include above(lg) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

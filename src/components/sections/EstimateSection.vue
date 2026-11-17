@@ -4,12 +4,11 @@ import BaseIcon from '@/components/BaseIcon.vue'
 import EstimateForm from '@/components/blocks/EstimateForm.vue'
 import { SITE } from '@/config/site'
 import { useContent } from '@/i18n'
-import { telegramShareLink, whatsappLink } from '@/utils/messengers'
+import { whatsappLink } from '@/utils/messengers'
 
 const content = useContent()
 
 const waLink = computed(() => whatsappLink(SITE.phone, content.value.estimate.message))
-const tgLink = computed(() => telegramShareLink(content.value.estimate.message))
 </script>
 
 <template>
@@ -28,10 +27,6 @@ const tgLink = computed(() => telegramShareLink(content.value.estimate.message))
         <a class="btn btn--ghost" :href="waLink" target="_blank" rel="noopener">
           <BaseIcon name="whatsapp" />
           WhatsApp
-        </a>
-        <a class="btn btn--ghost" :href="tgLink" target="_blank" rel="noopener">
-          <BaseIcon name="telegram" />
-          Telegram
         </a>
       </div>
     </div>
@@ -66,7 +61,6 @@ const tgLink = computed(() => telegramShareLink(content.value.estimate.message))
 
   &__messengers {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: var(--space-2);
 
     .btn {

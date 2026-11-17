@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 import { SITE } from '@/config/site'
 import { useI18n } from '@/i18n'
-import { phoneLink, telegramLink, whatsappLink } from '@/utils/messengers'
+import { phoneLink, whatsappLink } from '@/utils/messengers'
 
 const props = defineProps<{ open: boolean; withCall?: boolean }>()
 const emit = defineEmits(['close'])
@@ -29,14 +29,6 @@ const items = computed(() => [
     href: whatsappLink(SITE.phone),
     title: 'WhatsApp',
     hint: t((m) => m.contactDock.whatsappHint),
-    external: true,
-  },
-  {
-    key: 'telegram',
-    icon: 'telegram' as const,
-    href: telegramLink(SITE.telegram),
-    title: 'Telegram',
-    hint: t((m) => m.contactDock.telegramHint),
     external: true,
   },
   {

@@ -3,7 +3,7 @@ import BaseIcon from '@/components/BaseIcon.vue'
 import { useNavLinks } from '@/composables/useNavLinks'
 import { SITE } from '@/config/site'
 import { useI18n } from '@/i18n'
-import { mailLink, phoneLink, telegramLink, whatsappLink } from '@/utils/messengers'
+import { mailLink, phoneLink, whatsappLink } from '@/utils/messengers'
 import SiteLogo from './SiteLogo.vue'
 
 const { t } = useI18n()
@@ -50,15 +50,6 @@ const { pageLinks } = useNavLinks()
         >
           <BaseIcon name="whatsapp" />
           {{ t((m) => m.contactInfo.whatsapp) }}
-        </a>
-        <a
-          class="footer__line footer__link"
-          :href="telegramLink(SITE.telegram)"
-          target="_blank"
-          rel="noopener"
-        >
-          <BaseIcon name="telegram" />
-          @{{ SITE.telegram }}
         </a>
         <a class="footer__line footer__link" :href="mailLink(SITE.email)">
           <BaseIcon name="mail" />

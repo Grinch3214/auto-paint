@@ -3,7 +3,7 @@ import type { Content } from '@/types/content'
 export default {
   seoTitle: 'Контакты — {BRAND}, покраска авто в Батуми',
   seoDescription:
-    'Адрес, телефон, часы работы и мессенджеры {BRAND} в Батуми: ул. Кахабери, 26б. Позвоните или напишите в WhatsApp и Telegram.',
+    'Адрес, телефон, часы работы и мессенджеры {BRAND} в Батуми: ул. Кахабери, 26б. Позвоните или напишите в WhatsApp.',
   h1: 'Контакты',
   lead: 'Приезжайте на бесплатный осмотр или пришлите фото в мессенджер — оценим бесплатно и договоримся о времени.',
   channels: {
@@ -13,8 +13,6 @@ export default {
     phoneHint: 'звонки в рабочие часы',
     whatsapp: 'WhatsApp',
     whatsappHint: 'фото повреждений и вопросы',
-    telegram: 'Telegram',
-    telegramHint: 'фото повреждений и вопросы',
     email: 'Почта',
     emailHint: 'для документов и счетов',
   },

@@ -12,7 +12,7 @@ const en: Messages = {
   home: {
     seoTitle: 'Car Painting in Batumi — {BRAND}',
     seoDescription:
-      'Car painting in Batumi: full and spot repaint, colour matching by VIN and by the actual panel. Photo estimate via WhatsApp and Telegram.',
+      'Car painting in Batumi: full and spot repaint, colour matching by VIN and by the actual panel. Photo estimate via WhatsApp or our website.',
     h1: 'Car painting in Batumi',
     lead: 'Site skeleton. The home page goes here.',
   },
@@ -43,7 +43,6 @@ const en: Messages = {
   contactDock: {
     title: 'Get in touch',
     whatsappHint: 'Message or call',
-    telegramHint: 'Message on Telegram',
     route: 'Directions in Google Maps',
   },
   footer: {
