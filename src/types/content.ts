@@ -1,4 +1,3 @@
-import type { EstimatePartId } from './estimate'
 import type { FaqEntry, FaqId } from './faq'
 import type { PaintCodeBrandId, PaintCodeZone } from './paintCodes'
 import type { ServicePageId } from './pages'
@@ -107,8 +106,27 @@ export interface InsuranceContent {
 }
 
 export interface EstimateContent extends SectionHeading {
-  parts: Record<EstimatePartId, string>
   message: string
+  form: {
+    photos: string
+    photosAdd: string
+    photosHint: string
+    photosProcessing: string
+    photoRemove: string
+    photosLimit: string
+    photoError: string
+    text: string
+    textPlaceholder: string
+    phone: string
+    phonePlaceholder: string
+    submit: string
+    sending: string
+    sent: string
+    error: string
+    needPhone: string
+    needContent: string
+    orMessenger: string
+  }
 }
 
 export interface FaqContent extends SectionHeading {
