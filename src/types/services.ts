@@ -5,6 +5,7 @@ export type ServiceId =
   | 'panelPaint'
   | 'spotRepair'
   | 'wheelPaint'
+  | 'bodyRepair'
   | 'polishing'
   | 'colorMatch'
 

@@ -71,6 +71,17 @@ export const PRICE_GROUPS: readonly PriceGroup[] = [
       { id: 'polishDeep', single: 800 },
     ],
   },
+  {
+    id: 'body',
+    items: [
+      { id: 'bodyDent', ask: true },
+      { id: 'bodyFrame', ask: true },
+      { id: 'bodyWelding', ask: true },
+      { id: 'bodySills', ask: true },
+      { id: 'bodyPlastic', ask: true },
+      { id: 'bodyRust', ask: true },
+    ],
+  },
 ]
 
 /** Сокращённая таблица на главной — цены за деталь; всё остальное на /ceny и страницах услуг */

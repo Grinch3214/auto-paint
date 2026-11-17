@@ -7,6 +7,7 @@ export type PriceGroupId =
   | 'spot'
   | 'full'
   | 'polish'
+  | 'body'
 
 export type PriceItemId =
   | 'hood'
@@ -39,6 +40,12 @@ export type PriceItemId =
   | 'polishPanel'
   | 'polishLight'
   | 'polishDeep'
+  | 'bodyDent'
+  | 'bodyFrame'
+  | 'bodyWelding'
+  | 'bodySills'
+  | 'bodyPlastic'
+  | 'bodyRust'
 
 export interface PriceItem {
   id: PriceItemId

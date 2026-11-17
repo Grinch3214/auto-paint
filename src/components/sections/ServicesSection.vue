@@ -19,7 +19,13 @@ const services = computed(() =>
     <h2>{{ content.services.title }}</h2>
     <p class="lead">{{ content.services.lead }}</p>
     <ul class="services">
-      <li v-for="s in services" :key="s.id" class="service" :class="{ 'has-link': s.page }">
+      <li
+        v-for="s in services"
+        :key="s.id"
+        class="service"
+        :class="{ 'has-link': s.page, 'has-tag': s.tag }"
+      >
+        <span v-if="s.tag" class="tape service__tag">{{ s.tag }}</span>
         <h3 class="service__title">
           <!-- ссылка растянута на всю карточку через ::after: нажимается вся карточка -->
           <RouterLink v-if="s.page" class="service__link" :to="pagePath(s.page, locale)">
@@ -88,6 +94,14 @@ const services = computed(() =>
     }
   }
 
+  &__tag {
+    position: absolute;
+    top: -14px;
+    right: var(--space-4);
+    margin: 0;
+    font-size: 0.8rem;
+  }
+
   &__title {
     font-family: var(--font-display);
     font-size: 1.1rem;
@@ -146,6 +160,17 @@ const services = computed(() =>
     &__fits-label,
     &__more {
       display: none;
+    }
+
+    &.has-tag {
+      margin-top: var(--space-3);
+    }
+
+    &__tag {
+      top: -10px;
+      right: var(--space-8);
+      font-size: 0.7rem;
+      padding: 2px 10px 3px;
     }
 
     &__fits {

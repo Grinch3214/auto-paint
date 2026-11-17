@@ -29,6 +29,12 @@ export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
     related: ['panelPaint', 'polishing', 'fullPaint'],
     faq: ['wheels', 'wheelColor', 'wheelTires', 'photoEstimate'],
   },
+  bodyRepair: {
+    prices: ['bodyDent', 'bodyFrame', 'bodyWelding', 'bodySills', 'bodyPlastic', 'bodyRust'],
+    stages: STAGES,
+    related: ['panelPaint', 'fullPaint', 'spotRepair'],
+    faq: ['bodyRepair', 'bodyRepairOnly', 'price', 'paintBooth', 'insurance'],
+  },
   polishing: {
     prices: ['polishPanel', 'polishLight', 'polishDeep'],
     related: ['spotRepair', 'panelPaint', 'fullPaint'],

@@ -17,6 +17,8 @@ export interface ServiceText {
   title: string
   text: string
   fits: string
+  /** скотч над карточкой, например «подготовка к покраске» */
+  tag?: string
 }
 
 export interface StageText {

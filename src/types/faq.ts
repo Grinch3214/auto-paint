@@ -15,6 +15,7 @@ export type FaqId =
   | 'polishScratches'
   | 'paintCode'
   | 'metallic'
+  | 'bodyRepairOnly'
 
 export interface FaqEntry {
   question: string
