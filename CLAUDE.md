@@ -79,7 +79,8 @@ Do not declare interfaces, types, constants or pure functions in `.vue` files �
 - No hardcoded text in templates: short strings go to `i18n/messages`, content to `content/<lang>/`.
 - Content texts are typed by ids from `data/` (`satisfies Record<Id, string>`) so no locale can miss an item.
 - Never write: guarantees or turnaround times, "best"/"No. 1", texts copied from autosyndicate / autosyndycate. Staff: «маляры и рихтовщики с опытом от 12 лет» (painters and body repairers, 12+ years).
-- Painting is the product. Body repair (рихтовка) and anti-corrosion are presented as preparation for painting, done on site — never as separate services.
+- Brand promise (use in copy): «Красим под ключ: выправим, сварим, загрунтуем и покрасим — всё в одном месте». Body-repair line: «Рихтовка и кузовной ремонт: вытягиваем, варим, правим геометрию — и сразу красим у себя. Машину не нужно возить по разным сервисам».
+- Positioning: «покраска полного цикла». Home page, titles and H1 stay about painting. Body repair (кузовной ремонт, рихтовка, сварка, стапель, антикор) is a full service with its own page (`/kuzovnoy-remont`) and prices, but always framed as the first stage of painting, done on site («выправим, сварим — и сразу красим у себя»). Never promise body repair without painting; no PDR. No separate pages for single body operations (welding, frame) until Search Console shows demand.
 
 **Styles**
 
