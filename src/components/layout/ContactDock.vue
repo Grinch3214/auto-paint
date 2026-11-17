@@ -71,8 +71,6 @@ onKeyStroke('Escape', close)
     gap: var(--space-2);
     padding: var(--space-3) var(--gutter) calc(var(--space-3) + env(safe-area-inset-bottom));
     background: var(--header-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border-top: 1px solid var(--hero-line);
   }
 

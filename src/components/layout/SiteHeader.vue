@@ -130,19 +130,13 @@ onMounted(() => (mounted.value = true))
   z-index: 20;
   color: var(--hero-text);
   background: var(--header-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 
   @include motion {
-    transition:
-      background-color 0.25s ease,
-      backdrop-filter 0.25s ease;
+    transition: background-color 0.25s ease;
   }
 
   &.is-transparent {
     background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
   }
 
   &__inner {
