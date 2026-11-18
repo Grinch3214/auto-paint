@@ -92,7 +92,7 @@ Do not declare interfaces, types, constants or pure functions in `.vue` files �
 **Images and icons**
 
 - Images go through a shared component: `srcset` 400/800/1200, `width`/`height`, `loading="lazy"` (except hero), `alt` is required.
-- A changed image gets a new file name or `?v=N`: `/images/*` is cached for 30 days.
+- `/images/*` is cached for 30 days (`public/_headers`: browsers and Cloudflare's CDN). Never overwrite a published image under the same name — visitors would keep seeing the old one for up to a month. A changed image (new photo, new crop) gets a version suffix in its base name: `wheels-gloss` → `wheels-gloss-v2` (files `wheels-gloss-v2-{400,800,1200}.webp`), then update `image` in `src/data/` and delete the old files. Images not yet deployed may be overwritten freely.
 - Icons — inline SVG with `currentColor`.
 
 **Accessibility**

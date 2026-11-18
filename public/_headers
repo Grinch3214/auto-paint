@@ -6,7 +6,7 @@
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Картинки: 30 дней. Изменённая картинка = новое имя или ?v=N
+# Картинки: 30 дней. Изменённая картинка = новое имя с версией: name-v2-800.webp (см. CLAUDE.md)
 /images/*
   Cache-Control: public, max-age=2592000
 
