@@ -131,6 +131,17 @@ onMounted(() => (mounted.value = true))
   color: var(--hero-text);
   background: var(--header-bg);
 
+  @include below(lg) {
+    &::before {
+      content: '';
+      position: absolute;
+      inset: auto 0 100%;
+      height: 100vh;
+      background: inherit;
+      pointer-events: none;
+    }
+  }
+
   @include motion {
     transition: background-color 0.25s ease;
   }

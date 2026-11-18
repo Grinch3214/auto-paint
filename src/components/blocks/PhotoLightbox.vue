@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 import { useLightbox } from '@/composables/useLightbox'
 import { useI18n } from '@/i18n'
 import type { LightboxPhoto } from '@/types/images'
@@ -39,7 +40,7 @@ defineExpose({ open })
       :aria-label="t((m) => m.lightbox.prev)"
       @click="step(-1)"
     >
-      ‹
+      <BaseIcon name="chevronLeft" />
     </button>
     <button
       type="button"
@@ -47,10 +48,10 @@ defineExpose({ open })
       :aria-label="t((m) => m.lightbox.next)"
       @click="step(1)"
     >
-      ›
+      <BaseIcon name="chevronRight" />
     </button>
     <button type="button" class="lb__close" :aria-label="t((m) => m.lightbox.close)" @click="close">
-      ✕
+      <BaseIcon name="close" />
     </button>
   </dialog>
 </template>
@@ -91,11 +92,13 @@ defineExpose({ open })
     place-items: center;
     width: 48px;
     height: 48px;
+    padding: 0;
     border: 0;
     border-radius: 50%;
+    appearance: none;
     background: var(--color-surface);
     color: var(--color-text);
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     cursor: pointer;
   }
 
@@ -115,7 +118,7 @@ defineExpose({ open })
   &__close {
     top: -56px;
     right: 0;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 }
 </style>

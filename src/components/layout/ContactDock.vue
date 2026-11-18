@@ -66,12 +66,22 @@ onKeyStroke('Escape', close)
   }
 
   &__bar {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2);
     padding: var(--space-3) var(--gutter) calc(var(--space-3) + env(safe-area-inset-bottom));
     background: var(--header-bg);
     border-top: 1px solid var(--hero-line);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 100% 0 auto;
+      height: 100vh;
+      background: inherit;
+      pointer-events: none;
+    }
   }
 
   &__btn {
