@@ -24,5 +24,7 @@ export default {
     needPhone: 'Укажите телефон, чтобы мы могли ответить',
     needContent: 'Добавьте фото или опишите повреждение',
     orMessenger: 'Или напишите в WhatsApp',
+    consent: 'Отправляя заявку, вы подтверждаете, что ознакомились с',
+    consentLink: 'политикой конфиденциальности',
   },
 } satisfies Content['estimate']

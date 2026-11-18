@@ -9,6 +9,7 @@ import insurance from './insurance'
 import blocks from './blocks'
 import prices from './prices'
 import pricesPage from './pricesPage'
+import privacyPage from './privacyPage'
 import servicePages from './servicePages'
 import services from './services'
 import stages from './stages'
@@ -31,4 +32,5 @@ export default {
   colorMatch,
   pricesPage,
   contactsPage,
+  privacyPage,
 } satisfies Content

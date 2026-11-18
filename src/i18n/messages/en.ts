@@ -54,6 +54,7 @@ const en: Messages = {
     contactsTitle: 'Contacts',
     note: 'Prices on the site are preliminary. We name the final amount after inspecting the car and agree it before work starts.',
     rights: 'All rights reserved.',
+    privacy: 'Privacy policy',
   },
   menu: {
     open: 'Open menu',

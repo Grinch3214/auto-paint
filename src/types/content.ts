@@ -123,6 +123,8 @@ export interface EstimateContent extends SectionHeading {
     needPhone: string
     needContent: string
     orMessenger: string
+    consent: string
+    consentLink: string
   }
 }
 
@@ -237,6 +239,20 @@ export interface ContactsPageContent extends PageIntro {
   map: { title: string; show: string; open: string; frameTitle: string }
 }
 
+export interface PrivacySection {
+  title: string
+  paragraphs?: readonly string[]
+  items?: readonly string[]
+  /** абзацы после списка */
+  after?: readonly string[]
+}
+
+export interface PrivacyPageContent extends PageIntro {
+  /** «Редакция от …» */
+  updated: string
+  sections: readonly PrivacySection[]
+}
+
 export interface Content {
   hero: HeroContent
   services: ServicesContent
@@ -253,4 +269,5 @@ export interface Content {
   colorMatch: ColorMatchContent
   pricesPage: PricesPageContent
   contactsPage: ContactsPageContent
+  privacyPage: PrivacyPageContent
 }

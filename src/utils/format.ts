@@ -29,6 +29,9 @@ export function fillPrices(text: string, groups: readonly PriceGroup[]): string 
     return price === undefined ? match : formatNumber(price)
   })
 }
+export function fillVars(text: string, vars: Record<string, string>): string {
+  return text.replace(/\{(\w+)\}/g, (match, key: string) => vars[key] ?? match)
+}
 
 /** '{BRAND}' в тексте → название бренда */
 export function fillBrand(text: string, brand: string): string {

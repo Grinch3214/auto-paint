@@ -9,7 +9,7 @@ export type ServicePageId =
   | 'bodyRepair'
   | 'polishing'
 
-export type PageId = 'home' | 'contacts' | 'colorMatch' | 'prices' | ServicePageId
+export type PageId = 'home' | 'contacts' | 'colorMatch' | 'prices' | 'privacy' | ServicePageId
 
 export interface PageDef {
   id: PageId

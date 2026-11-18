@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import BaseIcon from '@/components/BaseIcon.vue'
 import { useNavLinks } from '@/composables/useNavLinks'
+import { pagePath } from '@/config/pages'
 import { SITE } from '@/config/site'
 import { useI18n } from '@/i18n'
 import { mailLink, phoneLink, whatsappLink } from '@/utils/messengers'
 import SiteLogo from './SiteLogo.vue'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { pageLinks } = useNavLinks()
 </script>
 
@@ -64,7 +65,12 @@ const { pageLinks } = useNavLinks()
     <div class="footer__bottom">
       <div class="footer__bottom-inner">
         <p>{{ t((m) => m.footer.note) }}</p>
-        <p>© {{ SITE.copyrightYear }} {{ SITE.brand }}. {{ t((m) => m.footer.rights) }}</p>
+        <p>
+          © {{ SITE.copyrightYear }} {{ SITE.brand }}. {{ t((m) => m.footer.rights) }}
+          <RouterLink class="footer__legal" :to="pagePath('privacy', locale)">
+            {{ t((m) => m.footer.privacy) }}
+          </RouterLink>
+        </p>
       </div>
     </div>
   </footer>
@@ -161,6 +167,15 @@ const { pageLinks } = useNavLinks()
     border-top: 1px solid var(--hero-line);
     color: var(--hero-muted);
     font-size: 0.78rem;
+  }
+
+  &__legal {
+    margin-left: var(--space-3);
+    color: inherit;
+
+    &:hover {
+      color: var(--hero-text);
+    }
   }
 
   &__bottom-inner {

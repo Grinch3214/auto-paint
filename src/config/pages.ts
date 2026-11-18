@@ -65,6 +65,11 @@ export const PAGES: readonly PageDef[] = [
     slugs: { ru: 'ceny', ka: 'fasebi', en: 'prices' },
     component: () => import('@/pages/PricesPage.vue'),
   },
+  {
+    id: 'privacy',
+    slugs: { ru: 'politika-konfidencialnosti', ka: 'konfidencialuroba', en: 'privacy-policy' },
+    component: () => import('@/pages/PrivacyPage.vue'),
+  },
 ]
 
 export function pagePath(id: PageId, locale: Locale): string {

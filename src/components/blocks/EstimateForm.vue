@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useEstimatePhotos } from '@/composables/useEstimatePhotos'
+import { pagePath } from '@/config/pages'
 import { ESTIMATE_ENDPOINT } from '@/constants/estimate'
-import { useContent } from '@/i18n'
+import { useContent, useI18n } from '@/i18n'
 import PhotoPicker from './PhotoPicker.vue'
 import type { EstimateFormStatus } from '@/types/estimate'
 
+const { locale } = useI18n()
 const content = useContent()
 const { photos, processing, failed, overLimit, canAdd, add, remove, clear } = useEstimatePhotos()
 
@@ -98,6 +100,10 @@ async function submit() {
     <button type="submit" class="btn form__submit" :disabled="status === 'sending' || processing">
       {{ status === 'sending' ? form.sending : form.submit }}
     </button>
+    <p class="form__consent">
+      {{ form.consent }}
+      <RouterLink :to="pagePath('privacy', locale)">{{ form.consentLink }}</RouterLink>
+    </p>
   </form>
 </template>
 
@@ -157,6 +163,12 @@ async function submit() {
     &.is-ok {
       color: var(--color-ok);
     }
+  }
+
+  &__consent {
+    margin: calc(var(--space-2) * -1) 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
   }
 
   &__submit {
