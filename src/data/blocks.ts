@@ -25,7 +25,6 @@ export const SERVICE_BLOCKS: readonly ServiceBlock[] = [
   { id: 'polishBody' },
   { id: 'headlights', prices: ['polishHeadlights'] },
   { id: 'glass', prices: ['polishGlass'] },
-  { id: 'polishAfterPaint' },
 
   { id: 'dents', prices: ['bodyDent'] },
   { id: 'frame', prices: ['bodyFrame'] },

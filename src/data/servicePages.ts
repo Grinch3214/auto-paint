@@ -40,8 +40,8 @@ export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
   },
   polishing: {
     prices: ['polishPanel', 'polishLight', 'polishDeep'],
-    blocks: ['polishBody', 'headlights', 'glass', 'polishAfterPaint'],
+    blocks: ['polishBody', 'headlights', 'glass'],
     related: ['spotRepair', 'panelPaint', 'fullPaint'],
-    faq: ['polishScratches', 'polishHowOften', 'headlights', 'polishing', 'photoEstimate'],
+    faq: ['polishScratches', 'headlights', 'polishHowOften', 'photoEstimate', 'polishing'],
   },
 }

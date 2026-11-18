@@ -23,7 +23,6 @@ export type BlockId =
   | 'polishBody'
   | 'headlights'
   | 'glass'
-  | 'polishAfterPaint'
   // кузовной ремонт
   | 'dents'
   | 'frame'
