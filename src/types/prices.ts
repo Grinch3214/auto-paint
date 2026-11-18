@@ -40,6 +40,8 @@ export type PriceItemId =
   | 'polishPanel'
   | 'polishLight'
   | 'polishDeep'
+  | 'polishHeadlights'
+  | 'polishGlass'
   | 'bodyDent'
   | 'bodyFrame'
   | 'bodyWelding'

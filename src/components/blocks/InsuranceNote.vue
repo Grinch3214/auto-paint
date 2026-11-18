@@ -14,7 +14,6 @@ const content = useContent()
     </svg>
     <div>
       <h3 id="docs-title" class="docs__title">{{ content.insurance.title }}</h3>
-      <p>{{ content.insurance.lead }}</p>
       <p>
         {{ content.insurance.docsBefore }}
         <template v-for="(doc, i) in content.insurance.docs" :key="doc">

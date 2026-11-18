@@ -1,4 +1,4 @@
-import type { PriceGroup, PriceGroupId } from '@/types/prices'
+import type { PriceGroup, PriceItemId } from '@/types/prices'
 
 export const PRICE_GROUPS: readonly PriceGroup[] = [
   {
@@ -69,6 +69,9 @@ export const PRICE_GROUPS: readonly PriceGroup[] = [
       { id: 'polishPanel', single: 100 },
       { id: 'polishLight', single: 500 },
       { id: 'polishDeep', single: 800 },
+      // цены ждём от Димы — пока «по фото»
+      { id: 'polishHeadlights', ask: true },
+      { id: 'polishGlass', ask: true },
     ],
   },
   {
@@ -84,5 +87,14 @@ export const PRICE_GROUPS: readonly PriceGroup[] = [
   },
 ]
 
-/** Сокращённая таблица на главной — цены за деталь; всё остальное на /ceny и страницах услуг */
-export const HOME_PRICE_GROUPS: readonly PriceGroupId[] = ['front', 'side', 'roof', 'small']
+/** Главные цены на главной; полная таблица — на /ceny */
+export const HOME_PRICE_ITEMS: readonly PriceItemId[] = [
+  'bumper',
+  'hood',
+  'frontFender',
+  'door',
+  'roof',
+  'fullExterior',
+  'wheel',
+  'spotChip',
+]

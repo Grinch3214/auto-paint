@@ -3,8 +3,8 @@ import { computed } from 'vue'
 import EstimateSection from '@/components/sections/EstimateSection.vue'
 import FaqSection from '@/components/sections/FaqSection.vue'
 import PageHeroSection from '@/components/sections/PageHeroSection.vue'
-import PartsSection from '@/components/sections/PartsSection.vue'
 import RelatedServicesSection from '@/components/sections/RelatedServicesSection.vue'
+import ServiceBlocksSection from '@/components/sections/ServiceBlocksSection.vue'
 import ServiceOverviewSection from '@/components/sections/ServiceOverviewSection.vue'
 import StagesSection from '@/components/sections/StagesSection.vue'
 import WorksSection from '@/components/sections/WorksSection.vue'
@@ -37,7 +37,11 @@ useSeo({
     :caption="text.photoCaption"
   />
   <ServiceOverviewSection :id="id" :prices="page.prices" />
-  <PartsSection v-if="page.parts" :ids="page.parts" />
+  <ServiceBlocksSection
+    v-if="page.blocks && text.blocks"
+    :ids="page.blocks"
+    :heading="text.blocks"
+  />
   <StagesSection v-if="page.stages" :ids="page.stages" />
   <WorksSection :page="id" />
   <EstimateSection />

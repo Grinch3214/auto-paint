@@ -1,7 +1,7 @@
 import type { FaqEntry, FaqId } from './faq'
 import type { PaintCodeBrandId, PaintCodeZone } from './paintCodes'
 import type { ServicePageId } from './pages'
-import type { PartId } from './parts'
+import type { BlockId } from './blocks'
 import type { PriceGroupId, PriceItemId } from './prices'
 import type { ServiceId } from './services'
 import type { StageId } from './stages'
@@ -56,6 +56,8 @@ export interface PriceColumn {
 export interface PricesContent {
   title: string
   intro: string
+  /** ссылка с главной на полную таблицу */
+  allPrices: string
   partHeader: string
   priceHeader: string
   fresh: PriceColumn
@@ -92,16 +94,8 @@ export interface WorksContent extends SectionHeading {
   items: Record<WorkId, WorkText>
 }
 
-export interface PassportContent {
-  tape: string
-  title: string
-  label: string
-  rows: readonly { term: string; value: string }[]
-}
-
 export interface InsuranceContent {
   title: string
-  lead: string
   docsBefore: string
   docs: readonly string[]
   docsJoiner: string
@@ -146,6 +140,8 @@ export interface VisitContent extends SectionHeading {
 
 export interface ServicePageText extends PageIntro {
   photoCaption?: string
+  /** заголовок блока разделов, если у страницы есть blocks */
+  blocks?: SectionHeading
   includes: readonly string[]
   cases: readonly string[]
 }
@@ -185,9 +181,9 @@ export interface TitledText {
   text: string
 }
 
-export interface PartsContent extends SectionHeading {
+export interface BlocksContent {
   navLabel: string
-  items: Record<PartId, TitledText>
+  items: Record<BlockId, TitledText>
 }
 
 export interface PaintCodeText {
@@ -246,12 +242,11 @@ export interface Content {
   insurance: InsuranceContent
   stages: StagesContent
   works: WorksContent
-  passport: PassportContent
   estimate: EstimateContent
   faq: FaqContent
   visit: VisitContent
   servicePages: ServicePagesContent
-  parts: PartsContent
+  blocks: BlocksContent
   colorMatch: ColorMatchContent
   pricesPage: PricesPageContent
   contactsPage: ContactsPageContent

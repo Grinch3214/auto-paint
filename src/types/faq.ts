@@ -16,6 +16,16 @@ export type FaqId =
   | 'paintCode'
   | 'metallic'
   | 'bodyRepairOnly'
+  | 'fullWorthIt'
+  | 'fullColorChange'
+  | 'spotVisible'
+  | 'spotChipRust'
+  | 'polishHowOften'
+  | 'headlights'
+  | 'bodyFrameWhen'
+  | 'bodySillsRust'
+  | 'wheelPowder'
+  | 'wheelCurb'
 
 export interface FaqEntry {
   question: string

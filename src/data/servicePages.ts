@@ -5,13 +5,14 @@ import type { ServicePageId } from '@/types/pages'
 export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
   fullPaint: {
     prices: ['fullExterior', 'fullWithOpenings'],
+    blocks: ['fullWhen', 'fullOpenings', 'fullColorChange', 'fullPrep'],
     stages: STAGES,
     related: ['panelPaint', 'spotRepair', 'colorMatch'],
-    faq: ['price', 'duration', 'colorMatch', 'paintBooth', 'bodyRepair', 'polishing'],
+    faq: ['fullWorthIt', 'fullColorChange', 'price', 'colorMatch', 'paintBooth', 'polishing'],
   },
   panelPaint: {
     prices: ['bumper', 'hood', 'frontFender', 'door', 'roof'],
-    parts: ['bumper', 'hood', 'fender', 'door', 'roof', 'sill', 'small'],
+    blocks: ['bumper', 'hood', 'fender', 'door', 'roof', 'sill', 'small'],
     stages: ['inspection', 'repair', 'filler', 'primer', 'colorMatch', 'paintBooth'],
     related: ['spotRepair', 'wheelPaint', 'colorMatch'],
     faq: ['price', 'singlePart', 'colorMatch', 'bodyRepair', 'insurance'],
@@ -19,25 +20,28 @@ export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
   spotRepair: {
     heroWork: 'wingSpot',
     prices: ['spotChip', 'spotArea', 'spotScratch'],
+    blocks: ['spotPolishOrPaint', 'spotChips', 'spotScratches', 'spotLimits'],
     stages: ['inspection', 'filler', 'primer', 'colorMatch', 'paintBooth'],
     related: ['panelPaint', 'colorMatch'],
-    faq: ['singlePart', 'colorMatch', 'photoEstimate', 'polishing'],
+    faq: ['spotVisible', 'spotChipRust', 'singlePart', 'colorMatch', 'photoEstimate'],
   },
   wheelPaint: {
     prices: ['wheel', 'wheelR17', 'wheelR19', 'caliper'],
+    blocks: ['wheelPaint', 'curbRash', 'wheelColors', 'calipers', 'tireService'],
     stages: ['inspection', 'filler', 'primer', 'colorMatch', 'paintBooth', 'assembly'],
     related: ['panelPaint', 'polishing', 'fullPaint'],
-    faq: ['wheels', 'wheelColor', 'wheelTires', 'photoEstimate'],
+    faq: ['wheelPowder', 'wheelColor', 'wheelCurb', 'wheelTires', 'wheels'],
   },
   bodyRepair: {
-    prices: ['bodyDent', 'bodyFrame', 'bodyWelding', 'bodySills', 'bodyPlastic', 'bodyRust'],
+    blocks: ['dents', 'frame', 'welding', 'sills', 'plastic', 'rustproofing'],
     stages: STAGES,
     related: ['panelPaint', 'fullPaint', 'spotRepair'],
-    faq: ['bodyRepair', 'bodyRepairOnly', 'price', 'paintBooth', 'insurance'],
+    faq: ['bodyRepairOnly', 'bodyFrameWhen', 'bodySillsRust', 'bodyRepair', 'insurance'],
   },
   polishing: {
     prices: ['polishPanel', 'polishLight', 'polishDeep'],
+    blocks: ['polishBody', 'headlights', 'glass', 'polishAfterPaint'],
     related: ['spotRepair', 'panelPaint', 'fullPaint'],
-    faq: ['polishing', 'polishScratches', 'photoEstimate'],
+    faq: ['polishScratches', 'polishHowOften', 'headlights', 'polishing', 'photoEstimate'],
   },
 }

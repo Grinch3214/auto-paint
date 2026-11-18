@@ -53,9 +53,12 @@ const home = computed(() => pagePath('home', locale.value))
 <style scoped lang="scss">
 .howto {
   margin-top: var(--space-8);
-  padding: var(--space-6);
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius);
+
+  @include above(md) {
+    padding: var(--space-6);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius);
+  }
 
   &__title {
     font-family: var(--font-display);
@@ -78,7 +81,7 @@ const home = computed(() => pagePath('home', locale.value))
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-3);
-    padding: var(--space-6);
+    padding: var(--space-4);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
@@ -98,6 +101,10 @@ const home = computed(() => pagePath('home', locale.value))
     p {
       margin: 0;
       color: var(--color-text-muted);
+    }
+
+    @include above(md) {
+      padding: var(--space-6);
     }
 
     &--best {

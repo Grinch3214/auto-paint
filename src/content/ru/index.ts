@@ -6,8 +6,7 @@ import faq from './faq'
 import hero from './hero'
 import howto from './howto'
 import insurance from './insurance'
-import parts from './parts'
-import passport from './passport'
+import blocks from './blocks'
 import prices from './prices'
 import pricesPage from './pricesPage'
 import servicePages from './servicePages'
@@ -24,12 +23,11 @@ export default {
   insurance,
   stages,
   works,
-  passport,
   estimate,
   faq,
   visit,
   servicePages,
-  parts,
+  blocks,
   colorMatch,
   pricesPage,
   contactsPage,
