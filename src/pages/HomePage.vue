@@ -9,6 +9,7 @@ import ServicesSection from '@/components/sections/ServicesSection.vue'
 import StagesSection from '@/components/sections/StagesSection.vue'
 import VisitSection from '@/components/sections/VisitSection.vue'
 import WorksSection from '@/components/sections/WorksSection.vue'
+import { useBusinessSchema } from '@/composables/useBusinessSchema'
 import { FAQ_HOME } from '@/data/faq'
 import { useI18n } from '@/i18n'
 import { useSeo } from '@/seo/useSeo'
@@ -19,6 +20,8 @@ useSeo({
   title: () => t((m) => m.home.seoTitle),
   description: () => t((m) => m.home.seoDescription),
 })
+
+useBusinessSchema()
 </script>
 
 <template>

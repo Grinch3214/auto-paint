@@ -4,6 +4,7 @@ import ContactsSection from '@/components/sections/ContactsSection.vue'
 import EstimateSection from '@/components/sections/EstimateSection.vue'
 import FaqSection from '@/components/sections/FaqSection.vue'
 import PageHeroSection from '@/components/sections/PageHeroSection.vue'
+import { useBusinessSchema } from '@/composables/useBusinessSchema'
 import { SITE } from '@/config/site'
 import { FAQ_CONTACTS } from '@/data/faq'
 import { useContent } from '@/i18n'
@@ -18,6 +19,8 @@ useSeo({
   title: () => fillBrand(text.value.seoTitle, SITE.brand),
   description: () => fillBrand(text.value.seoDescription, SITE.brand),
 })
+
+useBusinessSchema()
 </script>
 
 <template>
