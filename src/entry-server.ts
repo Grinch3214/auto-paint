@@ -15,9 +15,11 @@ export async function render(url: string) {
   const { app, router } = createApp({ history: createMemoryHistory(), head, hydrate: true })
   await router.push(url)
   await router.isReady()
-  const html = await renderToString(app)
+  // ctx.modules — какие компоненты попали в рендер; по ним пререндер подключит их CSS
+  const ctx: { modules?: Set<string> } = {}
+  const html = await renderToString(app, ctx)
   const headPayload = await renderSSRHead(head)
-  return { html, head: headPayload }
+  return { html, head: headPayload, modules: [...(ctx.modules ?? [])] }
 }
 
 /** Все опубликованные URL с языковыми альтернативами — для пререндера и sitemap */

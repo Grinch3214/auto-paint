@@ -11,6 +11,24 @@ const ssrEntry = join(root, 'dist-ssr', 'entry-server.js')
 const template = await readFile(join(dist, 'index.html'), 'utf8')
 const { render, getPrerenderEntries, siteUrl } = await import(pathToFileURL(ssrEntry).href)
 
+const manifestFile = join(dist, '.vite', 'ssr-manifest.json')
+const manifest = JSON.parse(await readFile(manifestFile, 'utf8'))
+
+function assetLinks(modules) {
+  const files = new Set(modules.flatMap((id) => manifest[id] ?? []))
+  return [...files]
+    .filter((file) => !template.includes(file))
+    .map((file) =>
+      file.endsWith('.css')
+        ? `<link rel="stylesheet" crossorigin href="${file}">`
+        : file.endsWith('.js')
+          ? `<link rel="modulepreload" crossorigin href="${file}">`
+          : '',
+    )
+    .filter(Boolean)
+    .join('')
+}
+
 /** '/' → index.html, '/ka/' → ka/index.html, '/kontakty' → kontakty.html */
 function fileFor(path) {
   if (path.endsWith('/')) return join(dist, path, 'index.html')
@@ -18,10 +36,10 @@ function fileFor(path) {
 }
 
 async function renderPage(url) {
-  const { html, head } = await render(url)
+  const { html, head, modules } = await render(url)
   return template
     .replace('<html lang="ru">', `<html${head.htmlAttrs}>`)
-    .replace('<!--head-tags-->', head.headTags)
+    .replace('<!--head-tags-->', head.headTags + assetLinks(modules))
     .replace('<!--app-html-->', html)
 }
 
@@ -65,5 +83,6 @@ await write(
 )
 console.log(`  ✓ sitemap.xml (${entries.length} URL), robots.txt`)
 
-// SSR-бандл нужен только для пререндера
+// SSR-бандл и манифест нужны только для пререндера — на хостинг не уходят
 await rm(join(root, 'dist-ssr'), { recursive: true, force: true })
+await rm(join(dist, '.vite'), { recursive: true, force: true })

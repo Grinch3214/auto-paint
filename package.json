@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "typecheck": "vue-tsc --noEmit -p tsconfig.app.json && vue-tsc --noEmit -p tsconfig.node.json",
-    "build": "npm run typecheck && vite build && vite build --ssr src/entry-server.ts --outDir dist-ssr && node scripts/prerender.mjs",
+    "build": "npm run typecheck && vite build --ssrManifest && vite build --ssr src/entry-server.ts --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
