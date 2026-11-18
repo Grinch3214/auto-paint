@@ -7,7 +7,11 @@ import { useContent, useI18n } from '@/i18n'
 import type { ServicePageId } from '@/types/pages'
 import type { PriceItemId } from '@/types/prices'
 
-const props = defineProps<{ id: ServicePageId; prices?: readonly PriceItemId[] }>()
+const props = defineProps<{
+  id: ServicePageId
+  prices?: readonly PriceItemId[]
+  pricesInBlocks?: boolean
+}>()
 
 const { locale } = useI18n()
 const content = useContent()
@@ -39,6 +43,13 @@ const text = computed(() => content.value.servicePages.items[props.id])
           <PriceList :items="prices" />
           <p class="overview__note">{{ content.servicePages.price.note }}</p>
         </template>
+        <div v-else-if="pricesInBlocks" class="ask">
+          <p class="ask__title">{{ content.servicePages.price.inBlocksTitle }}</p>
+          <p class="ask__text">{{ content.servicePages.price.inBlocksText }}</p>
+          <RouterLink class="btn" :to="{ path: pagePath(id, locale), hash: '#blocks' }">
+            {{ content.servicePages.price.inBlocksCta }}
+          </RouterLink>
+        </div>
         <div v-else class="ask">
           <p class="ask__title">{{ content.servicePages.price.askTitle }}</p>
           <p class="ask__text">{{ content.servicePages.price.askText }}</p>

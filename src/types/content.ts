@@ -157,6 +157,9 @@ export interface ServicePagesContent {
     askTitle: string
     askText: string
     askCta: string
+    inBlocksTitle: string
+    inBlocksText: string
+    inBlocksCta: string
   }
   related: { tape: string; title: string }
   aside: {

@@ -9,6 +9,7 @@ import ServiceOverviewSection from '@/components/sections/ServiceOverviewSection
 import StagesSection from '@/components/sections/StagesSection.vue'
 import WorksSection from '@/components/sections/WorksSection.vue'
 import { SITE } from '@/config/site'
+import { SERVICE_BLOCKS } from '@/data/blocks'
 import { SERVICE_PAGES } from '@/data/servicePages'
 import { useContent } from '@/i18n'
 import { useSeo } from '@/seo/useSeo'
@@ -21,6 +22,9 @@ const content = useContent()
 
 const page = computed(() => SERVICE_PAGES[props.id])
 const text = computed(() => content.value.servicePages.items[props.id])
+const pricesInBlocks = computed(() =>
+  (page.value.blocks ?? []).some((id) => SERVICE_BLOCKS.find((b) => b.id === id)?.prices?.length),
+)
 
 useSeo({
   title: () => fillBrand(text.value.seoTitle, SITE.brand),
@@ -36,7 +40,7 @@ useSeo({
     :work="page.heroWork"
     :caption="text.photoCaption"
   />
-  <ServiceOverviewSection :id="id" :prices="page.prices" />
+  <ServiceOverviewSection :id="id" :prices="page.prices" :prices-in-blocks="pricesInBlocks" />
   <ServiceBlocksSection
     v-if="page.blocks && text.blocks"
     :ids="page.blocks"
