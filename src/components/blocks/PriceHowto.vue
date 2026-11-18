@@ -62,7 +62,7 @@ const home = computed(() => pagePath('home', locale.value))
 
   &__title {
     font-family: var(--font-display);
-    text-transform: uppercase;
+    text-transform: var(--caps);
     font-size: 1.3rem;
     margin-bottom: var(--space-4);
   }
@@ -95,7 +95,7 @@ const home = computed(() => pagePath('home', locale.value))
       margin: 0;
       font-family: var(--font-display);
       font-size: 1.15rem;
-      text-transform: uppercase;
+      text-transform: var(--caps);
     }
 
     p {
@@ -177,7 +177,7 @@ const home = computed(() => pagePath('home', locale.value))
     margin: 0;
     font-family: var(--font-display);
     font-size: 1rem;
-    text-transform: uppercase;
+    text-transform: var(--caps);
   }
 
   &__flow-note {

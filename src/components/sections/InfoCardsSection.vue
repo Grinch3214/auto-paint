@@ -67,7 +67,7 @@ defineProps<{
     margin-bottom: var(--space-2);
     font-family: var(--font-display);
     font-size: 1rem;
-    text-transform: uppercase;
+    text-transform: var(--caps);
   }
 
   &__text {

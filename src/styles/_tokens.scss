@@ -2,7 +2,9 @@
   --font-display: 'Unbounded Variable', 'Noto Sans Georgian Variable', sans-serif;
   --font-text: 'Manrope Variable', 'Noto Sans Georgian Variable', sans-serif; // текст
   --font-mono: var(--font-text);
-  --font-marker: 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive;
+  --font-marker:
+    'Segoe Print', 'Bradley Hand', 'Comic Sans MS', 'Noto Sans Georgian Variable', cursive;
+  --caps: uppercase;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -45,4 +47,10 @@
   --scrim: rgb(29 25 18 / 0.55);
 
   color-scheme: light;
+}
+
+// В грузинском нет заглавных в обычном письме: Safari превращает uppercase в мтаврули,
+// Chrome и Firefox игнорируют — чтобы везде выглядело одинаково, капс выключаем
+:root:lang(ka) {
+  --caps: none;
 }

@@ -122,7 +122,7 @@ async function submit() {
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
+    text-transform: var(--caps);
   }
 
   &__input {

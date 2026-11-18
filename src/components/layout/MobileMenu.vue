@@ -100,7 +100,7 @@ const otherLinks = computed(() => [
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.14em;
-    text-transform: uppercase;
+    text-transform: var(--caps);
   }
 
   &__link {
@@ -120,7 +120,7 @@ const otherLinks = computed(() => [
 
     &--main {
       font-family: var(--font-display);
-      text-transform: uppercase;
+      text-transform: var(--caps);
     }
   }
 

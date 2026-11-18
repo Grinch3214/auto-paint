@@ -118,7 +118,7 @@ const text = computed(() => codes.value.brands[selected.value])
     margin-bottom: var(--space-2);
     font-family: var(--font-display);
     font-size: 1.25rem;
-    text-transform: uppercase;
+    text-transform: var(--caps);
   }
 
   &__where {
@@ -143,7 +143,7 @@ const text = computed(() => codes.value.brands[selected.value])
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
+    text-transform: var(--caps);
   }
 
   &__facts {

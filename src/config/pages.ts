@@ -51,7 +51,7 @@ export const PAGES: readonly PageDef[] = [
   },
   {
     id: 'polishing',
-    slugs: { ru: 'polirovka', ka: 'gaprialeba', en: 'polishing' },
+    slugs: { ru: 'polirovka', ka: 'polireba', en: 'polishing' },
     component: servicePage,
     props: { id: 'polishing' },
   },

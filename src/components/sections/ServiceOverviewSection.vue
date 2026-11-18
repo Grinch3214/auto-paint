@@ -131,7 +131,7 @@ const text = computed(() => content.value.servicePages.items[props.id])
     margin: 0 0 var(--space-3);
     font-size: 0.8rem;
     letter-spacing: 0.14em;
-    text-transform: uppercase;
+    text-transform: var(--caps);
     color: var(--color-text-muted);
   }
 

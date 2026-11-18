@@ -3,7 +3,7 @@ import type { Locale, LocaleInfo } from '@/types/i18n'
 // Порядок = порядок наполнения текстами
 export const LOCALES: readonly LocaleInfo[] = [
   { code: 'ru', prefix: '', hreflang: 'ru', label: 'RU', published: true },
-  { code: 'ka', prefix: '/ka', hreflang: 'ka', label: 'GE', published: false },
+  { code: 'ka', prefix: '/ka', hreflang: 'ka', label: 'GE', published: true },
   { code: 'en', prefix: '/en', hreflang: 'en', label: 'EN', published: true },
 ]
 

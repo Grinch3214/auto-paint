@@ -54,7 +54,7 @@ const logo = imageSources(LOGO.folder, LOGO.name, LOGO.widths)
   &__tagline {
     font-size: 0.7rem;
     letter-spacing: 0.12em;
-    text-transform: uppercase;
+    text-transform: var(--caps);
     opacity: 0.6;
   }
 }

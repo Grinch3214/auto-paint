@@ -61,7 +61,7 @@ const content = useContent()
   &__title {
     font-family: var(--font-display);
     font-size: 1.1rem;
-    text-transform: uppercase;
+    text-transform: var(--caps);
     margin-bottom: var(--space-2);
   }
 

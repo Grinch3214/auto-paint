@@ -92,7 +92,7 @@ const price = (value?: number) =>
 
     h3 {
       font-family: var(--font-display);
-      text-transform: uppercase;
+      text-transform: var(--caps);
       font-size: 1.3rem;
       margin-bottom: var(--space-2);
     }
@@ -170,7 +170,7 @@ const price = (value?: number) =>
       font-family: var(--font-mono);
       font-size: 0.72rem;
       font-weight: 600;
-      text-transform: uppercase;
+      text-transform: var(--caps);
       color: var(--color-text-muted);
       vertical-align: bottom;
       width: 26%;

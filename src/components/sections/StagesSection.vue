@@ -138,7 +138,7 @@ const { isOpen, toggle } = useAccordion(0)
     font-family: var(--font-display);
     font-size: 1.05rem;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: var(--caps);
     line-height: 1.2;
     margin-top: var(--space-2);
   }

@@ -3,6 +3,6 @@ import type { Locale } from '@/types/i18n'
 
 export const contentLoaders: Record<Locale, () => Promise<{ default: Content }>> = {
   ru: () => import('./ru'),
-  ka: () => import('./ru'),
+  ka: () => import('./ka'),
   en: () => import('./en'),
 }
