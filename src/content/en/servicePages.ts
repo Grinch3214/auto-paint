@@ -102,7 +102,6 @@ export default {
         'Spot repair in Batumi: we fix chips, scratches and scuffs without repainting the whole panel. Color matching by VIN and to your car, free estimate from photos on the site or via WhatsApp.',
       h1: 'Spot repair: chips and scratches',
       lead: 'When the damage is small, there is no need to paint the whole panel. We restore the finish only on the damaged area and blend it in so the edge of the repair does not catch the eye.',
-      photoCaption: 'fender: primer before color',
       blocks: {
         tape: 'in detail',
         title: 'Chips and scratches',
@@ -128,6 +127,7 @@ export default {
       seoDescription:
         'Alloy and steel wheel painting in Batumi: we remove curb rash and corrosion and paint in the factory or a new color, gloss or matte. Brake calipers in any color.',
       h1: 'Wheel and brake caliper painting',
+      photoCaption: 'wheels: gloss black',
       lead: 'We bring wheels back to factory look or paint them a new color. We remove curb rash, peeling clear coat and corrosion, paint with liquid paint and bake in the paint booth. We take the wheels off and put them back ourselves.',
       blocks: {
         tape: 'in detail',
@@ -156,6 +156,7 @@ export default {
       seoDescription:
         'Body repair and dent removal in Batumi ahead of painting: we pull dents, weld, straighten frames on a jig, repair sills and bumpers, and paint right away in our own booth.',
       h1: 'Body repair and dent removal before painting',
+      photoCaption: 'new doors on the frame bench',
       lead: 'Dent and body repair: we pull, weld and fix body geometry, then paint right here in our shop. No need to drive the car between different garages.',
       blocks: {
         tape: 'types of work',

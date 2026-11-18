@@ -1,12 +1,36 @@
 import type { Work } from '@/types/works'
 
+// порядок и размеры подобраны под сетку 4 колонки без дыр (dense)
 export const WORKS: readonly Work[] = [
-  { id: 'hoodGloss', folder: 'test', image: 'hood-gloss', size: 'big' },
-  { id: 'sideGloss', folder: 'test', image: 'side-gloss' },
-  { id: 'sedanAfter', folder: 'test', image: 'sedan-after-1', pages: ['spotRepair'] },
-  { id: 'partsGloss', folder: 'test', image: 'parts-gloss', size: 'wide' },
-  { id: 'wingSpot', folder: 'test', image: 'wing-spot', pages: ['spotRepair'] },
-  { id: 'crossoverBefore', folder: 'test', image: 'crossover-before' },
-  { id: 'sideBase', folder: 'test', image: 'side-base' },
-  { id: 'partsBase', folder: 'test', image: 'parts-base' },
+  {
+    id: 'frameDoors',
+    folder: 'works',
+    image: 'pickup-frame-doors',
+    size: 'big',
+    pages: ['bodyRepair'],
+  },
+  {
+    id: 'primerFender',
+    folder: 'works',
+    image: 'pickup-primer-fender',
+    size: 'tall',
+    pages: ['bodyRepair'],
+  },
+  { id: 'frameSill', folder: 'works', image: 'pickup-frame-sill', pages: ['bodyRepair'] },
+  { id: 'primerSill', folder: 'works', image: 'pickup-primer-sill', pages: ['bodyRepair'] },
+  {
+    id: 'wheelsBefore',
+    folder: 'works',
+    image: 'wheels-process',
+    size: 'tall',
+    pages: ['wheelPaint'],
+  },
+  { id: 'wheelsGloss', folder: 'works', image: 'wheels-gloss', size: 'big', pages: ['wheelPaint'] },
+  {
+    id: 'wheelsGlossSun',
+    folder: 'works',
+    image: 'wheels-gloss-sun',
+    size: 'tall',
+    pages: ['wheelPaint'],
+  },
 ]

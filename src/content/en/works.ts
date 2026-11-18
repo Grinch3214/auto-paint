@@ -6,13 +6,18 @@ export default {
   lead: 'Real cars and panels. Tap a photo to see it larger.',
   openPhoto: 'Open photo: {alt}',
   items: {
-    hoodGloss: { alt: 'Hood after clear coat in the booth', tag: 'hood · clear coat' },
-    sideGloss: { alt: 'Rear quarter panel and door after clear coat', tag: 'fender · clear coat' },
-    sedanAfter: { alt: 'White sedan after repair and painting', tag: 'sedan · done' },
-    partsGloss: { alt: 'Doors, fender and bumper after clear coat', tag: 'panels · clear coat' },
-    wingSpot: { alt: 'Spot repair on a fender', tag: 'spot repair' },
-    crossoverBefore: { alt: 'Crossover before repair, bumper removed', tag: 'before repair' },
-    sideBase: { alt: 'Fender in primer and base coat', tag: 'primer · base' },
-    partsBase: { alt: 'Panels in base coat before clear', tag: 'panels · base' },
+    frameDoors: {
+      alt: 'Pickup on the frame bench: new doors fitted, repair area by the rear quarter',
+      tag: 'frame bench · new doors',
+    },
+    primerFender: {
+      alt: 'Pickup rear quarter in primer after body repair',
+      tag: 'quarter · primer',
+    },
+    primerSill: { alt: 'Sill in primer, interior masked before painting', tag: 'sill · prep' },
+    wheelsBefore: { alt: 'Wheels before painting: worn finish and chips', tag: 'before' },
+    wheelsGloss: { alt: 'Wheel after painting in gloss black', tag: 'wheels · gloss black' },
+    wheelsGlossSun: { alt: 'A pair of gloss black wheels in the sun', tag: 'wheels · done' },
+    frameSill: { alt: 'Pickup sill and rear quarter before repair', tag: 'before repair' },
   },
 } satisfies Content['works']

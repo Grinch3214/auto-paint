@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import PhotoLightbox from '@/components/blocks/PhotoLightbox.vue'
+import { WORK_SIZES } from '@/constants/images'
 import { WORKS } from '@/data/works'
 import { useContent } from '@/i18n'
 import { imageSources, imageUrl } from '@/utils/image'
@@ -17,13 +18,16 @@ const list = computed(() => {
   return page ? WORKS.filter((w) => w.pages?.includes(page)) : WORKS
 })
 const works = computed(() =>
-  list.value.map((w) => ({
-    id: w.id,
-    ...imageSources(w.folder, w.image),
-    ...content.value.works.items[w.id],
-    big: w.size === 'big',
-    wide: w.size === 'wide',
-  })),
+  list.value.map((w) => {
+    const size: keyof typeof WORK_SIZES = w.size ?? 'normal'
+    return {
+      id: w.id,
+      ...imageSources(w.folder, w.image),
+      ...content.value.works.items[w.id],
+      size,
+      tall: size === 'tall',
+    }
+  }),
 )
 const photos = computed(() =>
   list.value.map((w) => ({
@@ -41,12 +45,7 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
     <h2>{{ content.works.title }}</h2>
     <p class="lead">{{ content.works.lead }}</p>
     <ul class="works">
-      <li
-        v-for="(w, i) in works"
-        :key="w.id"
-        class="works__item"
-        :class="{ 'works__item--big': w.big, 'works__item--wide': w.wide }"
-      >
+      <li v-for="(w, i) in works" :key="w.id" class="works__item" :class="`works__item--${w.size}`">
         <button
           type="button"
           class="works__btn"
@@ -56,10 +55,10 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
           <img
             :src="w.src"
             :srcset="w.srcset"
-            :sizes="w.big ? '(min-width: 768px) 50vw, 80vw' : '(min-width: 768px) 25vw, 80vw'"
+            :sizes="WORK_SIZES[w.size]"
             :alt="w.alt"
-            width="800"
-            height="600"
+            :width="w.tall ? 600 : 800"
+            :height="w.tall ? 800 : 600"
             loading="lazy"
           />
           <span class="tape works__tag">{{ w.tag }}</span>
@@ -112,6 +111,17 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
   &__item--big {
     @include above(md) {
       grid-column: span 2;
+      grid-row: span 2;
+    }
+  }
+
+  &__item--tall {
+    @include below(md) {
+      flex-basis: 45%;
+      aspect-ratio: 3 / 4;
+    }
+
+    @include above(md) {
       grid-row: span 2;
     }
   }

@@ -19,3 +19,11 @@ export const LOGO = {
   width: 2040,
   height: 547,
 } as const
+
+/** sizes для фото в сетке работ: на мобиле карусель (обычное 80%, вертикальное 45%) */
+export const WORK_SIZES = {
+  normal: '(min-width: 768px) 25vw, 80vw',
+  tall: '(min-width: 768px) 25vw, 45vw',
+  wide: '(min-width: 768px) 50vw, 80vw',
+  big: '(min-width: 768px) 50vw, 80vw',
+} as const

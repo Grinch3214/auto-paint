@@ -18,7 +18,6 @@ export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
     faq: ['price', 'singlePart', 'colorMatch', 'bodyRepair', 'insurance'],
   },
   spotRepair: {
-    heroWork: 'wingSpot',
     prices: ['spotChip', 'spotArea', 'spotScratch'],
     blocks: ['spotPolishOrPaint', 'spotChips', 'spotScratches', 'spotLimits'],
     stages: ['inspection', 'filler', 'primer', 'colorMatch', 'paintBooth'],
@@ -26,6 +25,7 @@ export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
     faq: ['spotVisible', 'spotChipRust', 'singlePart', 'colorMatch', 'photoEstimate'],
   },
   wheelPaint: {
+    heroWork: 'wheelsGloss',
     prices: ['wheel', 'wheelR17', 'wheelR19', 'caliper'],
     blocks: ['wheelPaint', 'curbRash', 'wheelColors', 'calipers', 'tireService'],
     stages: ['inspection', 'filler', 'primer', 'colorMatch', 'paintBooth', 'assembly'],
@@ -33,6 +33,7 @@ export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
     faq: ['wheelPowder', 'wheelColor', 'wheelCurb', 'wheelTires', 'wheels'],
   },
   bodyRepair: {
+    heroWork: 'frameDoors',
     blocks: ['dents', 'frame', 'welding', 'sills', 'plastic', 'rustproofing'],
     stages: STAGES,
     related: ['panelPaint', 'fullPaint', 'spotRepair'],
