@@ -3,7 +3,7 @@ import type { Messages } from '@/types/i18n'
 const en: Messages = {
   nav: {
     services: 'Services',
-    colorMatch: 'Colour matching',
+    colorMatch: 'Color matching',
     prices: 'Prices',
     home: 'Home',
     cta: 'Message us',
@@ -12,7 +12,7 @@ const en: Messages = {
   home: {
     seoTitle: 'Car Painting in Batumi — {BRAND}',
     seoDescription:
-      'Car painting in Batumi: full and spot repaint, colour matching by VIN and by the actual panel. Photo estimate via WhatsApp or our website.',
+      'Car painting in Batumi: full respray and spot repair, dent repair and rustproofing before painting, color matching by VIN and to your car. Free photo estimate on the website, via WhatsApp or at an inspection.',
     h1: 'Car painting in Batumi',
     lead: 'Site skeleton. The home page goes here.',
   },
@@ -48,7 +48,7 @@ const en: Messages = {
   footer: {
     tagline: 'car painting in Batumi',
     about:
-      'Car painting in Batumi: full and partial respray, colour matching, body repair and rust treatment before painting.',
+      'Full-cycle car painting in Batumi: from dent and body repair to clear coat and polishing, all under one roof.',
     navTitle: 'Sections',
     hoursTitle: 'Opening hours',
     contactsTitle: 'Contacts',

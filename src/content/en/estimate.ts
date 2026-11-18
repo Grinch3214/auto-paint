@@ -1,0 +1,30 @@
+import type { Content } from '@/types/content'
+
+export default {
+  tape: 'photo estimate',
+  title: 'What needs painting?',
+  lead: 'The estimate is free and there is no obligation. Send photos and briefly describe what happened, and we will reply with a preliminary quote.',
+  message: 'Hello! I would like a painting estimate. I will send photos in this chat.',
+  form: {
+    photos: 'Photos of the damage',
+    photosAdd: 'Add photos',
+    photosHint: 'A wide shot and close-ups, up to 5 photos',
+    photosProcessing: 'Preparing photos…',
+    photoRemove: 'Remove photo',
+    photosLimit: 'You can add up to {max} photos',
+    photoError: 'One of the photos could not be opened. Try another one, JPG or PNG.',
+    text: 'What happened',
+    textPlaceholder: 'For example: scratch on the rear bumper, chip on the hood',
+    phone: 'Phone or WhatsApp',
+    phonePlaceholder: '+995 …',
+    submit: 'Send for estimate',
+    sending: 'Sending…',
+    sent: 'Request sent! A painter will look at the photos and reply during opening hours.',
+    error: 'The request could not be sent. Please message us on WhatsApp using the button below.',
+    needPhone: 'Enter a phone number so we can reply',
+    needContent: 'Add a photo or describe the damage',
+    orMessenger: 'Or message us on WhatsApp',
+    consent: 'By sending a request, you confirm that you have read the',
+    consentLink: 'privacy policy',
+  },
+} satisfies Content['estimate']
