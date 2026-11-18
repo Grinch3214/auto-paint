@@ -9,3 +9,11 @@
 # Картинки: 30 дней. Изменённая картинка = новое имя или ?v=N
 /images/*
   Cache-Control: public, max-age=2592000
+
+# Служебные адреса Cloudflare (*.pages.dev и превью веток) не индексируем —
+# в поиске должен быть только autoatelier.ge
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
