@@ -1,24 +1,29 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, useId } from 'vue'
 import { useEstimatePhotos } from '@/composables/useEstimatePhotos'
 import { pagePath } from '@/config/pages'
 import { ESTIMATE_ENDPOINT } from '@/constants/estimate'
 import { useContent, useI18n } from '@/i18n'
+import PhoneInput from './PhoneInput.vue'
 import PhotoPicker from './PhotoPicker.vue'
 import type { EstimateFormStatus } from '@/types/estimate'
+import type { PhoneValue } from '@/types/phone'
 
 const { locale } = useI18n()
 const content = useContent()
 const { photos, processing, failed, overLimit, canAdd, add, remove, clear } = useEstimatePhotos()
 
+const phoneId = useId()
+
 const text = ref('')
-const phone = ref('')
+const phone = ref<PhoneValue>({ international: '', valid: false })
 const website = ref('')
 const status = ref<EstimateFormStatus>('idle')
 const showErrors = ref(false)
 
 const form = computed(() => content.value.estimate.form)
-const phoneMissing = computed(() => phone.value.replace(/\D/g, '').length < 6)
+const phoneMissing = computed(() => !phone.value.valid)
+const phoneEmpty = computed(() => !phone.value.international)
 const contentMissing = computed(() => !photos.value.length && !text.value.trim())
 
 async function submit() {
@@ -28,7 +33,7 @@ async function submit() {
   const data = new FormData()
   photos.value.forEach((p, i) => data.append('photos', p.blob, `photo-${i + 1}.jpg`))
   data.append('text', text.value.trim())
-  data.append('phone', phone.value.trim())
+  data.append('phone', phone.value.international)
   data.append('page', window.location.pathname)
   data.append('website', website.value)
 
@@ -68,18 +73,16 @@ async function submit() {
       />
     </label>
 
-    <label class="form__field">
-      <span class="form__label">{{ form.phone }}</span>
-      <input
+    <div class="form__field">
+      <label class="form__label" :for="phoneId">{{ form.phone }}</label>
+      <PhoneInput
         v-model="phone"
-        class="form__input"
-        type="tel"
-        autocomplete="tel"
-        inputmode="tel"
+        :input-id="phoneId"
+        :country-label="form.phoneCountry"
         :placeholder="form.phonePlaceholder"
-        :aria-invalid="showErrors && phoneMissing"
+        :invalid="showErrors && phoneMissing"
       />
-    </label>
+    </div>
 
     <input
       v-model="website"
@@ -92,7 +95,7 @@ async function submit() {
     />
 
     <p v-if="showErrors && (phoneMissing || contentMissing)" class="form__note is-error">
-      {{ phoneMissing ? form.needPhone : form.needContent }}
+      {{ phoneEmpty ? form.needPhone : phoneMissing ? form.phoneInvalid : form.needContent }}
     </p>
     <p v-else-if="status === 'sent'" class="form__note is-ok" role="status">{{ form.sent }}</p>
     <p v-else-if="status === 'error'" class="form__note is-error" role="alert">{{ form.error }}</p>

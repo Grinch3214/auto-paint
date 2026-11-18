@@ -16,7 +16,7 @@ export default {
     text: 'რა მოხდა',
     textPlaceholder: 'მაგალითად: ნაკაწრი უკანა ბამპერზე, ნაჭდევი კაპოტზე',
     phone: 'ტელეფონი ან WhatsApp',
-    phonePlaceholder: '+995 …',
+    phonePlaceholder: '555 12 34 56',
     submit: 'შესაფასებლად გაგზავნა',
     sending: 'იგზავნება…',
     sent: 'განაცხადი გაიგზავნა! ოსტატი ნახავს ფოტოებს და სამუშაო საათებში გიპასუხებთ.',
@@ -26,5 +26,7 @@ export default {
     orMessenger: 'ან მოგვწერეთ WhatsApp-ში',
     consent: 'განაცხადის გაგზავნით ადასტურებთ, რომ გაეცანით',
     consentLink: 'კონფიდენციალურობის პოლიტიკას',
+    phoneCountry: 'ქვეყნის კოდი',
+    phoneInvalid: 'შეამოწმეთ ნომერი: შესაძლოა, ციფრები აკლია ან სხვა ქვეყანაა არჩეული',
   },
 } satisfies Content['estimate']

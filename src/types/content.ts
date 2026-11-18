@@ -124,6 +124,8 @@ export interface EstimateContent extends SectionHeading {
     needContent: string
     orMessenger: string
     consent: string
+    phoneCountry: string
+    phoneInvalid: string
     consentLink: string
   }
 }

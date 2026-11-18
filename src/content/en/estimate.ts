@@ -16,7 +16,7 @@ export default {
     text: 'What happened',
     textPlaceholder: 'For example: scratch on the rear bumper, chip on the hood',
     phone: 'Phone or WhatsApp',
-    phonePlaceholder: '+995 …',
+    phonePlaceholder: '555 12 34 56',
     submit: 'Send for estimate',
     sending: 'Sending…',
     sent: 'Request sent! A painter will look at the photos and reply during opening hours.',
@@ -26,5 +26,7 @@ export default {
     orMessenger: 'Or message us on WhatsApp',
     consent: 'By sending a request, you confirm that you have read the',
     consentLink: 'privacy policy',
+    phoneCountry: 'Country code',
+    phoneInvalid: 'Check the number: some digits may be missing or the wrong country is selected',
   },
 } satisfies Content['estimate']

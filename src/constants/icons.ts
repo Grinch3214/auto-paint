@@ -23,4 +23,5 @@ export const ICONS = {
   drop: [
     'M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5S12.5 5.5 12 3c-.5 2.5-2 4.9-4 6.5S5 13 5 15a7 7 0 0 0 7 7',
   ],
+  chevron: ['m6 9 6 6 6-6'],
 } as const satisfies Record<string, readonly string[]>

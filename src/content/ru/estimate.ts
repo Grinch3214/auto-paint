@@ -16,7 +16,7 @@ export default {
     text: 'Что случилось',
     textPlaceholder: 'Например: царапина на заднем бампере, скол на капоте',
     phone: 'Телефон или WhatsApp',
-    phonePlaceholder: '+995 …',
+    phonePlaceholder: '555 12 34 56',
     submit: 'Отправить на оценку',
     sending: 'Отправляем…',
     sent: 'Заявка отправлена! Мастер посмотрит фото и ответит вам в рабочие часы.',
@@ -26,5 +26,7 @@ export default {
     orMessenger: 'Или напишите в WhatsApp',
     consent: 'Отправляя заявку, вы подтверждаете, что ознакомились с',
     consentLink: 'политикой конфиденциальности',
+    phoneCountry: 'Код страны',
+    phoneInvalid: 'Проверьте номер: похоже, не хватает цифр или выбрана не та страна',
   },
 } satisfies Content['estimate']
