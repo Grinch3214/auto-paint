@@ -76,14 +76,17 @@ onKeyStroke('Escape', close)
 
   &__btn {
     gap: var(--space-2);
-    font: inherit;
-    font-weight: 700;
-    cursor: pointer;
 
     &--light {
       background: var(--color-surface);
       border-color: var(--color-surface);
       color: var(--color-text);
+
+      &:hover:not(:disabled) {
+        background: var(--color-bg);
+        border-color: var(--color-bg);
+        box-shadow: none;
+      }
 
       .icon {
         color: var(--color-accent);

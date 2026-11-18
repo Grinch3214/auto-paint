@@ -71,6 +71,11 @@ a {
   color: inherit;
 }
 
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
 [id] {
   scroll-margin-top: var(--header-h);
 }
