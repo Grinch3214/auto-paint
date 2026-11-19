@@ -83,6 +83,11 @@ defineExpose({ open })
     gap: var(--space-4);
     margin: var(--space-3) 0 0;
     color: var(--hero-text);
+
+    .mono {
+      flex: none;
+      white-space: nowrap;
+    }
   }
 
   &__btn,

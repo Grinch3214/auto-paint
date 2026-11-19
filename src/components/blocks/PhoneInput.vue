@@ -182,6 +182,7 @@ onMounted(() => {
 
   &__input {
     flex: 1;
+    width: 0;
     min-width: 0;
     padding: var(--space-3) var(--space-4);
     border: 0;

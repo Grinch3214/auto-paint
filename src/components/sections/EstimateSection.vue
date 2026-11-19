@@ -36,6 +36,7 @@ const waLink = computed(() => whatsappLink(SITE.phone, content.value.estimate.me
 <style scoped lang="scss">
 .estimate {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-6);
 
   @include above(lg) {
