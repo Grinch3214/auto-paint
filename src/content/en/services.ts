@@ -3,7 +3,7 @@ import type { Content } from '@/types/content'
 export default {
   tape: 'services',
   title: 'What we paint',
-  lead: 'Pick what you need, or just send us a photo and we will suggest the right option.',
+  lead: "Not sure what you need: one panel, just a chip or the whole car? Send a photo and we'll advise you and give a quote.",
   fitsLabel: 'good for:',
   more: 'Learn more →',
   items: {
