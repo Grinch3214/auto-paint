@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 import PriceList from '@/components/blocks/PriceList.vue'
 import ServiceAside from '@/components/blocks/ServiceAside.vue'
 import { pagePath } from '@/config/pages'
@@ -31,7 +32,10 @@ const text = computed(() => content.value.servicePages.items[props.id])
         <div class="cases">
           <h3 class="cases__title">{{ content.servicePages.scope.casesTitle }}</h3>
           <ul class="cases__list">
-            <li v-for="item in text.cases" :key="item">{{ item }}</li>
+            <li v-for="item in text.cases" :key="item">
+              <BaseIcon name="check" />
+              {{ item }}
+            </li>
           </ul>
         </div>
       </div>
@@ -135,20 +139,29 @@ const text = computed(() => content.value.servicePages.items[props.id])
     color: var(--color-text-muted);
   }
 
+  // обычный список, не «таблетки»: пункты не нажимаются и не должны выглядеть кнопками
   &__list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     gap: var(--space-2);
     margin: 0;
     padding: 0;
     list-style: none;
 
+    @include above(md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: var(--space-6);
+    }
+
     li {
-      padding: var(--space-2) var(--space-4);
-      background: var(--hero-0);
-      color: var(--hero-text);
-      border-radius: 999px;
-      font-size: 0.9rem;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-2);
+    }
+
+    :deep(svg) {
+      flex: none;
+      margin-top: 0.2em;
+      color: var(--color-accent);
     }
   }
 }

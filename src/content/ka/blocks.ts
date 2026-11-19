@@ -1,7 +1,6 @@
 import type { Content } from '@/types/content'
 
 export default {
-  navLabel: 'განყოფილებები გვერდზე',
   items: {
     bumper: {
       title: 'ბამპერი',

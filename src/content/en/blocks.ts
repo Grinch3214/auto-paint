@@ -1,7 +1,6 @@
 import type { Content } from '@/types/content'
 
 export default {
-  navLabel: 'On this page',
   items: {
     bumper: {
       title: 'Bumper',

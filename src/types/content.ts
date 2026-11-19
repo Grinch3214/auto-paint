@@ -188,7 +188,6 @@ export interface TitledText {
 }
 
 export interface BlocksContent {
-  navLabel: string
   items: Record<BlockId, TitledText>
 }
 

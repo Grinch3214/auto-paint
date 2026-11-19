@@ -25,13 +25,6 @@ const blocks = computed(() =>
     <h2>{{ heading.title }}</h2>
     <p class="lead">{{ heading.lead }}</p>
 
-    <!-- якоря: Google может показать ссылку прямо на раздел -->
-    <nav class="blocks-nav" :aria-label="content.blocks.navLabel">
-      <a v-for="b in blocks" :key="b.id" class="blocks-nav__chip" :href="`#${b.id}`">
-        {{ b.title }}
-      </a>
-    </nav>
-
     <div class="blocks">
       <article
         v-for="b in blocks"
@@ -51,28 +44,6 @@ const blocks = computed(() =>
 </template>
 
 <style scoped lang="scss">
-.blocks-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-6);
-
-  &__chip {
-    padding: var(--space-2) var(--space-4);
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    background: var(--color-surface);
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-
-    &:hover {
-      border-color: var(--color-accent);
-      color: var(--accent-ink);
-    }
-  }
-}
-
 .blocks {
   display: grid;
   grid-template-columns: minmax(0, 1fr);

@@ -1,7 +1,6 @@
 import type { Content } from '@/types/content'
 
 export default {
-  navLabel: 'Разделы на странице',
   items: {
     bumper: {
       title: 'Бампер',
