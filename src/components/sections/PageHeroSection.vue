@@ -112,54 +112,12 @@ const photo = computed(() => {
 
 // фото как распечатка, приклеенная малярным скотчем к стене камеры
 .snapshot {
-  position: relative;
   max-width: 440px;
   margin: var(--space-12) auto 0;
-  padding: 10px 10px 40px;
-  background: var(--color-surface);
-  border-radius: 2px;
-  box-shadow: var(--shadow-pop);
 
   @include above(lg) {
     margin: 0 0 0 auto;
     transform: rotate(2deg);
-  }
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -12px;
-    width: 96px;
-    height: 26px;
-    background: var(--color-tape);
-    opacity: 0.9;
-    box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
-  }
-
-  &::before {
-    left: -18px;
-    transform: rotate(-35deg);
-  }
-
-  &::after {
-    right: -18px;
-    transform: rotate(35deg);
-  }
-
-  &__img {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-  }
-
-  &__caption {
-    position: absolute;
-    left: 16px;
-    bottom: 6px;
-    margin: 0;
   }
 }
 </style>

@@ -10,6 +10,10 @@
 /images/*
   Cache-Control: public, max-age=2592000
 
+# Видео — так же: изменённый ролик = новое имя
+/video/*
+  Cache-Control: public, max-age=2592000
+
 # Служебные адреса Cloudflare (*.pages.dev и превью веток) не индексируем —
 # в поиске должен быть только autoatelier.ge
 https://:project.pages.dev/*
