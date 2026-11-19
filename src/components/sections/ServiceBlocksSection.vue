@@ -75,12 +75,14 @@ const blocks = computed(() =>
 
 .blocks {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-4);
   margin-top: var(--space-6);
 }
 
 .block {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-4);
   padding: var(--space-6);
   background: var(--color-surface);
@@ -101,6 +103,7 @@ const blocks = computed(() =>
     font-family: var(--font-display);
     font-size: 1.25rem;
     text-transform: var(--caps);
+    overflow-wrap: break-word;
   }
 
   &__text {

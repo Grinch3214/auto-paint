@@ -33,11 +33,10 @@ export interface WorkText {
 }
 
 export interface HeroContent {
+  tape: string
   titleLines: readonly string[]
   lead: string
-  carAlt: string
-  recolor: string
-  colorPicker: string
+  facts: readonly string[]
   ctaEstimate: string
   ctaProcess: string
 }

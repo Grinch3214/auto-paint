@@ -1,57 +1,67 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import HeroCar from '@/components/HeroCar.vue'
+import { computed, onMounted, ref } from 'vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 import { pagePath } from '@/config/pages'
-import { SWATCHES } from '@/data/swatches'
+import { HERO_BG_VIDEO } from '@/constants/images'
 import { useContent, useI18n } from '@/i18n'
 
 const { locale } = useI18n()
 const content = useContent()
 
-const swatchIndex = ref(0)
+const bgVideo = ref<HTMLVideoElement | null>(null)
+const bgPlaying = ref(false)
 
-const swatch = computed(() => SWATCHES[swatchIndex.value] ?? SWATCHES[0]!)
 const home = computed(() => pagePath('home', locale.value))
 
-const nextColor = () => (swatchIndex.value = (swatchIndex.value + 1) % SWATCHES.length)
+onMounted(() => {
+  const el = bgVideo.value
+  if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const phone = window.matchMedia('(max-width: 767.98px)').matches
+  el.src = phone ? HERO_BG_VIDEO.square : HERO_BG_VIDEO.wide
+  el.play()
+    .then(() => (bgPlaying.value = true))
+    .catch(() => {})
+})
 </script>
 
 <template>
   <section class="hero">
-    <div class="hero__lamps" aria-hidden="true"><i /><i /><i /></div>
-    <h1 class="hero__title">
-      <template v-for="(line, i) in content.hero.titleLines" :key="line">
-        <br v-if="i" />{{ line }}
-      </template>
-    </h1>
-
-    <button class="hero__car" type="button" :aria-label="content.hero.recolor" @click="nextColor">
-      <HeroCar :paint="swatch.paint" />
-    </button>
-
-    <div class="hero__bottom">
-      <div class="dots" role="radiogroup" :aria-label="content.hero.colorPicker">
-        <button
-          v-for="(s, i) in SWATCHES"
-          :key="s.name"
-          class="dots__dot"
-          role="radio"
-          :aria-checked="i === swatchIndex"
-          :aria-label="s.name"
-          :title="s.name"
-          :style="{ '--sw': s.color }"
-          @click="swatchIndex = i"
-        />
+    <video
+      ref="bgVideo"
+      class="hero__video"
+      :class="{ 'is-playing': bgPlaying }"
+      muted
+      loop
+      playsinline
+      preload="none"
+      aria-hidden="true"
+    />
+    <div class="hero__inner">
+      <div class="hero__head">
+        <span class="tape">{{ content.hero.tape }}</span>
+        <h1 class="hero__title">
+          <template v-for="(line, i) in content.hero.titleLines" :key="line">
+            <br v-if="i" />{{ line }}
+          </template>
+        </h1>
       </div>
-      <p class="hero__swatch mono">{{ swatch.name }}</p>
-      <p class="hero__lead">{{ content.hero.lead }}</p>
-      <div class="cta">
-        <RouterLink class="btn" :to="{ path: home, hash: '#estimate' }">
-          {{ content.hero.ctaEstimate }}
-        </RouterLink>
-        <RouterLink class="btn btn--ghost-dark" :to="{ path: home, hash: '#layers' }">
-          {{ content.hero.ctaProcess }}
-        </RouterLink>
+
+      <div class="hero__text">
+        <p class="hero__lead">{{ content.hero.lead }}</p>
+        <ul class="hero__facts">
+          <li v-for="f in content.hero.facts" :key="f">
+            <BaseIcon name="check" />
+            {{ f }}
+          </li>
+        </ul>
+        <div class="cta">
+          <RouterLink class="btn" :to="{ path: home, hash: '#estimate' }">
+            {{ content.hero.ctaEstimate }}
+          </RouterLink>
+          <RouterLink class="btn btn--ghost-dark" :to="{ path: home, hash: '#layers' }">
+            {{ content.hero.ctaProcess }}
+          </RouterLink>
+        </div>
       </div>
     </div>
   </section>
@@ -61,97 +71,143 @@ const nextColor = () => (swatchIndex.value = (swatchIndex.value + 1) % SWATCHES.
 .hero {
   position: relative;
   margin-top: calc(-1 * var(--header-h));
-  padding: calc(var(--header-h) + 32px) var(--gutter) var(--space-12);
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  padding-top: var(--header-h);
   color: var(--hero-text);
-  background:
-    radial-gradient(ellipse 70% 45% at 50% 0%, rgb(255 255 255 / 0.12), transparent 70%),
-    radial-gradient(ellipse 50% 30% at 50% 78%, rgb(255 255 255 / 0.05), transparent 70%),
-    linear-gradient(var(--hero-0), var(--hero-1) 60%, var(--hero-0));
-  overflow: hidden;
+  // заглушка — первый кадр ролика; затемнение лежит поверх ролика в ::after
+  background: url('/images/hero/booth-red-1280.webp') center / cover no-repeat var(--hero-0);
 
-  &__lamps {
+  @include below(lg) {
+    background-position: 85% center;
+  }
+
+  // телефон: текста много и он внизу — квадратный ролик сверху, маляр и бампер над заголовком
+  @include below(md) {
+    background-image: url('/images/hero/booth-red-720sq.webp');
+    background-position: center top;
+    background-size: 100% auto;
+  }
+
+  &::after {
+    content: '';
     position: absolute;
-    inset: 0 0 auto;
-    display: flex;
-    justify-content: center;
-    gap: 12vw;
+    inset: 0;
+    pointer-events: none;
+    // слева темнее под текст, книзу уходит в цвет следующей секции
+    background:
+      linear-gradient(90deg, rgb(29 25 18 / 0.96), rgb(29 25 18 / 0.86) 45%, rgb(29 25 18 / 0.65)),
+      linear-gradient(transparent 60%, var(--hero-0));
 
-    i {
-      width: 18vw;
-      height: 5px;
-      background: #f5f5f0;
-      box-shadow:
-        0 0 24px 6px rgb(255 255 255 / 0.45),
-        0 0 90px 24px rgb(255 255 255 / 0.12);
-      border-radius: 0 0 4px 4px;
+    // планшет: текст внизу, сверху светлее
+    @include below(lg) {
+      background: linear-gradient(
+        rgb(29 25 18 / 0.7),
+        rgb(29 25 18 / 0.55) 20%,
+        rgb(29 25 18 / 0.85) 50%,
+        var(--hero-0) 90%
+      );
+    }
+
+    // телефон: квадратный ролик сверху, ниже — сплошной тёмный под текст
+    @include below(md) {
+      background: linear-gradient(
+        rgb(29 25 18 / 0.65),
+        rgb(29 25 18 / 0.4) 15%,
+        rgb(29 25 18 / 0.75) 35%,
+        var(--hero-0) 44%
+      );
     }
   }
 
+  border-bottom: 4px solid var(--color-accent);
+  overflow: hidden;
+
+  &__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+
+    // планшет: узкий кадр — держим в нём маляра справа
+    @include below(lg) {
+      object-position: 85% center;
+    }
+
+    @include below(md) {
+      height: auto;
+      aspect-ratio: 1;
+    }
+
+    @include motion {
+      transition: opacity 0.8s ease;
+    }
+
+    &.is-playing {
+      opacity: 1;
+    }
+  }
+
+  &__inner {
+    @include container;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'head' 'text';
+    align-content: end;
+    gap: var(--space-6);
+    min-height: calc(100svh - var(--header-h) - var(--dock-h));
+    padding-block: var(--space-8);
+
+    // десктоп: текст слева по центру высоты, справа — ролик
+    @include above(lg) {
+      grid-template-columns: minmax(0, 640px);
+      align-content: center;
+      min-height: calc(100dvh - var(--header-h));
+      padding-block: var(--space-12);
+    }
+  }
+
+  &__head {
+    grid-area: head;
+  }
+
+  &__text {
+    grid-area: text;
+  }
+
   &__title {
-    font-size: clamp(2.6rem, 9.5vw, 7rem);
-    line-height: 0.92;
-    margin-bottom: 0;
-  }
-
-  &__car {
-    width: min(860px, 98vw);
-    margin-top: var(--space-4);
-    padding: 0;
-    border: 0;
-    background: none;
-    cursor: pointer;
-
-    display: block;
-  }
-
-  &__bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    margin-top: var(--space-4);
-  }
-
-  &__swatch {
-    font-size: 0.8rem;
-    opacity: 0.55;
     margin: 0;
+    font-size: clamp(2.6rem, 8vw, 5.5rem);
+    line-height: 0.92;
   }
 
   &__lead {
-    max-width: 56ch;
-    opacity: 0.8;
-    margin: var(--space-2) 0 0;
-    font-size: 1.05rem;
+    max-width: 52ch;
+    margin: 0;
+    font-size: 1.1rem;
+    opacity: 0.85;
   }
-}
 
-.dots {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-3);
-
-  &__dot {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid rgb(255 255 255 / 0.25);
-    background:
-      radial-gradient(circle at 35% 30%, rgb(255 255 255 / 0.45), transparent 45%), var(--sw);
-    cursor: pointer;
+  &__facts {
+    display: grid;
+    gap: var(--space-2);
+    margin: var(--space-4) 0 var(--space-6);
     padding: 0;
+    list-style: none;
 
-    &[aria-checked='true'] {
-      outline: 2px solid #fff;
-      outline-offset: 3px;
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-2);
+      color: var(--hero-muted);
+    }
+
+    :deep(svg) {
+      flex: none;
+      margin-top: 0.15em;
+      color: var(--color-accent);
     }
   }
 }
