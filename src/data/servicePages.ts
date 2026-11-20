@@ -4,11 +4,20 @@ import type { ServicePageId } from '@/types/pages'
 
 export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
   fullPaint: {
+    heroWork: 'mattingCloseup',
     prices: ['fullExterior', 'fullWithOpenings'],
     blocks: ['fullWhen', 'fullOpenings', 'fullColorChange', 'fullPrep'],
     stages: STAGES,
     related: ['panelPaint', 'spotRepair', 'colorMatch'],
-    faq: ['fullWorthIt', 'fullColorChange', 'price', 'colorMatch', 'paintBooth', 'polishing'],
+    faq: [
+      'fullWorthIt',
+      'fullStripMetal',
+      'fullColorChange',
+      'price',
+      'colorMatch',
+      'paintBooth',
+      'polishing',
+    ],
   },
   panelPaint: {
     prices: ['bumper', 'hood', 'frontFender', 'door', 'roof'],

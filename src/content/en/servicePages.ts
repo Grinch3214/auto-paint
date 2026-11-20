@@ -45,6 +45,7 @@ export default {
       seoDescription:
         'Full car respray in Batumi: factory or new color, with trim removal, dent repair and rustproofing before painting. Our own paint booth, free estimate from photos.',
       h1: 'Full car respray',
+      photoCaption: 'scuffing the factory clear',
       lead: 'We repaint the whole body, in the factory color or a new one. We remove the trim, prepare every panel and paint the entire car in the paint booth.',
       blocks: {
         tape: 'in detail',

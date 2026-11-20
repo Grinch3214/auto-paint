@@ -1,36 +1,30 @@
 import type { Work } from '@/types/works'
 
-// порядок и размеры подобраны под сетку 4 колонки без дыр (dense)
+// одинаковые плитки 4:3, 4 в ряд — держим число фото кратным 4; порядок — «история машины»
 export const WORKS: readonly Work[] = [
-  {
-    id: 'frameDoors',
-    folder: 'works',
-    image: 'pickup-frame-doors',
-    size: 'big',
-    pages: ['bodyRepair'],
-  },
+  { id: 'frameSill', folder: 'works', image: 'pickup-frame-sill', pages: ['bodyRepair'] },
+  { id: 'frameDoors', folder: 'works', image: 'pickup-frame-doors', pages: ['bodyRepair'] },
+  { id: 'primerSill', folder: 'works', image: 'pickup-primer-sill', pages: ['bodyRepair'] },
   {
     id: 'primerFender',
     folder: 'works',
     image: 'pickup-primer-fender',
-    size: 'tall',
+    portrait: true,
     pages: ['bodyRepair'],
   },
-  { id: 'frameSill', folder: 'works', image: 'pickup-frame-sill', pages: ['bodyRepair'] },
-  { id: 'primerSill', folder: 'works', image: 'pickup-primer-sill', pages: ['bodyRepair'] },
   {
     id: 'wheelsBefore',
     folder: 'works',
     image: 'wheels-process',
-    size: 'tall',
+    portrait: true,
     pages: ['wheelPaint'],
   },
-  { id: 'wheelsGloss', folder: 'works', image: 'wheels-gloss', size: 'big', pages: ['wheelPaint'] },
+  { id: 'wheelsGloss', folder: 'works', image: 'wheels-gloss', pages: ['wheelPaint'] },
   {
-    id: 'wheelsGlossSun',
+    id: 'mattingCloseup',
     folder: 'works',
-    image: 'wheels-gloss-sun',
-    size: 'tall',
-    pages: ['wheelPaint'],
+    image: 'chevy-matting-closeup',
+    pages: ['fullPaint'],
   },
+  { id: 'mattingSide', folder: 'works', image: 'chevy-matting-side', pages: ['fullPaint'] },
 ]

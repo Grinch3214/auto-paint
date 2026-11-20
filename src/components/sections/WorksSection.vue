@@ -19,13 +19,12 @@ const list = computed(() => {
 })
 const works = computed(() =>
   list.value.map((w) => {
-    const size: keyof typeof WORK_SIZES = w.size ?? 'normal'
+    const shape: keyof typeof WORK_SIZES = w.portrait ? 'portrait' : 'landscape'
     return {
       id: w.id,
       ...imageSources(w.folder, w.image),
       ...content.value.works.items[w.id],
-      size,
-      tall: size === 'tall',
+      shape,
     }
   }),
 )
@@ -45,7 +44,12 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
     <h2>{{ content.works.title }}</h2>
     <p class="lead">{{ content.works.lead }}</p>
     <ul class="works">
-      <li v-for="(w, i) in works" :key="w.id" class="works__item" :class="`works__item--${w.size}`">
+      <li
+        v-for="(w, i) in works"
+        :key="w.id"
+        class="works__item"
+        :class="`works__item--${w.shape}`"
+      >
         <button
           type="button"
           class="works__btn"
@@ -55,10 +59,10 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
           <img
             :src="w.src"
             :srcset="w.srcset"
-            :sizes="WORK_SIZES[w.size]"
+            :sizes="WORK_SIZES[w.shape]"
             :alt="w.alt"
-            :width="w.tall ? 600 : 800"
-            :height="w.tall ? 800 : 600"
+            :width="w.shape === 'portrait' ? 600 : 800"
+            :height="w.shape === 'portrait' ? 800 : 600"
             loading="lazy"
           />
           <span class="tape works__tag">{{ w.tag }}</span>
@@ -92,43 +96,26 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
     }
   }
 
+  // десктоп: одинаковые плитки — галерея-доказательство, а не портфолио; крупно — в лупе
   @include above(md) {
     display: grid;
     gap: var(--space-3);
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 210px;
-    grid-auto-flow: dense;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   &__item {
+    aspect-ratio: 4 / 3;
+
     @include below(md) {
       flex: 0 0 80%;
-      aspect-ratio: 4 / 3;
       scroll-snap-align: start;
     }
   }
 
-  &__item--big {
-    @include above(md) {
-      grid-column: span 2;
-      grid-row: span 2;
-    }
-  }
-
-  &__item--tall {
+  &__item--portrait {
     @include below(md) {
       flex-basis: 45%;
       aspect-ratio: 3 / 4;
-    }
-
-    @include above(md) {
-      grid-row: span 2;
-    }
-  }
-
-  &__item--wide {
-    @include above(md) {
-      grid-column: span 2;
     }
   }
 

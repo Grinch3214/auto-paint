@@ -85,6 +85,11 @@ export default {
       answer:
         'We do body repair as preparation for painting. After dent repair and welding the metal is left bare, and it must be primed and painted or it will rust. So we quote and do everything together: we straighten, weld and paint right away in our own shop.',
     },
+    fullStripMetal: {
+      question: 'Do you strip the old paint down to bare metal?',
+      answer:
+        'Only where it is needed. Sound factory paint is the best base for new paint, so there is no reason to remove it. First we check it: with a thickness gauge, to make sure the panel has not been resprayed in a thick layer, and with solvent on a sanded spot, to make sure the old paint does not soften. If everything is fine, we scuff the clear coat with an abrasive so the new paint bonds well, and paint over it. We take it down to metal where the paint is blistered, peeling or has rust underneath.',
+    },
     fullWorthIt: {
       question: 'Which is better value: a full respray or a few panels?',
       answer:

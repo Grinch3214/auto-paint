@@ -17,6 +17,7 @@ export type FaqId =
   | 'metallic'
   | 'bodyRepairOnly'
   | 'fullWorthIt'
+  | 'fullStripMetal'
   | 'fullColorChange'
   | 'spotVisible'
   | 'spotChipRust'
