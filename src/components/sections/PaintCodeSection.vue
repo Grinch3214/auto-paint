@@ -12,6 +12,12 @@ const selected = ref<PaintCodeBrandId>('toyota')
 const codes = computed(() => content.value.colorMatch.codes)
 const zones = computed(() => PAINT_CODE_BRANDS.find((b) => b.id === selected.value)?.zones ?? [])
 const text = computed(() => codes.value.brands[selected.value])
+
+function select(id: PaintCodeBrandId, event: MouseEvent) {
+  selected.value = id
+  const chip = event.currentTarget
+  if (chip instanceof HTMLElement) chip.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+}
 </script>
 
 <template>
@@ -27,7 +33,7 @@ const text = computed(() => codes.value.brands[selected.value])
         type="button"
         class="brands__chip"
         :aria-pressed="b.id === selected"
-        @click="selected = b.id"
+        @click="select(b.id, $event)"
       >
         {{ codes.brands[b.id].name }}
       </button>
@@ -81,7 +87,23 @@ const text = computed(() => codes.value.brands[selected.value])
   gap: var(--space-2);
   margin-top: var(--space-6);
 
+  @include below(md) {
+    flex-wrap: nowrap;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
   &__chip {
+    flex: none;
+    white-space: nowrap;
     min-height: 44px;
     padding: 0 var(--space-4);
     border: 1px solid var(--color-border);
