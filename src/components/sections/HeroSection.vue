@@ -157,14 +157,14 @@ onMounted(() => {
     grid-template-areas: 'head' 'text';
     align-content: end;
     gap: var(--space-6);
-    min-height: calc(100svh - var(--header-h) - var(--dock-h));
+    min-height: min(calc(100svh - var(--header-h) - var(--dock-h)), 52rem);
     padding-block: var(--space-8);
 
     // десктоп: текст слева по центру высоты, справа — ролик
     @include above(lg) {
       grid-template-columns: minmax(0, 640px);
       align-content: center;
-      min-height: calc(100dvh - var(--header-h));
+      min-height: min(calc(100dvh - var(--header-h)), 60rem);
       padding-block: var(--space-12);
     }
   }
