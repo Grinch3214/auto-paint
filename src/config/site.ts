@@ -1,9 +1,11 @@
 // Бренд AutoAtelier, домен autoatelier.ge. Телефон — для звонков и WhatsApp; Telegram только как группа для заявок с сайта
 const GEO = { latitude: 41.61517, longitude: 41.61976 } as const
 
+// Карточка Google Business: CID — для ссылки и встроенной карты, Place ID — для маршрута.
+// Маршрут по тексту адреса уводит к соседям (Okey Motors); формат api=1 понимает и приложение на телефоне
 const GOOGLE_PLACE = {
   cid: '10854773661695640900',
-  featureId: '0x40678f211034ef91:0x96a3e7225ea28544',
+  placeId: 'ChIJke80ECGPZ0ARRIWiXiLno5Y',
 } as const
 
 export const SITE = {
@@ -31,7 +33,7 @@ export const SITE = {
   /** картинка для превью ссылок (WhatsApp, Facebook, Telegram) */
   ogImage: '/og-image.png',
   mapsUrl: `https://maps.google.com/?cid=${GOOGLE_PLACE.cid}`,
-  mapsRouteUrl: `https://www.google.com/maps/dir//AutoAtelier/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s${GOOGLE_PLACE.featureId}`,
+  mapsRouteUrl: `https://www.google.com/maps/dir/?api=1&destination=AutoAtelier&destination_place_id=${GOOGLE_PLACE.placeId}`,
   /** встраиваемая карта без API-ключа; грузится только по кнопке на /kontakty */
   mapsEmbedUrl: `https://maps.google.com/maps?cid=${GOOGLE_PLACE.cid}&output=embed`,
   copyrightYear: 2026,
