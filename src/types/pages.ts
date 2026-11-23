@@ -8,6 +8,7 @@ export type ServicePageId =
   | 'wheelPaint'
   | 'bodyRepair'
   | 'polishing'
+  | 'detailing'
 
 export type PageId = 'home' | 'contacts' | 'colorMatch' | 'prices' | 'privacy' | ServicePageId
 

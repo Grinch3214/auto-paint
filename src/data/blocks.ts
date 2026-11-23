@@ -25,6 +25,7 @@ export const SERVICE_BLOCKS: readonly ServiceBlock[] = [
   { id: 'polishBody' },
   { id: 'headlights', prices: ['polishHeadlights'] },
   { id: 'glass', prices: ['polishGlass'] },
+  { id: 'preSale', prices: ['polishPreSale'] },
 
   {
     id: 'dents',
@@ -41,4 +42,38 @@ export const SERVICE_BLOCKS: readonly ServiceBlock[] = [
   { id: 'wheelColors' },
   { id: 'calipers' },
   { id: 'tireService' },
+
+  { id: 'ppfFull', prices: ['ppfFull', 'ppfFullMatte', 'ppfFront'] },
+  {
+    id: 'ppfParts',
+    prices: [
+      'ppfFrontBumper',
+      'ppfHood',
+      'ppfFenders',
+      'ppfDoors',
+      'ppfRearFenders',
+      'ppfRoof',
+      'ppfRearBumper',
+      'ppfTrunkLid',
+      'ppfSills',
+      'ppfInnerSills',
+      'ppfArches',
+      'ppfMirrors',
+      'ppfPillars',
+      'ppfGlossTrim',
+      'ppfRoofStrip',
+      'ppfHandleCups',
+      'ppfLoadingZone',
+    ],
+  },
+  { id: 'ppfAfterPaint' },
+  { id: 'wrap', prices: ['ppfColor', 'vinylFull'] },
+  {
+    id: 'lightsFilm',
+    prices: ['headlightTint', 'taillightTint', 'ppfHeadlights', 'ppfTaillights'],
+  },
+  { id: 'ppfCare' },
+  { id: 'leather', prices: ['leatherSeats', 'leatherFull'] },
+  { id: 'flood', prices: ['floodDrying', 'ozone'] },
+  { id: 'antiRain', prices: ['antiRainWindshield', 'antiRainAll'] },
 ]

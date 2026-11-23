@@ -1,4 +1,3 @@
-
 export const LANG_SUGGEST = {
   text: 'Есть версия на русском',
   go: 'Перейти',

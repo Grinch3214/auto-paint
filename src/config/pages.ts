@@ -56,6 +56,12 @@ export const PAGES: readonly PageDef[] = [
     props: { id: 'polishing' },
   },
   {
+    id: 'detailing',
+    slugs: { ru: 'deteyling', ka: 'deteilingi', en: 'detailing' },
+    component: servicePage,
+    props: { id: 'detailing' },
+  },
+  {
     id: 'colorMatch',
     slugs: { ru: 'podbor-kraski', ka: 'peris-shercheva', en: 'paint-color-matching' },
     component: () => import('@/pages/ColorMatchPage.vue'),

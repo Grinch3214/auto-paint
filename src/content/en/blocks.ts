@@ -118,5 +118,45 @@ export default {
       title: 'Tires off and on, done here',
       text: 'We remove the wheels, take off the tires, paint the wheels and put everything back together, all in-house with no trips between garages. Tire fitting is charged separately.',
     },
+    preSale: {
+      title: 'Pre-sale polishing',
+      text: 'A well-kept car looks better in listing photos and when a buyer comes to see it. Before a sale we polish the body and headlights and remove car wash marks and fine scratches. We match the scope to the car and your budget and agree the price after an inspection.',
+    },
+    ppfFull: {
+      title: 'Paint protection film (PPF)',
+      text: 'Clear polyurethane film takes the chips, sand, fine scratches and road salt so the paint underneath stays intact. Most people protect the front end, which takes stones from the road. Wrapping the whole body makes sense on a new car or after a full respray. Gloss film is almost invisible on the car; matte film turns gloss paint into a satin finish.',
+    },
+    ppfParts: {
+      title: 'Film on individual parts',
+      text: 'You can protect just the areas that suffer most: hood and bumper against chips, sills and arches against stones thrown up by the wheels, handle cups against scratches from nails and keys, and the bumper loading area against bags and suitcases.',
+    },
+    ppfAfterPaint: {
+      title: 'Film after our paint job',
+      text: 'We apply film to fresh paint no sooner than 20 days later. The clear coat dries on the surface quickly, but underneath it keeps curing for several weeks and releasing solvents. Wrap it too early and the solvents are trapped: bubbles form under the film, the adhesive weakens and marks are left on the clear coat. So we paint, hand the car back and wrap it here 20 days later, with no trip to another shop. If the panel was painted long ago or elsewhere, we check it with a paint thickness gauge first: on a weak layer, the film can pull paint off when it is removed.',
+    },
+    wrap: {
+      title: 'Color change with film',
+      text: 'Colored polyurethane or vinyl changes the color of the car without touching the factory paint: if you get tired of it, the film comes off. Polyurethane is thicker and handles chips better; vinyl is cheaper but protects less. If the paint is already chipped or rusty, film will not hide it, and a respray is the better option. We will advise at the inspection.',
+    },
+    lightsFilm: {
+      title: 'Headlight tint and protection',
+      text: 'Tint film makes headlights and taillights darker and changes the look of the car. Clear film protects headlight plastic from chips and hazing. If the headlights are already cloudy, we polish them first and then apply the film.',
+    },
+    ppfCare: {
+      title: 'After the wrap',
+      text: 'Do not wash the car for 5–7 days while the adhesive sets. After 10 days there is a required follow-up: you bring the car in, we check the edges and re-stick anything that has lifted. After that, wash as usual, just keep pressure washer jets away from the film edges.',
+    },
+    leather: {
+      title: 'Leather interior cleaning',
+      text: 'We clean leather seats or all the leather in the cabin: seats, steering wheel, armrests and door inserts. The price depends on how dirty the interior is; we can quote from photos.',
+    },
+    flood: {
+      title: 'Interior drying after flooding',
+      text: 'Has the car been in water, or did water leak in through the sunroof or seals? A damp interior soon starts to smell and mold grows under the carpet. We dry the interior, and ozone treatment kills mold, germs and odors. We price the drying after an inspection: it depends on how much water got in and whether the interior has to come apart.',
+    },
+    antiRain: {
+      title: 'Rain repellent for glass',
+      text: 'A water-repellent coating: water beads up and runs off the glass on its own at speed, so you see the road better in the rain. We treat just the windshield or all the glass, including the sunroof.',
+    },
   },
 } satisfies Content['blocks']

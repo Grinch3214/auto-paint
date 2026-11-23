@@ -145,5 +145,25 @@ export default {
       answer:
         'These paints contain particles that settle differently depending on how they are applied, and pearl and tri-coat colors have more layers. To make the panel match the ones next to it takes more material, test spray-outs and painter time, so we quote them separately.',
     },
+    paintOrFilm: {
+      question: 'Which is better: painting the car or wrapping it?',
+      answer:
+        'It depends on the state of the paint. Film protects an intact finish but does not hide chips, rust or dents: they show through clear film and print through colored film. So we repair and paint a damaged body first and apply film 20 days later, both in our shop. If the paint is fine and you want a different color, film is simpler: it can be removed to bring back the factory color.',
+    },
+    filmOnRepaint: {
+      question: 'Can you put film on a repainted panel?',
+      answer:
+        'Yes, but not straight away. On fresh paint we apply film no sooner than 20 days later: the clear coat has to cure and release its solvents, or bubbles will form under the film. If the panel was painted long ago or at another shop, we measure it with a paint thickness gauge first: when removed, film can pull off a weak paint layer, and it is better to know that in advance.',
+    },
+    filmCare: {
+      question: 'How should I look after the car after wrapping?',
+      answer:
+        'Do not wash the car for 5–7 days while the adhesive sets. After 10 days, come in for the required follow-up: we check the edges and re-stick anything that has lifted. After that, wash as usual, just keep pressure washer jets away from the film edges.',
+    },
+    fabricInterior: {
+      question: 'Do you clean fabric interiors?',
+      answer:
+        'Right now we clean leather interiors: all seats from {leatherSeats} GEL, all the leather in the cabin from {leatherFull} GEL. For fabric interiors, message us and we will advise.',
+    },
   },
 } satisfies Content['faq']

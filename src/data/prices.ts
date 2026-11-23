@@ -72,6 +72,7 @@ export const PRICE_GROUPS: readonly PriceGroup[] = [
       { id: 'polishDeep', single: 800 },
       { id: 'polishHeadlights', single: 100 },
       { id: 'polishGlass', single: 200 },
+      { id: 'polishPreSale', ask: true },
     ],
   },
   {
@@ -105,6 +106,55 @@ export const PRICE_GROUPS: readonly PriceGroup[] = [
       { id: 'bodyRustSills', single: 200 },
       { id: 'bodyRustUnderbody', single: 350 },
       { id: 'bodySeams', single: 100 },
+    ],
+  },
+  // плёнка: прайс соседей в $ × курс НБГ 2,59 (21.11.2026) − 10%, округлено до 10 ₾.
+  // Полосы на капот и крыло и кромки дверей не клеим — их в таблице нет
+  {
+    id: 'ppf',
+    items: [
+      { id: 'ppfFull', single: 5600 },
+      { id: 'ppfFullMatte', single: 5970 },
+      { id: 'ppfFront', single: 2240 },
+      { id: 'ppfColor', single: 5600 },
+      { id: 'vinylFull', single: 4670 },
+    ],
+  },
+  {
+    id: 'ppfParts',
+    items: [
+      { id: 'ppfFrontBumper', single: 620 },
+      { id: 'ppfHood', single: 620 },
+      { id: 'ppfFenders', single: 340 },
+      { id: 'ppfDoors', single: 1120 },
+      { id: 'ppfRearFenders', single: 670 },
+      { id: 'ppfRoof', single: 750 },
+      { id: 'ppfRearBumper', single: 540 },
+      { id: 'ppfTrunkLid', single: 390 },
+      { id: 'ppfSills', single: 370 },
+      { id: 'ppfInnerSills', single: 150 },
+      { id: 'ppfArches', single: 370 },
+      { id: 'ppfMirrors', single: 150 },
+      { id: 'ppfPillars', single: 150 },
+      { id: 'ppfGlossTrim', single: 150 },
+      { id: 'ppfRoofStrip', single: 70 },
+      { id: 'ppfHandleCups', single: 70 },
+      { id: 'ppfLoadingZone', single: 70 },
+      { id: 'ppfHeadlights', single: 150 },
+      { id: 'ppfTaillights', single: 150 },
+    ],
+  },
+  {
+    id: 'detailing',
+    items: [
+      { id: 'headlightTint', single: 150 },
+      { id: 'taillightTint', single: 150 },
+      { id: 'leatherSeats', single: 250 },
+      { id: 'leatherFull', single: 350 },
+      { id: 'floodDrying', ask: true },
+      { id: 'ozone', single: 50 },
+      { id: 'antiRainWindshield', single: 75 },
+      { id: 'antiRainAll', single: 150 },
     ],
   },
 ]

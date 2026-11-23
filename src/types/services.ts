@@ -8,6 +8,7 @@ export type ServiceId =
   | 'wheelPaint'
   | 'bodyRepair'
   | 'polishing'
+  | 'detailing'
   | 'colorMatch'
 
 export interface Service {

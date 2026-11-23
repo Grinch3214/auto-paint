@@ -27,6 +27,10 @@ export type FaqId =
   | 'bodySillsRust'
   | 'wheelPowder'
   | 'wheelCurb'
+  | 'paintOrFilm'
+  | 'filmOnRepaint'
+  | 'filmCare'
+  | 'fabricInterior'
 
 export interface FaqEntry {
   question: string

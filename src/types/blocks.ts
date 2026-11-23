@@ -23,6 +23,7 @@ export type BlockId =
   | 'polishBody'
   | 'headlights'
   | 'glass'
+  | 'preSale'
   // кузовной ремонт
   | 'dents'
   | 'frame'
@@ -36,6 +37,16 @@ export type BlockId =
   | 'wheelColors'
   | 'calipers'
   | 'tireService'
+  // детейлинг
+  | 'ppfFull'
+  | 'ppfParts'
+  | 'ppfAfterPaint'
+  | 'wrap'
+  | 'lightsFilm'
+  | 'ppfCare'
+  | 'leather'
+  | 'flood'
+  | 'antiRain'
 
 export interface ServiceBlock {
   id: BlockId

@@ -210,5 +210,33 @@ export default {
         'before selling the car',
       ],
     },
+    detailing: {
+      seoTitle: 'Car Detailing in Batumi: PPF, Leather Cleaning, Rain Repellent — {BRAND}',
+      seoDescription:
+        'Car detailing in Batumi: paint protection film (PPF), vinyl wraps, headlight tint and protection, leather interior cleaning, drying after flooding, ozone treatment and rain repellent.',
+      h1: 'Detailing: protection film, lights and interior',
+      lead: 'We protect paint with PPF, change the color with vinyl, tint headlights, clean leather interiors and apply rain repellent. It fits neatly after a paint job: once a panel is painted, we protect it right here 20 days later.',
+      blocks: {
+        tape: 'services',
+        title: 'What we do',
+        lead: 'Prices are starting prices. We give the exact amount from photos or at an inspection and agree it before work starts.',
+      },
+      includes: [
+        'paint inspection and choosing the right film',
+        'washing and degreasing before wrapping',
+        'polishing before film, if needed',
+        'wrapping the whole body or individual parts',
+        'tint and clear film on headlights',
+        'leather cleaning, interior drying and ozone treatment',
+        'rain repellent on glass',
+      ],
+      cases: [
+        'a new car: keep the factory paint',
+        'after a respray: protect fresh clear coat from chips',
+        'you want a new color without a respray',
+        'damp interior or a smell after water',
+        'poor visibility in the rain',
+      ],
+    },
   },
 } satisfies Content['servicePages']

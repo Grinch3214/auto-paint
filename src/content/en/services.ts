@@ -43,5 +43,10 @@ export default {
       text: 'Paint code by VIN, a test spray-out and a check against your car. We can tell you where to find the paint code on your make.',
       fits: 'when you need an exact color',
     },
+    detailing: {
+      title: 'Detailing and film',
+      text: 'Paint protection film (PPF), vinyl, headlight tint, leather cleaning, ozone treatment and rain repellent.',
+      fits: 'a new or freshly painted car, interior after water',
+    },
   },
 } satisfies Content['services']

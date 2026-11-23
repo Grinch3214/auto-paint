@@ -50,8 +50,23 @@ export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
   },
   polishing: {
     prices: ['polishPanel', 'polishLight', 'polishDeep'],
-    blocks: ['polishBody', 'headlights', 'glass'],
-    related: ['spotRepair', 'panelPaint', 'fullPaint'],
+    blocks: ['polishBody', 'headlights', 'glass', 'preSale'],
+    related: ['detailing', 'spotRepair', 'panelPaint'],
     faq: ['polishScratches', 'headlights', 'polishHowOften', 'photoEstimate', 'polishing'],
+  },
+  detailing: {
+    blocks: [
+      'ppfFull',
+      'ppfParts',
+      'ppfAfterPaint',
+      'wrap',
+      'lightsFilm',
+      'ppfCare',
+      'leather',
+      'flood',
+      'antiRain',
+    ],
+    related: ['polishing', 'fullPaint', 'panelPaint'],
+    faq: ['paintOrFilm', 'filmOnRepaint', 'filmCare', 'fabricInterior', 'photoEstimate'],
   },
 }

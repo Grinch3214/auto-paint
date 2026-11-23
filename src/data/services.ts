@@ -7,6 +7,7 @@ export const SERVICES: readonly Service[] = [
   { id: 'wheelPaint', page: 'wheelPaint', fromPrice: 'wheel' },
   { id: 'bodyRepair', page: 'bodyRepair', fromPrice: 'bodyBumperRepair' },
   { id: 'polishing', page: 'polishing', fromPrice: 'polishPanel' },
+  { id: 'detailing', page: 'detailing', fromPrice: 'ozone' },
   { id: 'colorMatch', page: 'colorMatch' },
 ]
 
