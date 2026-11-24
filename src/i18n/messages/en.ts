@@ -39,6 +39,7 @@ const en: Messages = {
     whatsapp: 'Message on WhatsApp',
     maps: 'Open in Google Maps',
     call: 'Call',
+    mapTitle: 'Map: AutoAtelier, 35a Kakhaberi St, Batumi',
   },
   contactDock: {
     title: 'Get in touch',

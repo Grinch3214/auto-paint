@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BaseIcon from '@/components/BaseIcon.vue'
+import MapEmbed from '@/components/blocks/MapEmbed.vue'
 import { useNavLinks } from '@/composables/useNavLinks'
 import { pagePath } from '@/config/pages'
 import { SITE } from '@/config/site'
@@ -60,6 +61,10 @@ const { pageLinks } = useNavLinks()
           {{ t((m) => m.contactInfo.call) }}
         </a>
       </div>
+    </div>
+
+    <div class="footer__map">
+      <MapEmbed class="footer__map-frame" />
     </div>
 
     <div class="footer__bottom">
@@ -161,6 +166,20 @@ const { pageLinks } = useNavLinks()
 
   &__btn {
     margin-top: var(--space-3);
+  }
+
+  &__map {
+    @include container;
+    padding-bottom: var(--space-12);
+  }
+
+  &__map-frame {
+    height: 240px;
+    border-color: var(--hero-line);
+
+    @include above(md) {
+      height: 300px;
+    }
   }
 
   &__bottom {

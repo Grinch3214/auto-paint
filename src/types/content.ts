@@ -236,7 +236,6 @@ export interface ContactsPageContent extends PageIntro {
     route: string
     notes: readonly string[]
   }
-  map: { title: string; show: string; open: string; frameTitle: string }
 }
 
 export interface PrivacySection {

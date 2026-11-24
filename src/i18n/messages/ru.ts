@@ -38,6 +38,7 @@ const ru = {
     whatsapp: 'Написать в WhatsApp',
     maps: 'Открыть в Google Maps',
     call: 'Позвонить',
+    mapTitle: 'Карта: AutoAtelier, ул. Кахабери, 35а, Батуми',
   },
   contactDock: {
     title: 'Связаться с нами',

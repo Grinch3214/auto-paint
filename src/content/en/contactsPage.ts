@@ -27,10 +27,4 @@ export default {
       'We work on cars with any plates: Georgian, Russian, Turkish, European.',
     ],
   },
-  map: {
-    title: 'Map',
-    show: 'Show map',
-    open: 'Open in Google Maps',
-    frameTitle: 'Map: 35a Kakhaberi St, Batumi',
-  },
 } satisfies Content['contactsPage']

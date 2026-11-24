@@ -6,7 +6,7 @@ export default {
     'How {BRAND} processes personal data of website users: data collected, purposes and legal grounds, recipients, retention periods and data subject rights.',
   h1: 'Privacy policy',
   lead: 'This policy explains what personal data {BRAND} receives through the {SITE} website, why and on what legal basis it is processed, who it is shared with, how long it is kept and what rights users have.',
-  updated: 'Effective from 18 November 2026',
+  updated: 'Effective from 24 November 2026',
   sections: [
     {
       title: '1. General provisions',
@@ -56,6 +56,7 @@ export default {
       items: [
         'Cloudflare, Inc. (USA): Website hosting and request delivery. Requests are not stored on Cloudflare servers;',
         'Telegram: a private work chat where requests are delivered;',
+        'Google LLC (USA): the Google Maps map embedded on the Website pages;',
         'WhatsApp (Meta Platforms): if the user messages us there.',
       ],
       after: [
@@ -75,7 +76,7 @@ export default {
     {
       title: '8. Cookies',
       paragraphs: [
-        'The Website does not use advertising or analytics cookies or similar tracking technologies. The hosting provider processes technical data (IP address, browser and device type) needed to run the Website and protect it from attacks. If we start using analytics tools, this Policy will be updated before they are enabled.',
+        "The Website does not use advertising or analytics cookies or similar tracking technologies. A Google Maps map is embedded on the Website pages: when it loads, Google receives the visitor's IP address and browser data and may set its own cookies under Google's rules (policies.google.com/privacy). The hosting provider processes technical data (IP address, browser and device type) needed to run the Website and protect it from attacks. If we start using analytics tools, this Policy will be updated before they are enabled.",
       ],
     },
     {

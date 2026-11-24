@@ -27,10 +27,4 @@ export default {
       'ვმუშაობთ ნებისმიერი ნომრის მქონე მანქანებთან — ქართული, რუსული, თურქული, ევროპული.',
     ],
   },
-  map: {
-    title: 'რუკა',
-    show: 'რუკის ჩვენება',
-    open: 'გახსნა Google Maps-ში',
-    frameTitle: 'რუკა: კახაბერის ქ. 35ა, ბათუმი',
-  },
 } satisfies Content['contactsPage']

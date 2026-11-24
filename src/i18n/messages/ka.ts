@@ -39,6 +39,7 @@ const ka: Messages = {
     whatsapp: 'მოგვწერეთ WhatsApp-ში',
     maps: 'გახსნა Google Maps-ში',
     call: 'დარეკვა',
+    mapTitle: 'რუკა: AutoAtelier, კახაბრის ქ. 35ა, ბათუმი',
   },
   contactDock: {
     title: 'დაგვიკავშირდით',

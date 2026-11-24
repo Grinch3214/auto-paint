@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import BaseIcon from '@/components/BaseIcon.vue'
+import MapEmbed from '@/components/blocks/MapEmbed.vue'
 import { SITE } from '@/config/site'
 import { useContent, useI18n } from '@/i18n'
 import { mailLink, phoneLink, whatsappLink } from '@/utils/messengers'
 
 const { t } = useI18n()
 const content = useContent()
-
-// iframe Google Maps тяжёлый: грузим только по кнопке
-const mapShown = ref(false)
 
 const text = computed(() => content.value.contactsPage)
 const channels = computed(() => [
@@ -98,25 +96,7 @@ const channels = computed(() => [
       </div>
     </div>
 
-    <div class="map">
-      <iframe
-        v-if="mapShown"
-        class="map__frame"
-        :src="SITE.mapsEmbedUrl"
-        :title="text.map.frameTitle"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      />
-      <div v-else class="map__placeholder">
-        <span class="map__pin"><BaseIcon name="pin" /></span>
-        <p class="map__address">{{ t((m) => m.contactInfo.address) }}</p>
-        <button type="button" class="btn" @click="mapShown = true">{{ text.map.show }}</button>
-        <a class="map__open" :href="SITE.mapsUrl" target="_blank" rel="noopener">
-          {{ text.map.open }}
-          <BaseIcon name="arrow" />
-        </a>
-      </div>
-    </div>
+    <MapEmbed class="map" />
   </section>
 </template>
 
@@ -255,68 +235,6 @@ const channels = computed(() => [
 }
 
 .map {
-  overflow: hidden;
   aspect-ratio: 4 / 3;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--hero-0);
-
-  &__frame {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-
-  // сетка улиц нарисована градиентами — превью без запроса к Google
-  &__placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-4);
-    height: 100%;
-    padding: var(--space-6);
-    text-align: center;
-    color: var(--hero-text);
-    background:
-      radial-gradient(
-        circle at 50% 45%,
-        color-mix(in srgb, var(--color-accent) 35%, transparent),
-        transparent 40%
-      ),
-      repeating-linear-gradient(0deg, var(--hero-line) 0 1px, transparent 1px 48px),
-      repeating-linear-gradient(90deg, var(--hero-line) 0 1px, transparent 1px 48px), var(--hero-0);
-  }
-
-  &__pin {
-    display: grid;
-    place-items: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: var(--color-accent);
-    color: var(--on-accent);
-    box-shadow: 0 0 0 10px color-mix(in srgb, var(--color-accent) 25%, transparent);
-  }
-
-  &__address {
-    margin: 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-  }
-
-  &__open {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-1);
-    color: var(--hero-muted);
-    font-size: 0.9rem;
-    text-decoration: none;
-
-    &:hover {
-      color: var(--hero-text);
-    }
-  }
 }
 </style>
