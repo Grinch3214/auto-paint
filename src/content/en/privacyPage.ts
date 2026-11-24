@@ -56,7 +56,7 @@ export default {
       items: [
         'Cloudflare, Inc. (USA): Website hosting and request delivery. Requests are not stored on Cloudflare servers;',
         'Telegram: a private work chat where requests are delivered;',
-        'Google LLC (USA): the Google Maps map embedded on the Website pages;',
+        'Google LLC (USA): the Google Maps map on the Contacts page;',
         'WhatsApp (Meta Platforms): if the user messages us there.',
       ],
       after: [
@@ -76,7 +76,7 @@ export default {
     {
       title: '8. Cookies',
       paragraphs: [
-        "The Website does not use advertising or analytics cookies or similar tracking technologies. A Google Maps map is embedded on the Website pages: when it loads, Google receives the visitor's IP address and browser data and may set its own cookies under Google's rules (policies.google.com/privacy). The hosting provider processes technical data (IP address, browser and device type) needed to run the Website and protect it from attacks. If we start using analytics tools, this Policy will be updated before they are enabled.",
+        "The Website does not use advertising or analytics cookies or similar tracking technologies. A Google Maps map is embedded on the Contacts page: when it loads, Google receives the visitor's IP address and browser data and may set its own cookies under Google's rules (policies.google.com/privacy). The hosting provider processes technical data (IP address, browser and device type) needed to run the Website and protect it from attacks. If we start using analytics tools, this Policy will be updated before they are enabled.",
       ],
     },
     {

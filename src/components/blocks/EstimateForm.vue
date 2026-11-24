@@ -150,7 +150,8 @@ async function submit() {
     }
 
     &--area {
-      resize: vertical;
+      height: 120px;
+      resize: none;
     }
   }
 

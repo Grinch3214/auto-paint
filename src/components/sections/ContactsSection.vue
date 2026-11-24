@@ -132,6 +132,15 @@ const channels = computed(() => [
     border-color: var(--color-accent);
   }
 
+  @include below(md) {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    column-gap: var(--space-4);
+    row-gap: 0;
+    align-items: center;
+    padding: var(--space-4);
+  }
+
   &__icon {
     display: grid;
     place-items: center;
@@ -141,6 +150,11 @@ const channels = computed(() => [
     border-radius: 50%;
     background: var(--color-accent);
     color: var(--on-accent);
+
+    @include below(md) {
+      grid-row: 1 / span 3;
+      margin-bottom: 0;
+    }
   }
 
   &__title {
@@ -236,5 +250,11 @@ const channels = computed(() => [
 
 .map {
   aspect-ratio: 4 / 3;
+
+  // десктоп: карта едет рядом, пока читают адрес и подсказки
+  @include above(lg) {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-6));
+  }
 }
 </style>
