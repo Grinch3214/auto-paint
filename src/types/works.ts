@@ -9,6 +9,10 @@ export type WorkId =
   | 'frameSill'
   | 'mattingSide'
   | 'mattingCloseup'
+  | 'chevySideAfter'
+  | 'chevyDoorsGloss'
+  | 'chevyFuelDoor'
+  | 'chevyTailgate'
 
 export interface Work {
   id: WorkId

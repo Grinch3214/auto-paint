@@ -2,6 +2,7 @@ import type { FaqEntry, FaqId } from './faq'
 import type { PaintCodeBrandId, PaintCodeZone } from './paintCodes'
 import type { ServicePageId } from './pages'
 import type { BlockId } from './blocks'
+import type { CaseId, CaseStepId } from './cases'
 import type { PriceGroupId, PriceItemId } from './prices'
 import type { ServiceId } from './services'
 import type { StageId } from './stages'
@@ -252,6 +253,18 @@ export interface PrivacyPageContent extends PageIntro {
   sections: readonly PrivacySection[]
 }
 
+export interface CaseStepText {
+  title: string
+  text: string
+  alt: string
+}
+
+export interface CaseText extends SectionHeading {
+  steps: Record<CaseStepId, CaseStepText>
+}
+
+export type CasesContent = Record<CaseId, CaseText>
+
 export interface Content {
   hero: HeroContent
   services: ServicesContent
@@ -260,6 +273,7 @@ export interface Content {
   insurance: InsuranceContent
   stages: StagesContent
   works: WorksContent
+  cases: CasesContent
   estimate: EstimateContent
   faq: FaqContent
   visit: VisitContent

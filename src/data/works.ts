@@ -20,11 +20,32 @@ export const WORKS: readonly Work[] = [
     pages: ['wheelPaint'],
   },
   { id: 'wheelsGloss', folder: 'works', image: 'wheels-gloss', pages: ['wheelPaint'] },
+  // только на главной: на «Полной покраске» эта машина показана историей по шагам
+  { id: 'mattingCloseup', folder: 'works', image: 'chevy-matting-closeup' },
+  { id: 'mattingSide', folder: 'works', image: 'chevy-matting-side' },
   {
-    id: 'mattingCloseup',
+    id: 'chevySideAfter',
     folder: 'works',
-    image: 'chevy-matting-closeup',
-    pages: ['fullPaint'],
+    image: 'chevy-side-after',
+    pages: ['bodyRepair', 'panelPaint'],
   },
-  { id: 'mattingSide', folder: 'works', image: 'chevy-matting-side', pages: ['fullPaint'] },
+  {
+    id: 'chevyFuelDoor',
+    folder: 'works',
+    image: 'chevy-fuel-door',
+    portrait: true,
+    pages: ['bodyRepair', 'panelPaint'],
+  },
+  {
+    id: 'chevyDoorsGloss',
+    folder: 'works',
+    image: 'chevy-doors-gloss',
+    pages: ['bodyRepair', 'panelPaint'],
+  },
+  {
+    id: 'chevyTailgate',
+    folder: 'works',
+    image: 'chevy-tailgate',
+    pages: ['bodyRepair', 'panelPaint'],
+  },
 ]

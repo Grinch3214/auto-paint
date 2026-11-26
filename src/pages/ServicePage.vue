@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import CaseStudySection from '@/components/sections/CaseStudySection.vue'
 import EstimateSection from '@/components/sections/EstimateSection.vue'
 import FaqSection from '@/components/sections/FaqSection.vue'
 import PageHeroSection from '@/components/sections/PageHeroSection.vue'
@@ -47,6 +48,7 @@ useSeo({
     :heading="text.blocks"
   />
   <StagesSection v-if="page.stages" :ids="page.stages" />
+  <CaseStudySection v-if="page.case" :id="page.case" />
   <WorksSection :page="id" />
   <EstimateSection />
   <RelatedServicesSection v-if="page.related" :ids="page.related" />

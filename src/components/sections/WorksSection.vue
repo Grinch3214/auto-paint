@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import PhotoLightbox from '@/components/blocks/PhotoLightbox.vue'
-import { WORK_SIZES } from '@/constants/images'
+import { WORK_SIZES, WORK_SIZES_DENSE } from '@/constants/images'
 import { WORKS } from '@/data/works'
 import { useContent } from '@/i18n'
 import { imageSources, imageUrl } from '@/utils/image'
@@ -43,7 +43,7 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
     <span class="tape">{{ content.works.tape }}</span>
     <h2>{{ content.works.title }}</h2>
     <p class="lead">{{ content.works.lead }}</p>
-    <ul class="works">
+    <ul class="works" :class="{ 'works--dense': !page }">
       <li
         v-for="(w, i) in works"
         :key="w.id"
@@ -59,7 +59,7 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
           <img
             :src="w.src"
             :srcset="w.srcset"
-            :sizes="WORK_SIZES[w.shape]"
+            :sizes="page ? WORK_SIZES[w.shape] : WORK_SIZES_DENSE[w.shape]"
             :alt="w.alt"
             :width="w.shape === 'portrait' ? 600 : 800"
             :height="w.shape === 'portrait' ? 800 : 600"
@@ -101,6 +101,13 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
     display: grid;
     gap: var(--space-3);
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  &--dense {
+    @include above(lg) {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: var(--space-2);
+    }
   }
 
   &__item {
@@ -151,6 +158,17 @@ const openLabel = (alt: string) => content.value.works.openPhoto.replace('{alt}'
     bottom: var(--space-2);
     margin: 0;
     font-size: 0.85rem;
+  }
+
+  &--dense &__tag {
+    @include above(lg) {
+      left: var(--space-2);
+      max-width: calc(100% - var(--space-4));
+      overflow: hidden;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 }
 </style>

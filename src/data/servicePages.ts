@@ -8,6 +8,7 @@ export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
     prices: ['fullExterior', 'fullWithOpenings'],
     blocks: ['fullWhen', 'fullOpenings', 'fullColorChange', 'fullPrep'],
     stages: STAGES,
+    case: 'silverado',
     related: ['panelPaint', 'spotRepair', 'colorMatch'],
     faq: [
       'fullWorthIt',
@@ -20,6 +21,7 @@ export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
     ],
   },
   panelPaint: {
+    heroWork: 'chevyFuelDoor',
     prices: ['bumper', 'hood', 'frontFender', 'door', 'roof'],
     blocks: ['bumper', 'hood', 'fender', 'door', 'roof', 'sill', 'small'],
     stages: ['inspection', 'repair', 'filler', 'primer', 'colorMatch', 'paintBooth'],

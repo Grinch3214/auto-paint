@@ -7,6 +7,7 @@ import hero from './hero'
 import howto from './howto'
 import insurance from './insurance'
 import blocks from './blocks'
+import cases from './cases'
 import prices from './prices'
 import pricesPage from './pricesPage'
 import privacyPage from './privacyPage'
@@ -24,6 +25,7 @@ export default {
   insurance,
   stages,
   works,
+  cases,
   estimate,
   faq,
   visit,
