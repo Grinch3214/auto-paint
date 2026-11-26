@@ -25,6 +25,9 @@ export const WORK_SIZES_DENSE = {
   portrait: '(min-width: 1024px) 17vw, (min-width: 768px) 25vw, 45vw',
 } as const
 
+export const OG_FOLDER = 'og'
+export const HOME_OG_IMAGE = 'chevy-side-after'
+
 export const HERO_BG_VIDEO = {
   wide: '/video/booth-red-1280.mp4',
   square: '/video/booth-red-720sq.mp4',

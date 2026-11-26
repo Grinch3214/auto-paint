@@ -1,6 +1,7 @@
 export interface SeoInput {
   title: () => string
   description?: () => string
+  image?: () => string | undefined
   /** 404 и служебные страницы: noindex, без canonical/hreflang */
   noindex?: boolean
 }

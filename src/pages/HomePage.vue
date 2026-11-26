@@ -10,15 +10,18 @@ import StagesSection from '@/components/sections/StagesSection.vue'
 import VisitSection from '@/components/sections/VisitSection.vue'
 import WorksSection from '@/components/sections/WorksSection.vue'
 import { useBusinessSchema } from '@/composables/useBusinessSchema'
+import { HOME_OG_IMAGE } from '@/constants/images'
 import { FAQ_HOME } from '@/data/faq'
 import { useI18n } from '@/i18n'
 import { useSeo } from '@/seo/useSeo'
+import { ogImageUrl } from '@/utils/image'
 
 const { t } = useI18n()
 
 useSeo({
   title: () => t((m) => m.home.seoTitle),
   description: () => t((m) => m.home.seoDescription),
+  image: () => ogImageUrl(HOME_OG_IMAGE),
 })
 
 useBusinessSchema()

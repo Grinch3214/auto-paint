@@ -35,7 +35,7 @@ export function useSeo(input: SeoInput) {
         { property: 'og:title', content: input.title() },
         description && { property: 'og:description', content: description },
         canonical.value && { property: 'og:url', content: canonical.value },
-        { property: 'og:image', content: SITE.url + SITE.ogImage },
+        { property: 'og:image', content: SITE.url + (input.image?.() ?? SITE.ogImage) },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         { name: 'twitter:card', content: 'summary_large_image' },

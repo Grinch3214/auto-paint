@@ -1,4 +1,4 @@
-import { IMAGE_WIDTHS, IMAGES_BASE } from '@/constants/images'
+import { IMAGE_WIDTHS, IMAGES_BASE, OG_FOLDER } from '@/constants/images'
 import type { ImageSources } from '@/types/images'
 
 /** Файлы лежат как public/images/<folder>/<name>-<ширина>.webp */
@@ -16,4 +16,9 @@ export function imageSources(
     src: imageUrl(folder, name, fallback),
     srcset: widths.map((w) => `${imageUrl(folder, name, w)} ${w}w`).join(', '),
   }
+}
+
+/** Превью страницы (og:image): public/images/og/<name>.jpg */
+export function ogImageUrl(name: string): string {
+  return `${IMAGES_BASE}/${OG_FOLDER}/${name}.jpg`
 }

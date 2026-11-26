@@ -12,9 +12,11 @@ import WorksSection from '@/components/sections/WorksSection.vue'
 import { SITE } from '@/config/site'
 import { SERVICE_BLOCKS } from '@/data/blocks'
 import { SERVICE_PAGES } from '@/data/servicePages'
+import { WORKS } from '@/data/works'
 import { useContent } from '@/i18n'
 import { useSeo } from '@/seo/useSeo'
 import { fillBrand } from '@/utils/format'
+import { ogImageUrl } from '@/utils/image'
 import type { ServicePageId } from '@/types/pages'
 
 const props = defineProps<{ id: ServicePageId }>()
@@ -30,6 +32,10 @@ const pricesInBlocks = computed(() =>
 useSeo({
   title: () => fillBrand(text.value.seoTitle, SITE.brand),
   description: () => text.value.seoDescription,
+  image: () => {
+    const work = WORKS.find((w) => w.id === page.value.heroWork)
+    return work && ogImageUrl(work.image)
+  },
 })
 </script>
 
