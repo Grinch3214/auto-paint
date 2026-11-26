@@ -19,7 +19,10 @@ const en: Messages = {
   notFound: {
     seoTitle: 'Page not found — {BRAND}',
     h1: 'Page not found',
+    tape: 'Error 404',
+    lead: "There's no such page: the address has a typo or the page has moved. Head back home — every service and price is one click away from there.",
     back: 'Back to home',
+    prices: 'See prices',
   },
   common: {
     priceFrom: 'from {value}',
