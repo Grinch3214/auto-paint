@@ -15,7 +15,7 @@ const lightbox = ref<InstanceType<typeof PhotoLightbox> | null>(null)
 
 const list = computed(() => {
   const page = props.page
-  return page ? WORKS.filter((w) => w.pages?.includes(page)) : WORKS
+  return page ? WORKS.filter((w) => w.pages?.includes(page)) : WORKS.filter((w) => w.home !== false)
 })
 const works = computed(() =>
   list.value.map((w) => {

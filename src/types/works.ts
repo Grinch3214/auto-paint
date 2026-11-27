@@ -13,6 +13,10 @@ export type WorkId =
   | 'chevyDoorsGloss'
   | 'chevyFuelDoor'
   | 'chevyTailgate'
+  | 'polishPad'
+  | 'polishDoors'
+  | 'polishReflection'
+  | 'polishMirror'
 
 export interface Work {
   id: WorkId
@@ -22,4 +26,6 @@ export interface Work {
   portrait?: boolean
   /** на каких страницах услуг показывать это фото */
   pages?: readonly ServicePageId[]
+  /** false — только на страницах услуг, не в галерее главной */
+  home?: boolean
 }

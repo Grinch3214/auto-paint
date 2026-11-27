@@ -51,6 +51,7 @@ export const SERVICE_PAGES: Record<ServicePageId, ServicePageData> = {
     faq: ['bodyRepairOnly', 'bodyFrameWhen', 'bodySillsRust', 'bodyRepair', 'insurance'],
   },
   polishing: {
+    heroWork: 'polishDoors',
     prices: ['polishPanel', 'polishLight', 'polishDeep'],
     blocks: ['polishBody', 'headlights', 'glass', 'preSale'],
     related: ['detailing', 'spotRepair', 'panelPaint'],

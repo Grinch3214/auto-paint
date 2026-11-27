@@ -42,5 +42,21 @@ export default {
       alt: 'Chevrolet Silverado tailgate after straightening and paint',
       tag: 'tailgate',
     },
+    polishPad: {
+      alt: 'Polisher with a foam pad on an orange body',
+      tag: 'polishing',
+    },
+    polishDoors: {
+      alt: 'Doors of an orange crossover after polishing: deep gloss, crisp highlights',
+      tag: 'doors · gloss',
+    },
+    polishReflection: {
+      alt: 'Side after polishing: a chair reflected in the paint like in a mirror',
+      tag: 'reflection',
+    },
+    polishMirror: {
+      alt: 'Mirror and pillar after polishing, highlights without swirls',
+      tag: 'mirror · pillar',
+    },
   },
 } satisfies Content['works']
